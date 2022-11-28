@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+// MARK: - Drinks
+struct Drinks: Codable {
+    let drinks: [[String: String?]]
+}

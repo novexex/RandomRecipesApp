@@ -9,25 +9,31 @@
 /* Begin PBXBuildFile section */
 		EBDB97C12934FEB8000683C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C02934FEB8000683C1 /* AppDelegate.swift */; };
 		EBDB97C32934FEB8000683C1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C22934FEB8000683C1 /* SceneDelegate.swift */; };
-		EBDB97C52934FEB8000683C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C42934FEB8000683C1 /* ViewController.swift */; };
-		EBDB97C82934FEB8000683C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBDB97C62934FEB8000683C1 /* Main.storyboard */; };
+		EBDB97C52934FEB8000683C1 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C42934FEB8000683C1 /* RecipeViewController.swift */; };
 		EBDB97CA2934FEB9000683C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBDB97C92934FEB9000683C1 /* Assets.xcassets */; };
 		EBDB97CD2934FEB9000683C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBDB97CB2934FEB9000683C1 /* LaunchScreen.storyboard */; };
 		EBDB97D9293501DB000683C1 /* RandomMealClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97D8293501DB000683C1 /* RandomMealClass.swift */; };
 		EBDB97DB293501ED000683C1 /* RandomCoctailClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97DA293501ED000683C1 /* RandomCoctailClass.swift */; };
+		EBDB97E229351AD0000683C1 /* RecipePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97E129351AD0000683C1 /* RecipePresenter.swift */; };
+		EBDB97E529351C69000683C1 /* RecipeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97E429351C69000683C1 /* RecipeInteractor.swift */; };
+		EBDB97E729351C82000683C1 /* RecipeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97E629351C82000683C1 /* RecipeBuilder.swift */; };
+		EBDB97E929351C8A000683C1 /* RecipeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97E829351C8A000683C1 /* RecipeRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EBDB97BD2934FEB8000683C1 /* testSfera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testSfera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDB97C02934FEB8000683C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBDB97C22934FEB8000683C1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EBDB97C42934FEB8000683C1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		EBDB97C72934FEB8000683C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EBDB97C42934FEB8000683C1 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		EBDB97C92934FEB9000683C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EBDB97CC2934FEB9000683C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EBDB97CE2934FEB9000683C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBDB97D8293501DB000683C1 /* RandomMealClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMealClass.swift; sourceTree = "<group>"; };
 		EBDB97DA293501ED000683C1 /* RandomCoctailClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCoctailClass.swift; sourceTree = "<group>"; };
+		EBDB97E129351AD0000683C1 /* RecipePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePresenter.swift; sourceTree = "<group>"; };
+		EBDB97E429351C69000683C1 /* RecipeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInteractor.swift; sourceTree = "<group>"; };
+		EBDB97E629351C82000683C1 /* RecipeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeBuilder.swift; sourceTree = "<group>"; };
+		EBDB97E829351C8A000683C1 /* RecipeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,49 +66,52 @@
 		EBDB97BF2934FEB8000683C1 /* testSfera */ = {
 			isa = PBXGroup;
 			children = (
-				EBDB97D7293501BD000683C1 /* Entity */,
-				EBDB97D6293501AD000683C1 /* Interactor */,
-				EBDB97D52935019F000683C1 /* Presenter */,
-				EBDB97D42935018E000683C1 /* View */,
-				EBDB97C02934FEB8000683C1 /* AppDelegate.swift */,
-				EBDB97C22934FEB8000683C1 /* SceneDelegate.swift */,
-				EBDB97C42934FEB8000683C1 /* ViewController.swift */,
-				EBDB97C62934FEB8000683C1 /* Main.storyboard */,
-				EBDB97C92934FEB9000683C1 /* Assets.xcassets */,
-				EBDB97CB2934FEB9000683C1 /* LaunchScreen.storyboard */,
-				EBDB97CE2934FEB9000683C1 /* Info.plist */,
+				EBDB97D8293501DB000683C1 /* RandomMealClass.swift */,
+				EBDB97DA293501ED000683C1 /* RandomCoctailClass.swift */,
+				EBDB97E0293519B4000683C1 /* API */,
+				EBDB97DE293516CF000683C1 /* Application */,
+				EBDB97DD293515E6000683C1 /* Recipes */,
+				EBDB97DF2935170B000683C1 /* Resources */,
 			);
 			path = testSfera;
 			sourceTree = "<group>";
 		};
-		EBDB97D42935018E000683C1 /* View */ = {
+		EBDB97DD293515E6000683C1 /* Recipes */ = {
 			isa = PBXGroup;
 			children = (
+				EBDB97C42934FEB8000683C1 /* RecipeViewController.swift */,
+				EBDB97E129351AD0000683C1 /* RecipePresenter.swift */,
+				EBDB97E429351C69000683C1 /* RecipeInteractor.swift */,
+				EBDB97E629351C82000683C1 /* RecipeBuilder.swift */,
+				EBDB97E829351C8A000683C1 /* RecipeRouter.swift */,
 			);
-			path = View;
+			path = Recipes;
 			sourceTree = "<group>";
 		};
-		EBDB97D52935019F000683C1 /* Presenter */ = {
+		EBDB97DE293516CF000683C1 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				EBDB97C02934FEB8000683C1 /* AppDelegate.swift */,
+				EBDB97C22934FEB8000683C1 /* SceneDelegate.swift */,
 			);
-			path = Presenter;
+			path = Application;
 			sourceTree = "<group>";
 		};
-		EBDB97D6293501AD000683C1 /* Interactor */ = {
+		EBDB97DF2935170B000683C1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EBDB97C92934FEB9000683C1 /* Assets.xcassets */,
+				EBDB97CB2934FEB9000683C1 /* LaunchScreen.storyboard */,
+				EBDB97CE2934FEB9000683C1 /* Info.plist */,
 			);
-			path = Interactor;
+			path = Resources;
 			sourceTree = "<group>";
 		};
-		EBDB97D7293501BD000683C1 /* Entity */ = {
+		EBDB97E0293519B4000683C1 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				EBDB97D8293501DB000683C1 /* RandomMealClass.swift */,
-				EBDB97DA293501ED000683C1 /* RandomCoctailClass.swift */,
 			);
-			path = Entity;
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,7 +174,6 @@
 			files = (
 				EBDB97CD2934FEB9000683C1 /* LaunchScreen.storyboard in Resources */,
 				EBDB97CA2934FEB9000683C1 /* Assets.xcassets in Resources */,
-				EBDB97C82934FEB8000683C1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,10 +184,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBDB97C52934FEB8000683C1 /* ViewController.swift in Sources */,
+				EBDB97C52934FEB8000683C1 /* RecipeViewController.swift in Sources */,
 				EBDB97C12934FEB8000683C1 /* AppDelegate.swift in Sources */,
+				EBDB97E229351AD0000683C1 /* RecipePresenter.swift in Sources */,
 				EBDB97DB293501ED000683C1 /* RandomCoctailClass.swift in Sources */,
 				EBDB97D9293501DB000683C1 /* RandomMealClass.swift in Sources */,
+				EBDB97E729351C82000683C1 /* RecipeBuilder.swift in Sources */,
+				EBDB97E929351C8A000683C1 /* RecipeRouter.swift in Sources */,
+				EBDB97E529351C69000683C1 /* RecipeInteractor.swift in Sources */,
 				EBDB97C32934FEB8000683C1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,14 +199,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EBDB97C62934FEB8000683C1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EBDB97C72934FEB8000683C1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		EBDB97CB2934FEB9000683C1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -329,7 +333,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N64BNPUBV4;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = testSfera/Info.plist;
+				INFOPLIST_FILE = testSfera/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -357,7 +361,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N64BNPUBV4;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = testSfera/Info.plist;
+				INFOPLIST_FILE = testSfera/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
