@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		EBDB97C12934FEB8000683C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C02934FEB8000683C1 /* AppDelegate.swift */; };
 		EBDB97C32934FEB8000683C1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C22934FEB8000683C1 /* SceneDelegate.swift */; };
-		EBDB97C52934FEB8000683C1 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C42934FEB8000683C1 /* RecipeViewController.swift */; };
+		EBDB97C52934FEB8000683C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C42934FEB8000683C1 /* ViewController.swift */; };
 		EBDB97CA2934FEB9000683C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBDB97C92934FEB9000683C1 /* Assets.xcassets */; };
 		EBDB97CD2934FEB9000683C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBDB97CB2934FEB9000683C1 /* LaunchScreen.storyboard */; };
 		EBDB97D9293501DB000683C1 /* RandomMealClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97D8293501DB000683C1 /* RandomMealClass.swift */; };
@@ -24,7 +24,7 @@
 		EBDB97BD2934FEB8000683C1 /* testSfera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testSfera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDB97C02934FEB8000683C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBDB97C22934FEB8000683C1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EBDB97C42934FEB8000683C1 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		EBDB97C42934FEB8000683C1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EBDB97C92934FEB9000683C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EBDB97CC2934FEB9000683C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EBDB97CE2934FEB9000683C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 		EBDB97DD293515E6000683C1 /* Recipes */ = {
 			isa = PBXGroup;
 			children = (
-				EBDB97C42934FEB8000683C1 /* RecipeViewController.swift */,
+				EBDB97C42934FEB8000683C1 /* ViewController.swift */,
 				EBDB97E129351AD0000683C1 /* RecipePresenter.swift */,
 				EBDB97E429351C69000683C1 /* RecipeInteractor.swift */,
 				EBDB97E629351C82000683C1 /* RecipeBuilder.swift */,
@@ -184,7 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBDB97C52934FEB8000683C1 /* RecipeViewController.swift in Sources */,
+				EBDB97C52934FEB8000683C1 /* ViewController.swift in Sources */,
 				EBDB97C12934FEB8000683C1 /* AppDelegate.swift in Sources */,
 				EBDB97E229351AD0000683C1 /* RecipePresenter.swift in Sources */,
 				EBDB97DB293501ED000683C1 /* RandomCoctailClass.swift in Sources */,

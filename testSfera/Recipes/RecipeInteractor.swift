@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+protocol RecipeInteractorProtocol: AnyObject {
+    
+}
+
+class RecipeInteractor: RecipeInteractorProtocol {
+    weak var presenter: RecipePresenterProtocol?
+}
