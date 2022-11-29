@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK: - Meals
-struct Meals: Codable {
-    let meals: [[String: String?]]
+struct Meal: Codable {
+    //let meal: [[String: String?]]
+    let strMeal = "lasagna"
 }

@@ -8,7 +8,9 @@
 import Foundation
 
 protocol RecipePresenterProtocol: AnyObject {
-    
+    func viewDidLoaded()
+    func didLoad(meal: Meal)
+    func didLoad(drink: Drink)
 }
 
 class RecipePresenter {
@@ -23,5 +25,16 @@ class RecipePresenter {
 }
 
 extension RecipePresenter: RecipePresenterProtocol {
+    func didLoad(meal: Meal) {
+        //
+    }
     
+    func didLoad(drink: Drink) {
+        //
+    }
+    
+    func viewDidLoaded() {
+        interactor.loadMeal()
+        interactor.loadCocktail()
+    }
 }
