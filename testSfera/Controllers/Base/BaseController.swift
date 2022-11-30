@@ -17,16 +17,16 @@ class BaseController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure()
+        configureAppearance()
     }
 }
 
 @objc extension BaseController {
-    func addViews() {}
-    func configure() {
+    func setupViews() {}
+    func configureAppearance() {
         view.backgroundColor = Resources.Colors.background
     }
-    func layoutViews() {}
+    func constraintViews() {}
     func navBarLeftButtonHandler() {
         print("NavBar left button tapped")
     }
@@ -42,7 +42,6 @@ extension BaseController {
         button.setTitle(title, for: .normal)
         button.setTitleColor(Resources.Colors.active, for: .normal)
         button.titleLabel?.font = Resources.Fonts.helveticaRegular(with: 17)
-        //button.setImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
         
         switch position {
         case .left:

@@ -9,35 +9,35 @@ import UIKit
 
 enum Resources {
     enum Colors {
-        static var active = UIColor(hexString: "#437BFE")
-        static var inActive = UIColor(hexString: "#929DA5")
-        static var separator = UIColor(hexString: "#E8ECEF")
-        static var titleGray = UIColor(hexString: "#545C77")
-        static var background = UIColor(hexString: "#F8F9F9")
+        static let active = UIColor(hexString: "#437BFE")
+        static let inActive = UIColor(hexString: "#929DA5")
+        static let separator = UIColor(hexString: "#E8ECEF")
+        static let titleGray = UIColor(hexString: "#545C77")
+        static let background = UIColor(hexString: "#F8F9F9")
     }
     
     enum Titles {
         enum TabBar {
-            static var meal = "Random Meal"
-            static var drink = "Random Drink"
-            static var favorites = "Saved Recipes"
+            static let meal = "Random Meal"
+            static let drink = "Random Drink"
+            static let favorites = "Saved Recipes"
         }
         enum NavBar {
             enum Actions {
-                static var left = "Next"
-                static var right = "Save"
+                static let left = "Next"
+                static let right = "Save"
             }
-            static var favorites = "Favorites Recipes"
-            static var meal = "Meal Recipe"
-            static var drink = "Drink Recipe"
+            static let favorites = "Favorites Recipes"
+            static let meal = "Meal Recipe"
+            static let drink = "Drink Recipe"
         }
         
     }
     
     enum Images {
-        static var meal = UIImage(systemName: "fork.knife")
-        static var drink = UIImage(systemName: "wineglass")
-        static var favorites = UIImage(systemName: "bookmark")
+        static let meal = UIImage(systemName: "fork.knife")
+        static let drink = UIImage(systemName: "wineglass")
+        static let favorites = UIImage(systemName: "bookmark")
     }
     
     enum Fonts {
