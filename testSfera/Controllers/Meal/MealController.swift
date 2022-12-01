@@ -8,7 +8,10 @@
 import UIKit
 
 class MealController: BaseController {
-
+    
+    let scrollView = UIScrollView()
+    let contentView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -17,35 +20,64 @@ class MealController: BaseController {
         addNavBarButton(at: .left, with: Resources.Titles.NavBar.Actions.left)
         addNavBarButton(at: .right, with: Resources.Titles.NavBar.Actions.right)
         
-        //MARK: Image
-        let image = UIImage(named: "meal")
-        let imageView = UIImageView(frame: view.bounds)
-        imageView.image = image
-        imageView.contentMode = .scaleAspectFit
-        
-        
-        //MARK: Label
-        let label = UILabel()
-        label.text = "This Shepherd's Pie is vegetarian comfort food at its best. Carrots, mushrooms, peas, and green beans bathed in a creamy sauce and topped with cheesy mashed potatoes make a diner's delight! This Shepherd's Pie is vegetarian comfort food at its best. Carrots, mushrooms, peas, and green beans bathed in a creamy sauce and topped with cheesy mashed potatoes make a diner's delight! This Shepherd's Pie is vegetarian comfort food at its best. Carrots, mushrooms, peas, and green beans bathed in a creamy sauce and topped with cheesy mashed potatoes make a diner's delight! This Shepherd's Pie is vegetarian comfort food at its best. Carrots, mushrooms, peas, and green beans bathed in a creamy sauce and topped with cheesy mashed potatoes make a diner's delight! This Shepherd's Pie is vegetarian comfort food at its best. Carrots, mushrooms, peas, and green beans bathed in a creamy sauce and topped with cheesy mashed potatoes make a diner's delight! "
-        label.numberOfLines = 0
-        
-        //MARK: Add Subviews
-        view.addSubview(imageView)
-        view.addSubview(label)
-        
-        // MARK: Constraints
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        label.translatesAutoresizingMaskIntoConstraints = false
+        setupScrollView()
+        setupViews1()
+    }
+    
+    
+    func setupScrollView() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
         NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -19),
-            imageView.heightAnchor.constraint(equalToConstant: 300),
-
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            label.topAnchor.constraint(equalTo: imageView.bottomAnchor)
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 100),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+        ])
+        
+    }
+    
+    let imageView: UIImageView = {
+        let image = UIImage(named: "meal")
+        let imageView = UIImageView()
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+        label.numberOfLines = 0
+        label.sizeToFit()
+        label.textColor = UIColor.black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    func setupViews1(){
+        contentView.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4)
+        ])
+        
+        contentView.addSubview(subtitleLabel)
+        NSLayoutConstraint.activate([
+            subtitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            subtitleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
+            subtitleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4),
+            subtitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         
     }
