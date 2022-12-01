@@ -1,5 +1,5 @@
 //
-//  MealController.swift
+//  DrinkController.swift
 //  testSfera
 //
 //  Created by Artour Ilyasov on 30.11.2022.
@@ -7,10 +7,27 @@
 
 import UIKit
 
-class MealController: BaseController {
-    
+class DrinkController: RecipeBaseViewController {
+
     let scrollView = UIScrollView()
     let contentView = UIView()
+    let imageView: UIImageView = {
+        let image = UIImage(named: "drink")
+        let imageView = UIImageView()
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Muddle the lime juice, sugar and mint leaves in a small jug, crushing the mint as you go – you can use the end of a rolling pin for this. Pour into a tall glass and add a handful of ice. Pour over the rum, stirring with a long-handled spoon. Top up with soda water, garnish with mint and serve."
+        label.numberOfLines = 0
+        label.sizeToFit()
+        label.textColor = UIColor.black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,16 +37,31 @@ class MealController: BaseController {
         addNavBarButton(at: .left, with: Resources.Titles.NavBar.Actions.left)
         addNavBarButton(at: .right, with: Resources.Titles.NavBar.Actions.right)
         
-        setupScrollView()
-        setupViews1()
+        setupViews()
+        constraintViews()
     }
     
+    override func navBarLeftButtonHandler() {
+        print("Drink NavBar button Next tapped")
+    }
     
-    func setupScrollView() {
+    override func navBarRightButtonHandler() {
+        print("Drink NavBar button Save tapped")
+    }
+}
+
+extension DrinkController {
+    override func setupViews() {
+        super.setupViews()
+        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+    }
+
+    override func constraintViews() {
+        super.constraintViews()
         
         NSLayoutConstraint.activate([
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -43,29 +75,8 @@ class MealController: BaseController {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
         
-    }
-    
-    let imageView: UIImageView = {
-        let image = UIImage(named: "meal")
-        let imageView = UIImageView()
-        imageView.image = image
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    let subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-        label.numberOfLines = 0
-        label.sizeToFit()
-        label.textColor = UIColor.black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    func setupViews1(){
         contentView.addSubview(imageView)
+        
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -73,21 +84,12 @@ class MealController: BaseController {
         ])
         
         contentView.addSubview(subtitleLabel)
+        
         NSLayoutConstraint.activate([
             subtitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             subtitleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
             subtitleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4),
             subtitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
-        
-    }
-    
-    override func navBarLeftButtonHandler() {
-        print("Meal NavBar button Next tapped")
-    }
-    
-    override func navBarRightButtonHandler() {
-        print("Meal NavBar button Save tapped")
     }
 }
-

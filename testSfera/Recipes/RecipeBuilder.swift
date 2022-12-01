@@ -8,17 +8,16 @@
 import UIKit
 
 class RecipeBuilder {
-    static func build() -> RecipeViewController {
+    static func build() -> TabBarController {
         let interactor = RecipeInteractor()
         let router = RecipeRouter()
         let presenter = RecipePresenter(router: router, interactor: interactor)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "Main") as! RecipeViewController
-        viewController.presenter = presenter
-        presenter.view = viewController
+        let tabBarController = TabBarController()
+        tabBarController.presenter = presenter
+        presenter.view = tabBarController
         interactor.presenter = presenter
-        router.viewController = viewController
+        router.viewController = tabBarController
         
-        return viewController
+        return tabBarController
     }
 }

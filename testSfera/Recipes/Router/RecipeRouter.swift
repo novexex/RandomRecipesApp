@@ -12,5 +12,5 @@ protocol RecipeRouterProtocol: AnyObject {
 }
 
 class RecipeRouter: RecipeRouterProtocol {
-    weak var viewController: RecipeViewController?
+    weak var viewController: TabBarController?
 }

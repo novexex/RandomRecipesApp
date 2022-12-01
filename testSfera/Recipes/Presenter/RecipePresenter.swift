@@ -14,7 +14,7 @@ protocol RecipePresenterProtocol: AnyObject {
 }
 
 class RecipePresenter {
-    weak var view: RecipeViewProtocol?
+    weak var view: RecipeBaseViewProtocol?
     var router: RecipeRouterProtocol
     var interactor: RecipeInteractorProtocol
     
