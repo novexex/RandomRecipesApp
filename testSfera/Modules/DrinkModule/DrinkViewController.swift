@@ -1,39 +1,38 @@
 //
-//  DrinkController.swift
-//  testSfera
+//  DrinkViewController.swift
+//  Super easy dev
 //
-//  Created by Artour Ilyasov on 30.11.2022.
+//  Created by Artour Ilyasov on 01.12.2022
 //
 
 import UIKit
 
-class DrinkController: RecipeBaseViewController {
+protocol DrinkViewProtocol: AnyObject {
+    func viewInput(discription: String, image: UIImage)
+    func viewOutput()
+}
+
+class DrinkViewController: BaseViewController {
+    // MARK: - Public
+    var presenter: DrinkPresenterProtocol? {
+        didSet {
+            presenter?.viewDidLoaded()
+        }
+    }
+    
 
     let scrollView = UIScrollView()
     let contentView = UIView()
-    let imageView: UIImageView = {
-        let image = UIImage(named: "drink")
-        let imageView = UIImageView()
-        imageView.image = image
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    let subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Muddle the lime juice, sugar and mint leaves in a small jug, crushing the mint as you go – you can use the end of a rolling pin for this. Pour into a tall glass and add a handful of ice. Pour over the rum, stirring with a long-handled spoon. Top up with soda water, garnish with mint and serve."
-        label.numberOfLines = 0
-        label.sizeToFit()
-        label.textColor = UIColor.black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    var imageView = UIImageView()
+    var subtitleLabel = UILabel()
     
+    
+    // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = Resources.Titles.NavBar.meal
-        navigationController?.tabBarItem.title = Resources.Titles.TabBar.meal
+        initialize()
+        title = Resources.Titles.NavBar.drink
+        navigationController?.tabBarItem.title = Resources.Titles.TabBar.drink
         addNavBarButton(at: .left, with: Resources.Titles.NavBar.Actions.left)
         addNavBarButton(at: .right, with: Resources.Titles.NavBar.Actions.right)
         
@@ -48,9 +47,47 @@ class DrinkController: RecipeBaseViewController {
     override func navBarRightButtonHandler() {
         print("Drink NavBar button Save tapped")
     }
+    
 }
 
-extension DrinkController {
+// MARK: - Private functions
+private extension DrinkViewController {
+    func initialize() {
+    }
+}
+
+// MARK: - DrinkViewProtocol
+extension DrinkViewController: DrinkViewProtocol {
+    func viewInput(discription: String, image: UIImage) {
+        DispatchQueue.main.async {
+            let subtitleLabel: UILabel = {
+                let label = UILabel()
+                label.text = discription
+                label.numberOfLines = 0
+                label.sizeToFit()
+                label.textColor = UIColor.black
+                label.translatesAutoresizingMaskIntoConstraints = false
+                return label
+            }()
+            let imageView: UIImageView = {
+                let imageView = UIImageView()
+                imageView.image = image
+                imageView.contentMode = .scaleAspectFit
+                imageView.translatesAutoresizingMaskIntoConstraints = false
+                return imageView
+            }()
+            self.subtitleLabel = subtitleLabel
+            self.imageView = imageView
+        }
+    }
+    
+    func viewOutput() {
+        
+    }
+    
+}
+
+extension DrinkViewController {
     override func setupViews() {
         super.setupViews()
         
@@ -60,6 +97,8 @@ extension DrinkController {
         scrollView.addSubview(contentView)
     }
 
+
+    
     override func constraintViews() {
         super.constraintViews()
         
@@ -79,7 +118,7 @@ extension DrinkController {
         
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -150),
             imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4)
         ])
         
@@ -87,7 +126,7 @@ extension DrinkController {
         
         NSLayoutConstraint.activate([
             subtitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            subtitleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
+            subtitleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -150),
             subtitleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4),
             subtitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])

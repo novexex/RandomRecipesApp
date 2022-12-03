@@ -8,48 +8,82 @@
 
 /* Begin PBXBuildFile section */
 		EBDB97C12934FEB8000683C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C02934FEB8000683C1 /* AppDelegate.swift */; };
-		EBDB97C32934FEB8000683C1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C22934FEB8000683C1 /* SceneDelegate.swift */; };
-		EBDB97C52934FEB8000683C1 /* RecipeBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C42934FEB8000683C1 /* RecipeBaseViewController.swift */; };
+		EBDB97C52934FEB8000683C1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C42934FEB8000683C1 /* BaseViewController.swift */; };
 		EBDB97CA2934FEB9000683C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBDB97C92934FEB9000683C1 /* Assets.xcassets */; };
 		EBDB97CD2934FEB9000683C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBDB97CB2934FEB9000683C1 /* LaunchScreen.storyboard */; };
-		EBDB97D9293501DB000683C1 /* RecipeMealClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97D8293501DB000683C1 /* RecipeMealClass.swift */; };
-		EBDB97DB293501ED000683C1 /* RecipeDrinkClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97DA293501ED000683C1 /* RecipeDrinkClass.swift */; };
-		EBDB97E229351AD0000683C1 /* RecipePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97E129351AD0000683C1 /* RecipePresenter.swift */; };
-		EBDB97E529351C69000683C1 /* RecipeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97E429351C69000683C1 /* RecipeInteractor.swift */; };
-		EBDB97E929351C8A000683C1 /* RecipeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97E829351C8A000683C1 /* RecipeRouter.swift */; };
-		EBDB97EB29376D26000683C1 /* MealController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97EA29376D26000683C1 /* MealController.swift */; };
+		EBDB97D9293501DB000683C1 /* MealEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97D8293501DB000683C1 /* MealEntity.swift */; };
+		EBDB97DB293501ED000683C1 /* DrinkEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97DA293501ED000683C1 /* DrinkEntity.swift */; };
+		EBDB97E229351AD0000683C1 /* TabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97E129351AD0000683C1 /* TabBarPresenter.swift */; };
+		EBDB97E529351C69000683C1 /* TabBarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97E429351C69000683C1 /* TabBarInteractor.swift */; };
+		EBDB97E929351C8A000683C1 /* TabBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97E829351C8A000683C1 /* TabBarRouter.swift */; };
 		EBDB97ED29376D45000683C1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97EC29376D45000683C1 /* TabBarController.swift */; };
 		EBDB97F129377364000683C1 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97F029377364000683C1 /* UIColor.swift */; };
 		EBDB97F329377398000683C1 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97F229377398000683C1 /* Resources.swift */; };
-		EBDB981829378136000683C1 /* NavBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB981729378136000683C1 /* NavBarController.swift */; };
 		EBDB981D293789AC000683C1 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB981C293789AC000683C1 /* UIView.swift */; };
-		EBDB982229378AF6000683C1 /* DrinkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB982129378AF6000683C1 /* DrinkController.swift */; };
-		EBDB982729378C6F000683C1 /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB982629378C6F000683C1 /* FavoritesController.swift */; };
-		EBDB98352938F745000683C1 /* RecipeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB98342938F745000683C1 /* RecipeBuilder.swift */; };
+		EBDB98352938F745000683C1 /* TabBarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB98342938F745000683C1 /* TabBarBuilder.swift */; };
+		EBDB984629393691000683C1 /* NavBarModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984129393691000683C1 /* NavBarModuleBuilder.swift */; };
+		EBDB984729393691000683C1 /* NavBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984229393691000683C1 /* NavBarPresenter.swift */; };
+		EBDB984829393691000683C1 /* NavBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984329393691000683C1 /* NavBarRouter.swift */; };
+		EBDB984929393691000683C1 /* NavBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984429393691000683C1 /* NavBarViewController.swift */; };
+		EBDB984A29393691000683C1 /* NavBarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984529393691000683C1 /* NavBarInteractor.swift */; };
+		EBDB985129393778000683C1 /* MealModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984C29393778000683C1 /* MealModuleBuilder.swift */; };
+		EBDB985229393778000683C1 /* MealPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984D29393778000683C1 /* MealPresenter.swift */; };
+		EBDB985329393778000683C1 /* MealRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984E29393778000683C1 /* MealRouter.swift */; };
+		EBDB985429393778000683C1 /* MealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984F29393778000683C1 /* MealViewController.swift */; };
+		EBDB985529393778000683C1 /* MealInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB985029393778000683C1 /* MealInteractor.swift */; };
+		EBDB985C29393833000683C1 /* DrinkModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB985729393833000683C1 /* DrinkModuleBuilder.swift */; };
+		EBDB985D29393833000683C1 /* DrinkPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB985829393833000683C1 /* DrinkPresenter.swift */; };
+		EBDB985E29393833000683C1 /* DrinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB985929393833000683C1 /* DrinkRouter.swift */; };
+		EBDB985F29393833000683C1 /* DrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB985A29393833000683C1 /* DrinkViewController.swift */; };
+		EBDB986029393833000683C1 /* DrinkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB985B29393833000683C1 /* DrinkInteractor.swift */; };
+		EBDB9867293938C0000683C1 /* FavoritesModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB9862293938C0000683C1 /* FavoritesModuleBuilder.swift */; };
+		EBDB9868293938C0000683C1 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB9863293938C0000683C1 /* FavoritesPresenter.swift */; };
+		EBDB9869293938C0000683C1 /* FavoritesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB9864293938C0000683C1 /* FavoritesRouter.swift */; };
+		EBDB986A293938C0000683C1 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB9865293938C0000683C1 /* FavoritesViewController.swift */; };
+		EBDB986B293938C0000683C1 /* FavoritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB9866293938C0000683C1 /* FavoritesInteractor.swift */; };
+		EBDB986F29393C1D000683C1 /* RandomMealService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB986E29393C1D000683C1 /* RandomMealService.swift */; };
+		EBDB987129393C27000683C1 /* RandomDrinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB987029393C27000683C1 /* RandomDrinkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EBDB97BD2934FEB8000683C1 /* testSfera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testSfera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDB97C02934FEB8000683C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EBDB97C22934FEB8000683C1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EBDB97C42934FEB8000683C1 /* RecipeBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeBaseViewController.swift; sourceTree = "<group>"; };
+		EBDB97C42934FEB8000683C1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		EBDB97C92934FEB9000683C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EBDB97CC2934FEB9000683C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EBDB97CE2934FEB9000683C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBDB97D8293501DB000683C1 /* RecipeMealClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeMealClass.swift; sourceTree = "<group>"; };
-		EBDB97DA293501ED000683C1 /* RecipeDrinkClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDrinkClass.swift; sourceTree = "<group>"; };
-		EBDB97E129351AD0000683C1 /* RecipePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePresenter.swift; sourceTree = "<group>"; };
-		EBDB97E429351C69000683C1 /* RecipeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInteractor.swift; sourceTree = "<group>"; };
-		EBDB97E829351C8A000683C1 /* RecipeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRouter.swift; sourceTree = "<group>"; };
-		EBDB97EA29376D26000683C1 /* MealController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealController.swift; sourceTree = "<group>"; };
+		EBDB97D8293501DB000683C1 /* MealEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealEntity.swift; sourceTree = "<group>"; };
+		EBDB97DA293501ED000683C1 /* DrinkEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkEntity.swift; sourceTree = "<group>"; };
+		EBDB97E129351AD0000683C1 /* TabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPresenter.swift; sourceTree = "<group>"; };
+		EBDB97E429351C69000683C1 /* TabBarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarInteractor.swift; sourceTree = "<group>"; };
+		EBDB97E829351C8A000683C1 /* TabBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarRouter.swift; sourceTree = "<group>"; };
 		EBDB97EC29376D45000683C1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EBDB97F029377364000683C1 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		EBDB97F229377398000683C1 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
-		EBDB981729378136000683C1 /* NavBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarController.swift; sourceTree = "<group>"; };
 		EBDB981C293789AC000683C1 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		EBDB982129378AF6000683C1 /* DrinkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkController.swift; sourceTree = "<group>"; };
-		EBDB982629378C6F000683C1 /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
-		EBDB98342938F745000683C1 /* RecipeBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeBuilder.swift; sourceTree = "<group>"; };
+		EBDB98342938F745000683C1 /* TabBarBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarBuilder.swift; sourceTree = "<group>"; };
+		EBDB984129393691000683C1 /* NavBarModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarModuleBuilder.swift; sourceTree = "<group>"; };
+		EBDB984229393691000683C1 /* NavBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarPresenter.swift; sourceTree = "<group>"; };
+		EBDB984329393691000683C1 /* NavBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarRouter.swift; sourceTree = "<group>"; };
+		EBDB984429393691000683C1 /* NavBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarViewController.swift; sourceTree = "<group>"; };
+		EBDB984529393691000683C1 /* NavBarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarInteractor.swift; sourceTree = "<group>"; };
+		EBDB984C29393778000683C1 /* MealModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealModuleBuilder.swift; sourceTree = "<group>"; };
+		EBDB984D29393778000683C1 /* MealPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPresenter.swift; sourceTree = "<group>"; };
+		EBDB984E29393778000683C1 /* MealRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRouter.swift; sourceTree = "<group>"; };
+		EBDB984F29393778000683C1 /* MealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealViewController.swift; sourceTree = "<group>"; };
+		EBDB985029393778000683C1 /* MealInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealInteractor.swift; sourceTree = "<group>"; };
+		EBDB985729393833000683C1 /* DrinkModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkModuleBuilder.swift; sourceTree = "<group>"; };
+		EBDB985829393833000683C1 /* DrinkPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkPresenter.swift; sourceTree = "<group>"; };
+		EBDB985929393833000683C1 /* DrinkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkRouter.swift; sourceTree = "<group>"; };
+		EBDB985A29393833000683C1 /* DrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkViewController.swift; sourceTree = "<group>"; };
+		EBDB985B29393833000683C1 /* DrinkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkInteractor.swift; sourceTree = "<group>"; };
+		EBDB9862293938C0000683C1 /* FavoritesModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesModuleBuilder.swift; sourceTree = "<group>"; };
+		EBDB9863293938C0000683C1 /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
+		EBDB9864293938C0000683C1 /* FavoritesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRouter.swift; sourceTree = "<group>"; };
+		EBDB9865293938C0000683C1 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		EBDB9866293938C0000683C1 /* FavoritesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesInteractor.swift; sourceTree = "<group>"; };
+		EBDB986E29393C1D000683C1 /* RandomMealService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMealService.swift; sourceTree = "<group>"; };
+		EBDB987029393C27000683C1 /* RandomDrinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDrinkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,31 +116,31 @@
 		EBDB97BF2934FEB8000683C1 /* testSfera */ = {
 			isa = PBXGroup;
 			children = (
+				EBDB986D29393C0C000683C1 /* API */,
+				EBDB986C29393920000683C1 /* Modules */,
+				EBDB97EE29377288000683C1 /* Helpers */,
 				EBDB97DE293516CF000683C1 /* Application */,
-				EBDB97DD293515E6000683C1 /* Recipes */,
 				EBDB97DF2935170B000683C1 /* Resources */,
 			);
 			path = testSfera;
 			sourceTree = "<group>";
 		};
-		EBDB97DD293515E6000683C1 /* Recipes */ = {
+		EBDB97DD293515E6000683C1 /* TabNavBarModule */ = {
 			isa = PBXGroup;
 			children = (
-				EBDB98342938F745000683C1 /* RecipeBuilder.swift */,
-				EBDB982F2938F51C000683C1 /* Entity */,
-				EBDB982A2938F4F6000683C1 /* View */,
-				EBDB982B2938F4FA000683C1 /* Presenter */,
-				EBDB982C2938F501000683C1 /* Interactor */,
-				EBDB982E2938F511000683C1 /* Router */,
+				EBDB97EC29376D45000683C1 /* TabBarController.swift */,
+				EBDB97E129351AD0000683C1 /* TabBarPresenter.swift */,
+				EBDB97E429351C69000683C1 /* TabBarInteractor.swift */,
+				EBDB97E829351C8A000683C1 /* TabBarRouter.swift */,
+				EBDB98342938F745000683C1 /* TabBarBuilder.swift */,
 			);
-			path = Recipes;
+			path = TabNavBarModule;
 			sourceTree = "<group>";
 		};
 		EBDB97DE293516CF000683C1 /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				EBDB97C02934FEB8000683C1 /* AppDelegate.swift */,
-				EBDB97C22934FEB8000683C1 /* SceneDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -126,6 +160,7 @@
 			children = (
 				EBDB97EF293772D0000683C1 /* Extensions */,
 				EBDB97F229377398000683C1 /* Resources.swift */,
+				EBDB97C42934FEB8000683C1 /* BaseViewController.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -139,91 +174,75 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		EBDB981929378816000683C1 /* Controllers */ = {
+		EBDB984029393678000683C1 /* NavBarModule */ = {
 			isa = PBXGroup;
 			children = (
-				EBDB982529378C63000683C1 /* Favorites */,
-				EBDB982029378ADA000683C1 /* Drink */,
-				EBDB981F29378AD5000683C1 /* Meal */,
-				EBDB981E29378AA6000683C1 /* Base */,
+				EBDB984129393691000683C1 /* NavBarModuleBuilder.swift */,
+				EBDB984229393691000683C1 /* NavBarPresenter.swift */,
+				EBDB984329393691000683C1 /* NavBarRouter.swift */,
+				EBDB984429393691000683C1 /* NavBarViewController.swift */,
+				EBDB984529393691000683C1 /* NavBarInteractor.swift */,
 			);
-			path = Controllers;
+			path = NavBarModule;
 			sourceTree = "<group>";
 		};
-		EBDB981E29378AA6000683C1 /* Base */ = {
+		EBDB984B2939376B000683C1 /* MealModule */ = {
 			isa = PBXGroup;
 			children = (
-				EBDB97EC29376D45000683C1 /* TabBarController.swift */,
-				EBDB981729378136000683C1 /* NavBarController.swift */,
-				EBDB97C42934FEB8000683C1 /* RecipeBaseViewController.swift */,
+				EBDB984C29393778000683C1 /* MealModuleBuilder.swift */,
+				EBDB984D29393778000683C1 /* MealPresenter.swift */,
+				EBDB984E29393778000683C1 /* MealRouter.swift */,
+				EBDB984F29393778000683C1 /* MealViewController.swift */,
+				EBDB985029393778000683C1 /* MealInteractor.swift */,
+				EBDB97D8293501DB000683C1 /* MealEntity.swift */,
 			);
-			path = Base;
+			path = MealModule;
 			sourceTree = "<group>";
 		};
-		EBDB981F29378AD5000683C1 /* Meal */ = {
+		EBDB985629393828000683C1 /* DrinkModule */ = {
 			isa = PBXGroup;
 			children = (
-				EBDB97EA29376D26000683C1 /* MealController.swift */,
+				EBDB985729393833000683C1 /* DrinkModuleBuilder.swift */,
+				EBDB985829393833000683C1 /* DrinkPresenter.swift */,
+				EBDB985929393833000683C1 /* DrinkRouter.swift */,
+				EBDB985A29393833000683C1 /* DrinkViewController.swift */,
+				EBDB985B29393833000683C1 /* DrinkInteractor.swift */,
+				EBDB97DA293501ED000683C1 /* DrinkEntity.swift */,
 			);
-			path = Meal;
+			path = DrinkModule;
 			sourceTree = "<group>";
 		};
-		EBDB982029378ADA000683C1 /* Drink */ = {
+		EBDB986129393899000683C1 /* FavoritesModule */ = {
 			isa = PBXGroup;
 			children = (
-				EBDB982129378AF6000683C1 /* DrinkController.swift */,
+				EBDB9862293938C0000683C1 /* FavoritesModuleBuilder.swift */,
+				EBDB9863293938C0000683C1 /* FavoritesPresenter.swift */,
+				EBDB9864293938C0000683C1 /* FavoritesRouter.swift */,
+				EBDB9865293938C0000683C1 /* FavoritesViewController.swift */,
+				EBDB9866293938C0000683C1 /* FavoritesInteractor.swift */,
 			);
-			path = Drink;
+			path = FavoritesModule;
 			sourceTree = "<group>";
 		};
-		EBDB982529378C63000683C1 /* Favorites */ = {
+		EBDB986C29393920000683C1 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				EBDB982629378C6F000683C1 /* FavoritesController.swift */,
+				EBDB986129393899000683C1 /* FavoritesModule */,
+				EBDB985629393828000683C1 /* DrinkModule */,
+				EBDB984B2939376B000683C1 /* MealModule */,
+				EBDB984029393678000683C1 /* NavBarModule */,
+				EBDB97DD293515E6000683C1 /* TabNavBarModule */,
 			);
-			path = Favorites;
+			path = Modules;
 			sourceTree = "<group>";
 		};
-		EBDB982A2938F4F6000683C1 /* View */ = {
+		EBDB986D29393C0C000683C1 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				EBDB981929378816000683C1 /* Controllers */,
-				EBDB97EE29377288000683C1 /* Helpers */,
+				EBDB986E29393C1D000683C1 /* RandomMealService.swift */,
+				EBDB987029393C27000683C1 /* RandomDrinkService.swift */,
 			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		EBDB982B2938F4FA000683C1 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				EBDB97E129351AD0000683C1 /* RecipePresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		EBDB982C2938F501000683C1 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				EBDB97E429351C69000683C1 /* RecipeInteractor.swift */,
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		EBDB982E2938F511000683C1 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				EBDB97E829351C8A000683C1 /* RecipeRouter.swift */,
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
-		EBDB982F2938F51C000683C1 /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-				EBDB97D8293501DB000683C1 /* RecipeMealClass.swift */,
-				EBDB97DA293501ED000683C1 /* RecipeDrinkClass.swift */,
-			);
-			path = Entity;
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,22 +316,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBDB981D293789AC000683C1 /* UIView.swift in Sources */,
-				EBDB97EB29376D26000683C1 /* MealController.swift in Sources */,
+				EBDB985129393778000683C1 /* MealModuleBuilder.swift in Sources */,
+				EBDB9867293938C0000683C1 /* FavoritesModuleBuilder.swift in Sources */,
 				EBDB97F129377364000683C1 /* UIColor.swift in Sources */,
-				EBDB97C52934FEB8000683C1 /* RecipeBaseViewController.swift in Sources */,
-				EBDB981829378136000683C1 /* NavBarController.swift in Sources */,
+				EBDB984829393691000683C1 /* NavBarRouter.swift in Sources */,
+				EBDB97C52934FEB8000683C1 /* BaseViewController.swift in Sources */,
+				EBDB984A29393691000683C1 /* NavBarInteractor.swift in Sources */,
 				EBDB97ED29376D45000683C1 /* TabBarController.swift in Sources */,
+				EBDB986029393833000683C1 /* DrinkInteractor.swift in Sources */,
+				EBDB985E29393833000683C1 /* DrinkRouter.swift in Sources */,
+				EBDB986A293938C0000683C1 /* FavoritesViewController.swift in Sources */,
 				EBDB97C12934FEB8000683C1 /* AppDelegate.swift in Sources */,
-				EBDB97E229351AD0000683C1 /* RecipePresenter.swift in Sources */,
-				EBDB97DB293501ED000683C1 /* RecipeDrinkClass.swift in Sources */,
-				EBDB982229378AF6000683C1 /* DrinkController.swift in Sources */,
-				EBDB982729378C6F000683C1 /* FavoritesController.swift in Sources */,
-				EBDB97D9293501DB000683C1 /* RecipeMealClass.swift in Sources */,
-				EBDB97E929351C8A000683C1 /* RecipeRouter.swift in Sources */,
-				EBDB97E529351C69000683C1 /* RecipeInteractor.swift in Sources */,
-				EBDB98352938F745000683C1 /* RecipeBuilder.swift in Sources */,
-				EBDB97C32934FEB8000683C1 /* SceneDelegate.swift in Sources */,
+				EBDB97E229351AD0000683C1 /* TabBarPresenter.swift in Sources */,
+				EBDB97DB293501ED000683C1 /* DrinkEntity.swift in Sources */,
+				EBDB985229393778000683C1 /* MealPresenter.swift in Sources */,
+				EBDB985D29393833000683C1 /* DrinkPresenter.swift in Sources */,
+				EBDB9869293938C0000683C1 /* FavoritesRouter.swift in Sources */,
+				EBDB987129393C27000683C1 /* RandomDrinkService.swift in Sources */,
+				EBDB984729393691000683C1 /* NavBarPresenter.swift in Sources */,
+				EBDB985329393778000683C1 /* MealRouter.swift in Sources */,
+				EBDB985529393778000683C1 /* MealInteractor.swift in Sources */,
+				EBDB986B293938C0000683C1 /* FavoritesInteractor.swift in Sources */,
+				EBDB984629393691000683C1 /* NavBarModuleBuilder.swift in Sources */,
+				EBDB9868293938C0000683C1 /* FavoritesPresenter.swift in Sources */,
+				EBDB985429393778000683C1 /* MealViewController.swift in Sources */,
+				EBDB97D9293501DB000683C1 /* MealEntity.swift in Sources */,
+				EBDB97E929351C8A000683C1 /* TabBarRouter.swift in Sources */,
+				EBDB97E529351C69000683C1 /* TabBarInteractor.swift in Sources */,
+				EBDB985F29393833000683C1 /* DrinkViewController.swift in Sources */,
+				EBDB986F29393C1D000683C1 /* RandomMealService.swift in Sources */,
+				EBDB98352938F745000683C1 /* TabBarBuilder.swift in Sources */,
+				EBDB984929393691000683C1 /* NavBarViewController.swift in Sources */,
 				EBDB97F329377398000683C1 /* Resources.swift in Sources */,
+				EBDB985C29393833000683C1 /* DrinkModuleBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +492,6 @@
 				INFOPLIST_FILE = testSfera/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -488,7 +523,6 @@
 				INFOPLIST_FILE = testSfera/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

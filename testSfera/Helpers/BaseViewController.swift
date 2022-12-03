@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  BaseViewController.swift
 //  testSfera
 //
 //  Created by Artour Ilyasov on 28.11.2022.
@@ -12,9 +12,7 @@ enum NavBarPosition {
     case right
 }
 
-
-
-class RecipeBaseViewController: UIViewController {
+class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +21,7 @@ class RecipeBaseViewController: UIViewController {
     }
 }
 
-@objc extension RecipeBaseViewController {
+@objc extension BaseViewController {
     func setupViews() {}
     func configureAppearance() {
         view.backgroundColor = Resources.Colors.background
@@ -38,7 +36,7 @@ class RecipeBaseViewController: UIViewController {
     }
 }
 
-extension RecipeBaseViewController {
+extension BaseViewController {
     func addNavBarButton(at position: NavBarPosition, with title: String) {
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)

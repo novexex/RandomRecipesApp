@@ -1,14 +1,24 @@
 //
-//  MealController.swift
-//  testSfera
+//  MealViewController.swift
+//  Super easy dev
 //
-//  Created by Artour Ilyasov on 30.11.2022.
+//  Created by Artour Ilyasov on 01.12.2022
 //
 
 import UIKit
 
-class MealController: RecipeBaseViewController {
-    
+protocol MealViewProtocol: AnyObject {
+    func viewInput()
+    func viewOutput()
+}
+
+class MealViewController: BaseViewController {
+    // MARK: - Public
+    var presenter: MealPresenterProtocol? {
+        didSet {
+            presenter?.viewDidLoaded()
+        }
+    }
     let scrollView = UIScrollView()
     let contentView = UIView()
     let imageView: UIImageView = {
@@ -28,14 +38,18 @@ class MealController: RecipeBaseViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
+    // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialize()
         
         title = Resources.Titles.NavBar.meal
         navigationController?.tabBarItem.title = Resources.Titles.TabBar.meal
         addNavBarButton(at: .left, with: Resources.Titles.NavBar.Actions.left)
         addNavBarButton(at: .right, with: Resources.Titles.NavBar.Actions.right)
+        
+        
         
         setupViews()
         constraintViews()
@@ -48,9 +62,28 @@ class MealController: RecipeBaseViewController {
     override func navBarRightButtonHandler() {
         print("Meal NavBar button Save tapped")
     }
+    
 }
 
-extension MealController {
+// MARK: - Private functions
+private extension MealViewController {
+    func initialize() {
+    }
+}
+
+// MARK: - MealViewProtocol
+extension MealViewController: MealViewProtocol {
+    func viewInput() {
+        
+    }
+    
+    func viewOutput() {
+        
+    }
+    
+}
+
+extension MealViewController {
     override func setupViews() {
         super.setupViews()
         
