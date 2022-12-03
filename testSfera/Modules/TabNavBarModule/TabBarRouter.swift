@@ -13,14 +13,14 @@ protocol TabBarRouterProtocol: AnyObject {
 }
 
 class TabBarRouter: TabBarRouterProtocol {
-    weak var viewController: TabBarController?
+    weak var viewController: TabBarViewController?
     
     func setupViews() {
-        let mealVC = MealModuleBuilder.build()
-        let drinkVC = DrinkModuleBuilder.build()
-        let favoritesVC = FavoritesModuleBuilder.build()
+        let mealVC = MealBuilder.build()
+        let drinkVC = DrinkBuilder.build()
+        let favoritesVC = FavoritesBuilder.build()
         
-        let navArray = NavBarModuleBuilder.build(mealVC: mealVC, drinkVC: drinkVC, favoritesVC: favoritesVC)
+        let navArray = NavBarBuilder.build(mealVC: mealVC, drinkVC: drinkVC, favoritesVC: favoritesVC)
         
         viewController?.setViews(mealNavigation: navArray[0], drinkNavigation: navArray[1], favoritesNavigation: navArray[2])
     }

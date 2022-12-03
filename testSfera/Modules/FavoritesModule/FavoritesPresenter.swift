@@ -1,6 +1,6 @@
 //
 //  FavoritesPresenter.swift
-//  Super easy dev
+//  testSfera
 //
 //  Created by Artour Ilyasov on 01.12.2022
 //

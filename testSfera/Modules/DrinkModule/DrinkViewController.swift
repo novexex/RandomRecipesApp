@@ -1,6 +1,6 @@
 //
 //  DrinkViewController.swift
-//  Super easy dev
+//  testSfera
 //
 //  Created by Artour Ilyasov on 01.12.2022
 //
@@ -19,10 +19,8 @@ class DrinkViewController: BaseViewController {
             presenter?.viewDidLoaded()
         }
     }
-    
-
-    let scrollView = UIScrollView()
-    let contentView = UIView()
+    var scrollView = UIScrollView()
+    var contentView = UIView()
     var imageView = UIImageView()
     var subtitleLabel = UILabel()
     
@@ -37,11 +35,17 @@ class DrinkViewController: BaseViewController {
         addNavBarButton(at: .right, with: Resources.Titles.NavBar.Actions.right)
         
         setupViews()
-        constraintViews()
     }
     
     override func navBarLeftButtonHandler() {
-        print("Drink NavBar button Next tapped")
+        view.subviews.forEach({ $0.removeFromSuperview() })
+        scrollView = UIScrollView()
+        contentView = UIView()
+        imageView = UIImageView()
+        subtitleLabel = UILabel()
+        
+        setupViews()
+        presenter?.viewInput()
     }
     
     override func navBarRightButtonHandler() {
@@ -78,6 +82,7 @@ extension DrinkViewController: DrinkViewProtocol {
             }()
             self.subtitleLabel = subtitleLabel
             self.imageView = imageView
+            self.constraintViews()
         }
     }
     

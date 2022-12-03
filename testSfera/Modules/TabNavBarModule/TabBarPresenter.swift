@@ -9,8 +9,6 @@ import Foundation
 
 protocol TabBarPresenterProtocol: AnyObject {
     func viewDidLoaded()
-//    func didLoad(meal: Meal)
-//    func didLoad(drink: Drink)
 }
 
 class TabBarPresenter {
@@ -30,13 +28,9 @@ extension TabBarPresenter: TabBarPresenterProtocol {
     }
     
     func didLoad(drink: Drink) {
-        // print(drink.drinks[0]["strDrink"]!!)
-        
     }
     
     func viewDidLoaded() {
-//        interactor.loadMeal()
-//        interactor.loadCocktail()
         router.setupViews()
     }
 }

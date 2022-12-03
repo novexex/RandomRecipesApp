@@ -1,6 +1,6 @@
 //
 //  DrinkPresenter.swift
-//  Super easy dev
+//  testSfera
 //
 //  Created by Artour Ilyasov on 01.12.2022
 //
@@ -11,6 +11,7 @@ import UIKit
 protocol DrinkPresenterProtocol: AnyObject {
     func viewDidLoaded()
     func didLoad(drink: Drink)
+    func viewInput()
 }
 
 class DrinkPresenter {
@@ -25,6 +26,10 @@ class DrinkPresenter {
 }
 
 extension DrinkPresenter: DrinkPresenterProtocol {
+    func viewInput() {
+        interactor.loadCocktail()
+    }
+    
     func viewDidLoaded() {
         interactor.loadCocktail()
     }

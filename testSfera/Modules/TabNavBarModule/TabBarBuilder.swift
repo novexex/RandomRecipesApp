@@ -8,11 +8,11 @@
 import UIKit
 
 class TabBarBuilder {
-    static func build() -> TabBarController {
+    static func build() -> TabBarViewController {
         let interactor = TabBarInteractor()
         let router = TabBarRouter()
         let presenter = TabBarPresenter(router: router, interactor: interactor)
-        let tabBarController = TabBarController()
+        let tabBarController = TabBarViewController()
         presenter.view = tabBarController
         interactor.presenter = presenter
         router.viewController = tabBarController

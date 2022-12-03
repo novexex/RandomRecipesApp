@@ -1,5 +1,5 @@
 //
-//  TabBarController.swift
+//  TabBarViewController.swift
 //  testSfera
 //
 //  Created by Artour Ilyasov on 30.11.2022.
@@ -21,7 +21,7 @@ protocol TabBarBaseViewProtocol: AnyObject {
     func viewOutput()
 }
 
-final class TabBarController: UITabBarController {
+final class TabBarViewController: UITabBarController {
 
     var presenter: TabBarPresenterProtocol? {
         didSet {
@@ -51,7 +51,7 @@ final class TabBarController: UITabBarController {
     }
 }
 
-extension TabBarController: TabBarBaseViewProtocol {
+extension TabBarViewController: TabBarBaseViewProtocol {
     func viewInput() {
         
     }
