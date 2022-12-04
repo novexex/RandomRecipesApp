@@ -5,8 +5,6 @@
 //  Created by Artour Ilyasov on 01.12.2022
 //
 
-import UIKit
-
 class DrinkBuilder {
     static func build() -> DrinkViewController {
         let interactor = DrinkInteractor()

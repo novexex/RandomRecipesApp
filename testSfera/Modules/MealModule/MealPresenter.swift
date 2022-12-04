@@ -5,7 +5,6 @@
 //  Created by Artour Ilyasov on 01.12.2022
 //
 
-import Foundation
 import UIKit
 
 protocol MealPresenterProtocol: AnyObject {

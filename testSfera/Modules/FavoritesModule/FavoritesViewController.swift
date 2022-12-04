@@ -13,6 +13,7 @@ protocol FavoritesViewProtocol: AnyObject {
 class FavoritesViewController: UIViewController {
     // MARK: - Public
     var presenter: FavoritesPresenterProtocol?
+    var tableView = UITableView()
 
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -25,8 +26,24 @@ class FavoritesViewController: UIViewController {
 }
 
 // MARK: - Private functions
-private extension FavoritesViewController {
+extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
     func initialize() {
+        view.addSubview(tableView)
+        setTableViewDelegates()
+        //tableView.rowHeight = 100
+        tableView.pin(to: view)
+    }
+    func setTableViewDelegates() {
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 }
 

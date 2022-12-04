@@ -5,8 +5,6 @@
 //  Created by Artour Ilyasov on 01.12.2022
 //
 
-import UIKit
-
 class MealBuilder {
     static func build() -> MealViewController {
         let interactor = MealInteractor()

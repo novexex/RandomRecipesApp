@@ -15,4 +15,14 @@ extension UIView {
         separator.frame = CGRect(x: 0, y: frame.height - height, width: frame.width, height: height)
         addSubview(separator)
     }
+    
+    func pin(to superView: UIView) {
+        translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            topAnchor.constraint(equalTo: superView.topAnchor),
+            leadingAnchor.constraint(equalTo: superView.leadingAnchor),
+            trailingAnchor.constraint(equalTo: superView.trailingAnchor),
+            bottomAnchor.constraint(equalTo: superView.bottomAnchor)
+        ])
+    }
 }

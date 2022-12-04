@@ -5,9 +5,6 @@
 //  Created by Artour Ilyasov on 28.11.2022.
 //
 
-import Foundation
-import UIKit
-
 protocol TabBarRouterProtocol: AnyObject {
     func setupViews()
 }

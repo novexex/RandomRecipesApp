@@ -5,8 +5,6 @@
 //  Created by Artour Ilyasov on 28.11.2022.
 //
 
-import UIKit
-
 class TabBarBuilder {
     static func build() -> TabBarViewController {
         let interactor = TabBarInteractor()
