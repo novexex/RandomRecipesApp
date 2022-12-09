@@ -20,8 +20,8 @@ class FavoritesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
         
+        initialize()
         title = Resources.Titles.NavBar.favorites
         navigationController?.tabBarItem.title = Resources.Titles.TabBar.favorites
     }
@@ -36,7 +36,13 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         guard !savedRecipe.isEmpty else { return cell }
         if let drink = savedRecipe[indexPath.row] as? ParcedDrinkClass {
-            cell.textLabel?.text = drink.strDrink
+            if #available(iOS 14.0, *) {
+                var content = cell.defaultContentConfiguration()
+                content.text = drink.strDrink
+                cell.contentConfiguration = content
+            } else {
+                cell.textLabel?.text = drink.strDrink
+            }
         }
         return cell
     }
