@@ -6,6 +6,10 @@
 //
 
 protocol FavoritesPresenterProtocol: AnyObject {
+    func viewInput(drink: ParcedDrink)
+    func viewInput(meal: ParcedMeal)
+    func viewOutput(drink: ParcedDrink)
+    func viewOutput(meal: ParcedMeal)
 }
 
 class FavoritesPresenter {
@@ -20,4 +24,20 @@ class FavoritesPresenter {
 }
 
 extension FavoritesPresenter: FavoritesPresenterProtocol {
+    func viewInput(drink: ParcedDrink) {
+        
+    }
+    
+    func viewInput(meal: ParcedMeal) {
+        
+    }
+    
+    func viewOutput(drink: ParcedDrink) {
+        
+    }
+    
+    func viewOutput(meal: ParcedMeal) {
+        
+    }
+    
 }

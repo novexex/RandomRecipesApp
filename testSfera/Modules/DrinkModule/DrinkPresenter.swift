@@ -11,6 +11,7 @@ protocol DrinkPresenterProtocol: AnyObject {
     func viewDidLoaded()
     func didLoad(drink: Drink)
     func viewInput()
+    func buttonSaveTapped()
 }
 
 class DrinkPresenter {
@@ -25,6 +26,10 @@ class DrinkPresenter {
 }
 
 extension DrinkPresenter: DrinkPresenterProtocol {
+    func buttonSaveTapped() {
+        //router.buttonSavePressed()
+    }
+    
     func viewInput() {
         interactor.loadCocktail()
     }
@@ -34,56 +39,54 @@ extension DrinkPresenter: DrinkPresenterProtocol {
     }
     
     func didLoad(drink: Drink) {
-        let presentedDrink = ParcedDrink(strDrink: drink.drinks[0]["strDrink"]!!,
-                                         strCategory: drink.drinks[0]["strCategory"]!!,
-                                         strAlcoholic: drink.drinks[0]["strAlcoholic"]!!,
-                                         strGlass: drink.drinks[0]["strGlass"]!!,
-                                         strInstructions: drink.drinks[0]["strInstructions"]!!,
-                                         image: drink.drinks[0]["strDrinkThumb"]!!,
-                                         strIngridients: [drink.drinks[0]["strIngredient1"] ?? "",
-                                                          drink.drinks[0]["strIngredient2"] ?? "",
-                                                          drink.drinks[0]["strIngredient3"] ?? "",
-                                                          drink.drinks[0]["strIngredient4"] ?? "",
-                                                          drink.drinks[0]["strIngredient5"] ?? "",
-                                                          drink.drinks[0]["strIngredient6"] ?? "",
-                                                          drink.drinks[0]["strIngredient7"] ?? "",
-                                                          drink.drinks[0]["strIngredient8"] ?? "",
-                                                          drink.drinks[0]["strIngredient9"] ?? "",
-                                                          drink.drinks[0]["strIngredient10"] ?? "",
-                                                          drink.drinks[0]["strIngredient11"] ?? "",
-                                                          drink.drinks[0]["strIngredient12"] ?? "",
-                                                          drink.drinks[0]["strIngredient13"] ?? "",
-                                                          drink.drinks[0]["strIngredient14"] ?? "",
-                                                          drink.drinks[0]["strIngredient15"] ?? ""],
-                                         strMeasure: [drink.drinks[0]["strMeasure1"] ?? "",
-                                                      drink.drinks[0]["strMeasure2"] ?? "",
-                                                      drink.drinks[0]["strMeasure3"] ?? "",
-                                                      drink.drinks[0]["strMeasure4"] ?? "",
-                                                      drink.drinks[0]["strMeasure5"] ?? "",
-                                                      drink.drinks[0]["strMeasure6"] ?? "",
-                                                      drink.drinks[0]["strMeasure7"] ?? "",
-                                                      drink.drinks[0]["strMeasure8"] ?? "",
-                                                      drink.drinks[0]["strMeasure9"] ?? "",
-                                                      drink.drinks[0]["strMeasure10"] ?? "",
-                                                      drink.drinks[0]["strMeasure11"] ?? "",
-                                                      drink.drinks[0]["strMeasure12"] ?? "",
-                                                      drink.drinks[0]["strMeasure13"] ?? "",
-                                                      drink.drinks[0]["strMeasure14"] ?? "",
-                                                      drink.drinks[0]["strMeasure15"] ?? ""])
-        
-        let drinkDiscription = "Drink: \(presentedDrink.strDrink)\n\n"
-        let categoryDiscription = "Category: \(presentedDrink.strCategory), \(presentedDrink.strAlcoholic)\n\n"
-        var ingridientsDiscription = "Ingridients: \(presentedDrink.strIngridients[0] ?? "") \(presentedDrink.strMeasure[0] ?? ""), \(presentedDrink.strIngridients[1] ?? "") \(presentedDrink.strMeasure[1] ?? ""), \(presentedDrink.strIngridients[2] ?? "") \(presentedDrink.strMeasure[2] ?? ""), \(presentedDrink.strIngridients[3] ?? "") \(presentedDrink.strMeasure[3] ?? ""), \(presentedDrink.strIngridients[4] ?? "") \(presentedDrink.strMeasure[4] ?? ""), \(presentedDrink.strIngridients[5] ?? "") \(presentedDrink.strMeasure[5] ?? ""), \(presentedDrink.strIngridients[6] ?? "") \(presentedDrink.strMeasure[6] ?? ""), \(presentedDrink.strIngridients[7] ?? "") \(presentedDrink.strMeasure[7] ?? ""), \(presentedDrink.strIngridients[8] ?? "") \(presentedDrink.strMeasure[8] ?? ""), \(presentedDrink.strIngridients[9] ?? "") \(presentedDrink.strMeasure[9] ?? ""), \(presentedDrink.strIngridients[10] ?? "") \(presentedDrink.strMeasure[10] ?? ""), \(presentedDrink.strIngridients[11] ?? "") \(presentedDrink.strMeasure[11] ?? ""), \(presentedDrink.strIngridients[12] ?? "") \(presentedDrink.strMeasure[12] ?? ""), \(presentedDrink.strIngridients[13] ?? "") \(presentedDrink.strMeasure[13] ?? ""), \(presentedDrink.strIngridients[14] ?? "") \(presentedDrink.strMeasure[14] ?? "")"
-        let instructionDiscription = "Instructions: \(presentedDrink.strInstructions)"
-        // MARK: rework
-        while ingridientsDiscription.last == "\r" || ingridientsDiscription.last == "\n" || ingridientsDiscription.last == " " || ingridientsDiscription.last == "," {
-            ingridientsDiscription.removeLast()
+        var presentedDrink = ParcedDrink()
+        for (key, value) in drink.drinks[0] {
+            if let newValue = value { presentedDrink.data.updateValue(newValue, forKey: key) }
         }
-        ingridientsDiscription += "\n\n"
         
-        let imageURL = URL(string: presentedDrink.image)
-        let data = try? Data(contentsOf: imageURL!)
-        let image = UIImage(data: data!)!
-        view?.viewInput(discription: drinkDiscription + categoryDiscription + ingridientsDiscription + instructionDiscription, image: image)
+//        print("\(presentedDrink.data)\n\n\n")
+        
+        let drinkDiscription = "Drink: \(presentedDrink.data[DictValues.Drink.name] ?? "")\n\n"
+        let categoryDiscription = "Category: \(presentedDrink.data[DictValues.category] ?? ""), \(presentedDrink.data[DictValues.Drink.alco] ?? "")\n\n"
+        
+        var ingredientsDiscription = """
+        Ingredients:
+        \(presentedDrink.data[DictValues.ingr1] ?? "del"): \(presentedDrink.data[DictValues.meas1] ?? "del"),
+        \(presentedDrink.data[DictValues.ingr2] ?? "del"): \(presentedDrink.data[DictValues.meas2] ?? "del"),
+        \(presentedDrink.data[DictValues.ingr3] ?? "del"): \(presentedDrink.data[DictValues.meas3] ?? "del"),
+        \(presentedDrink.data[DictValues.ingr4] ?? "del"): \(presentedDrink.data[DictValues.meas4] ?? "del"),
+        \(presentedDrink.data[DictValues.ingr5] ?? "del"): \(presentedDrink.data[DictValues.meas5] ?? "del"),
+        \(presentedDrink.data[DictValues.ingr6] ?? "del"): \(presentedDrink.data[DictValues.meas6] ?? "del"),
+        \(presentedDrink.data[DictValues.ingr7] ?? "del"): \(presentedDrink.data[DictValues.meas7] ?? "del"),
+        \(presentedDrink.data[DictValues.ingr8] ?? "del"): \(presentedDrink.data[DictValues.meas8] ?? "del"),
+        \(presentedDrink.data[DictValues.ingr9] ?? "del"): \(presentedDrink.data[DictValues.meas9] ?? "del"),
+        \(presentedDrink.data[DictValues.ingr10] ?? "del"): \(presentedDrink.data[DictValues.meas10] ?? "del"),
+        \(presentedDrink.data[DictValues.ingr11] ?? "del"): \(presentedDrink.data[DictValues.meas11] ?? "del"),
+        \(presentedDrink.data[DictValues.ingr12] ?? "del"): \(presentedDrink.data[DictValues.meas12] ?? "del"),
+        \(presentedDrink.data[DictValues.ingr13] ?? "del"): \(presentedDrink.data[DictValues.meas13] ?? "del"),
+        \(presentedDrink.data[DictValues.ingr14] ?? "del"): \(presentedDrink.data[DictValues.meas14] ?? "del"),
+        \(presentedDrink.data[DictValues.ingr15] ?? "del"): \(presentedDrink.data[DictValues.meas15] ?? "del"),
+        """
+        
+        let instructionDiscription = "\n\nInstructions:\n\(presentedDrink.data[DictValues.instruct] ?? "")"
+        
+//        print("\(ingredientsDiscription)\n\n\n")
+    
+        ingredientsDiscription.formatting()
+        
+//        print(ingredientsDiscription)
+
+        guard let dictImage = presentedDrink.data[DictValues.Drink.image] else { return }
+        let imageURL = URL(string: dictImage)
+
+        guard let imageURL else { return }
+        let data = try? Data(contentsOf: imageURL)
+
+        guard let data else { return }
+        let image = UIImage(data: data)
+        
+        if let image {
+            view?.viewInput(discription: drinkDiscription + categoryDiscription + ingredientsDiscription + instructionDiscription, image: image)
+        }
     }
 }

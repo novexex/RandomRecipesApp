@@ -49,7 +49,7 @@ class DrinkViewController: BaseViewController {
     }
     
     override func navBarRightButtonHandler() {
-        print("Drink NavBar button Save tapped")
+        presenter?.buttonSaveTapped()
     }
     
 }

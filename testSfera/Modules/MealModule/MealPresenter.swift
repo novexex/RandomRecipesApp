@@ -34,66 +34,60 @@ extension MealPresenter: MealPresenterProtocol {
     }
     
     func didLoad(meal: Meal) {
-        let presentedMeal = ParcedMeal(strMeal: meal.meals[0]["strMeal"]!!,
-                                       strCategory: meal.meals[0]["strCategory"]!!,
-                                       strArea: meal.meals[0]["strArea"]!!,
-                                       strYoutube: meal.meals[0]["strYoutube"]!!,
-                                         strInstructions: meal.meals[0]["strInstructions"]!!,
-                                         image: meal.meals[0]["strMealThumb"]!!,
-                                         strIngridients: [meal.meals[0]["strIngredient1"] ?? "",
-                                                          meal.meals[0]["strIngredient2"] ?? "",
-                                                          meal.meals[0]["strIngredient3"] ?? "",
-                                                          meal.meals[0]["strIngredient4"] ?? "",
-                                                          meal.meals[0]["strIngredient5"] ?? "",
-                                                          meal.meals[0]["strIngredient6"] ?? "",
-                                                          meal.meals[0]["strIngredient7"] ?? "",
-                                                          meal.meals[0]["strIngredient8"] ?? "",
-                                                          meal.meals[0]["strIngredient9"] ?? "",
-                                                          meal.meals[0]["strIngredient10"] ?? "",
-                                                          meal.meals[0]["strIngredient11"] ?? "",
-                                                          meal.meals[0]["strIngredient12"] ?? "",
-                                                          meal.meals[0]["strIngredient13"] ?? "",
-                                                          meal.meals[0]["strIngredient14"] ?? "",
-                                                          meal.meals[0]["strIngredient15"] ?? "",
-                                                          meal.meals[0]["strIngredient16"] ?? "",
-                                                          meal.meals[0]["strIngredient17"] ?? "",
-                                                          meal.meals[0]["strIngredient18"] ?? "",
-                                                          meal.meals[0]["strIngredient19"] ?? "",
-                                                          meal.meals[0]["strIngredient20"] ?? ""],
-                                         strMeasure: [meal.meals[0]["strMeasure1"] ?? "",
-                                                      meal.meals[0]["strMeasure2"] ?? "",
-                                                      meal.meals[0]["strMeasure3"] ?? "",
-                                                      meal.meals[0]["strMeasure4"] ?? "",
-                                                      meal.meals[0]["strMeasure5"] ?? "",
-                                                      meal.meals[0]["strMeasure6"] ?? "",
-                                                      meal.meals[0]["strMeasure7"] ?? "",
-                                                      meal.meals[0]["strMeasure8"] ?? "",
-                                                      meal.meals[0]["strMeasure9"] ?? "",
-                                                      meal.meals[0]["strMeasure10"] ?? "",
-                                                      meal.meals[0]["strMeasure11"] ?? "",
-                                                      meal.meals[0]["strMeasure12"] ?? "",
-                                                      meal.meals[0]["strMeasure13"] ?? "",
-                                                      meal.meals[0]["strMeasure14"] ?? "",
-                                                      meal.meals[0]["strMeasure15"] ?? "",
-                                                      meal.meals[0]["strMeasure16"] ?? "",
-                                                      meal.meals[0]["strMeasure17"] ?? "",
-                                                      meal.meals[0]["strMeasure18"] ?? "",
-                                                      meal.meals[0]["strMeasure19"] ?? "",
-                                                      meal.meals[0]["strMeasure20"] ?? ""])
-        
-        let mealDiscription = "Meal: \(presentedMeal.strMeal)\n\n"
-        let categoryDiscription = "Category: \(presentedMeal.strCategory), \(presentedMeal.strArea)\n\n"
-        var ingridientsDiscription = "Ingridients: \(presentedMeal.strIngridients[0] ?? "") \(presentedMeal.strMeasure[0] ?? ""), \(presentedMeal.strIngridients[1] ?? "") \(presentedMeal.strMeasure[1] ?? ""), \(presentedMeal.strIngridients[2] ?? "") \(presentedMeal.strMeasure[2] ?? ""), \(presentedMeal.strIngridients[3] ?? "") \(presentedMeal.strMeasure[3] ?? ""), \(presentedMeal.strIngridients[4] ?? "") \(presentedMeal.strMeasure[4] ?? ""), \(presentedMeal.strIngridients[5] ?? "") \(presentedMeal.strMeasure[5] ?? ""), \(presentedMeal.strIngridients[6] ?? "") \(presentedMeal.strMeasure[6] ?? ""), \(presentedMeal.strIngridients[7] ?? "") \(presentedMeal.strMeasure[7] ?? ""), \(presentedMeal.strIngridients[8] ?? "") \(presentedMeal.strMeasure[8] ?? ""), \(presentedMeal.strIngridients[9] ?? "") \(presentedMeal.strMeasure[9] ?? ""), \(presentedMeal.strIngridients[10] ?? "") \(presentedMeal.strMeasure[10] ?? ""), \(presentedMeal.strIngridients[11] ?? "") \(presentedMeal.strMeasure[11] ?? ""), \(presentedMeal.strIngridients[12] ?? "") \(presentedMeal.strMeasure[12] ?? ""), \(presentedMeal.strIngridients[13] ?? "") \(presentedMeal.strMeasure[13] ?? ""), \(presentedMeal.strIngridients[14] ?? "") \(presentedMeal.strMeasure[14] ?? ""), \(presentedMeal.strIngridients[15] ?? "") \(presentedMeal.strMeasure[15] ?? ""), \(presentedMeal.strIngridients[16] ?? "") \(presentedMeal.strMeasure[16] ?? ""), \(presentedMeal.strIngridients[17] ?? "") \(presentedMeal.strMeasure[17] ?? ""), \(presentedMeal.strIngridients[18] ?? "") \(presentedMeal.strMeasure[18] ?? ""), \(presentedMeal.strIngridients[19] ?? "") \(presentedMeal.strMeasure[19] ?? "")"
-        let instructionDiscription = "Instructions: \(presentedMeal.strInstructions)"
-        // MARK: rework
-        while ingridientsDiscription.last == "\r" || ingridientsDiscription.last == "\n" || ingridientsDiscription.last == " " || ingridientsDiscription.last == "," {
-            ingridientsDiscription.removeLast()
+        var presentedMeal = ParcedMeal()
+        for (key, value) in meal.meals[0] {
+            if let newValue = value { presentedMeal.data.updateValue(newValue, forKey: key) }
         }
-        ingridientsDiscription += "\n\n"
         
-        let imageURL = URL(string: presentedMeal.image)
-        let data = try? Data(contentsOf: imageURL!)
-        let image = UIImage(data: data!)!
-        view?.viewInput(discription: mealDiscription + categoryDiscription + ingridientsDiscription + instructionDiscription, image: image)
+//        print("\(presentedMeal.data)\n\n\n")
+        
+        let drinkDiscription = "Meal: \(presentedMeal.data[DictValues.Meal.name] ?? "")\n\n"
+        let categoryDiscription = "Category: \(presentedMeal.data[DictValues.category] ?? ""), \(presentedMeal.data[DictValues.Meal.area] ?? "")\n\n"
+        
+        var ingredientsDiscription = """
+        Ingredients:
+        \(presentedMeal.data[DictValues.ingr1] ?? "del"): \(presentedMeal.data[DictValues.meas1] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr2] ?? "del"): \(presentedMeal.data[DictValues.meas2] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr3] ?? "del"): \(presentedMeal.data[DictValues.meas3] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr4] ?? "del"): \(presentedMeal.data[DictValues.meas4] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr5] ?? "del"): \(presentedMeal.data[DictValues.meas5] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr6] ?? "del"): \(presentedMeal.data[DictValues.meas6] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr7] ?? "del"): \(presentedMeal.data[DictValues.meas7] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr8] ?? "del"): \(presentedMeal.data[DictValues.meas8] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr9] ?? "del"): \(presentedMeal.data[DictValues.meas9] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr10] ?? "del"): \(presentedMeal.data[DictValues.meas10] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr11] ?? "del"): \(presentedMeal.data[DictValues.meas11] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr12] ?? "del"): \(presentedMeal.data[DictValues.meas12] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr13] ?? "del"): \(presentedMeal.data[DictValues.meas13] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr14] ?? "del"): \(presentedMeal.data[DictValues.meas14] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr15] ?? "del"): \(presentedMeal.data[DictValues.meas15] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr16] ?? "del"): \(presentedMeal.data[DictValues.meas16] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr17] ?? "del"): \(presentedMeal.data[DictValues.meas17] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr18] ?? "del"): \(presentedMeal.data[DictValues.meas18] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr19] ?? "del"): \(presentedMeal.data[DictValues.meas19] ?? "del"),
+        \(presentedMeal.data[DictValues.ingr20] ?? "del"): \(presentedMeal.data[DictValues.meas20] ?? "del"),
+        """
+        
+        let instructionDiscription = "\n\nInstructions:\n\(presentedMeal.data[DictValues.instruct] ?? "")"
+        
+//        print("\(ingredientsDiscription)\n\n\n")
+    
+        ingredientsDiscription.formatting()
+        
+//        print(ingredientsDiscription)
+
+        guard let dictImage = presentedMeal.data[DictValues.Meal.image] else { return }
+        let imageURL = URL(string: dictImage)
+
+        guard let imageURL else { return }
+        let data = try? Data(contentsOf: imageURL)
+
+        guard let data else { return }
+        let image = UIImage(data: data)
+        
+        if let image {
+            view?.viewInput(discription: drinkDiscription + categoryDiscription + ingredientsDiscription + instructionDiscription, image: image)
+        }
     }
 }
+

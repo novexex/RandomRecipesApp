@@ -34,8 +34,6 @@ class MealViewController: BaseViewController {
         addNavBarButton(at: .left, with: Resources.Titles.NavBar.Actions.left)
         addNavBarButton(at: .right, with: Resources.Titles.NavBar.Actions.right)
         
-        
-        
         setupViews()
     }
     

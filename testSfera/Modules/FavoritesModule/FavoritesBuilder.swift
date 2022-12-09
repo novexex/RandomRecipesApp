@@ -15,6 +15,7 @@ class FavoritesBuilder {
         viewController.presenter = presenter
         interactor.presenter = presenter
         router.viewController = viewController
+        
         return viewController
     }
 }

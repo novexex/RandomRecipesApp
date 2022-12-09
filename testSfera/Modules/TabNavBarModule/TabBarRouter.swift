@@ -13,9 +13,9 @@ class TabBarRouter: TabBarRouterProtocol {
     weak var viewController: TabBarViewController?
     
     func setupViews() {
-        let mealVC = MealBuilder.build()
-        let drinkVC = DrinkBuilder.build()
         let favoritesVC = FavoritesBuilder.build()
+        let mealVC = MealBuilder.build()
+        let drinkVC = DrinkBuilder.build(favoritesVC: favoritesVC)
         
         let navArray = NavBarBuilder.build(mealVC: mealVC, drinkVC: drinkVC, favoritesVC: favoritesVC)
         

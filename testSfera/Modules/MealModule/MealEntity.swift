@@ -11,12 +11,6 @@ struct Meal: Codable {
 }
 
 struct ParcedMeal {
-    let strMeal: String
-    let strCategory: String
-    let strArea: String
-    let strYoutube: String
-    let strInstructions: String
-    let image: String
-    let strIngridients: [String?]
-    let strMeasure: [String?]
+    var data = [String: String]()
 }
+
