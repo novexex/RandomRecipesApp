@@ -6,12 +6,12 @@
 //
 
 protocol DrinkRouterProtocol {
-    func buttonSavePressed(lastLoadedDrink: ParcedDrink)
+    func buttonSavePressed(drink: ParcedDrinkClass)
 }
 
 class DrinkRouter: DrinkRouterProtocol {
-    func buttonSavePressed(lastLoadedDrink: ParcedDrink) {
-        favoritesVC?.getEntity(drink: lastLoadedDrink)
+    func buttonSavePressed(drink: ParcedDrinkClass) {
+        favoritesVC?.getEntity(drink: drink)
     }
     
     

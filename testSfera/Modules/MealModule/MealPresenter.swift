@@ -41,34 +41,34 @@ extension MealPresenter: MealPresenterProtocol {
         
 //        print("\(presentedMeal.data)\n\n\n")
         
-        let drinkDiscription = "Meal: \(presentedMeal.data[DictValues.Meal.name] ?? "")\n\n"
-        let categoryDiscription = "Category: \(presentedMeal.data[DictValues.category] ?? ""), \(presentedMeal.data[DictValues.Meal.area] ?? "")\n\n"
+        let drinkDiscription = "Meal: \(presentedMeal.data[DictKeys.Meal.name] ?? "")\n\n"
+        let categoryDiscription = "Category: \(presentedMeal.data[DictKeys.category] ?? ""), \(presentedMeal.data[DictKeys.Meal.area] ?? "")\n\n"
         
         var ingredientsDiscription = """
         Ingredients:
-        \(presentedMeal.data[DictValues.ingr1] ?? "del"): \(presentedMeal.data[DictValues.meas1] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr2] ?? "del"): \(presentedMeal.data[DictValues.meas2] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr3] ?? "del"): \(presentedMeal.data[DictValues.meas3] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr4] ?? "del"): \(presentedMeal.data[DictValues.meas4] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr5] ?? "del"): \(presentedMeal.data[DictValues.meas5] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr6] ?? "del"): \(presentedMeal.data[DictValues.meas6] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr7] ?? "del"): \(presentedMeal.data[DictValues.meas7] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr8] ?? "del"): \(presentedMeal.data[DictValues.meas8] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr9] ?? "del"): \(presentedMeal.data[DictValues.meas9] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr10] ?? "del"): \(presentedMeal.data[DictValues.meas10] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr11] ?? "del"): \(presentedMeal.data[DictValues.meas11] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr12] ?? "del"): \(presentedMeal.data[DictValues.meas12] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr13] ?? "del"): \(presentedMeal.data[DictValues.meas13] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr14] ?? "del"): \(presentedMeal.data[DictValues.meas14] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr15] ?? "del"): \(presentedMeal.data[DictValues.meas15] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr16] ?? "del"): \(presentedMeal.data[DictValues.meas16] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr17] ?? "del"): \(presentedMeal.data[DictValues.meas17] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr18] ?? "del"): \(presentedMeal.data[DictValues.meas18] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr19] ?? "del"): \(presentedMeal.data[DictValues.meas19] ?? "del"),
-        \(presentedMeal.data[DictValues.ingr20] ?? "del"): \(presentedMeal.data[DictValues.meas20] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr1] ?? "del"): \(presentedMeal.data[DictKeys.meas1] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr2] ?? "del"): \(presentedMeal.data[DictKeys.meas2] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr3] ?? "del"): \(presentedMeal.data[DictKeys.meas3] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr4] ?? "del"): \(presentedMeal.data[DictKeys.meas4] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr5] ?? "del"): \(presentedMeal.data[DictKeys.meas5] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr6] ?? "del"): \(presentedMeal.data[DictKeys.meas6] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr7] ?? "del"): \(presentedMeal.data[DictKeys.meas7] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr8] ?? "del"): \(presentedMeal.data[DictKeys.meas8] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr9] ?? "del"): \(presentedMeal.data[DictKeys.meas9] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr10] ?? "del"): \(presentedMeal.data[DictKeys.meas10] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr11] ?? "del"): \(presentedMeal.data[DictKeys.meas11] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr12] ?? "del"): \(presentedMeal.data[DictKeys.meas12] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr13] ?? "del"): \(presentedMeal.data[DictKeys.meas13] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr14] ?? "del"): \(presentedMeal.data[DictKeys.meas14] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr15] ?? "del"): \(presentedMeal.data[DictKeys.meas15] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr16] ?? "del"): \(presentedMeal.data[DictKeys.meas16] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr17] ?? "del"): \(presentedMeal.data[DictKeys.meas17] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr18] ?? "del"): \(presentedMeal.data[DictKeys.meas18] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr19] ?? "del"): \(presentedMeal.data[DictKeys.meas19] ?? "del"),
+        \(presentedMeal.data[DictKeys.ingr20] ?? "del"): \(presentedMeal.data[DictKeys.meas20] ?? "del"),
         """
         
-        let instructionDiscription = "\n\nInstructions:\n\(presentedMeal.data[DictValues.instruct] ?? "")"
+        let instructionDiscription = "\n\nInstructions:\n\(presentedMeal.data[DictKeys.instruct] ?? "")"
         
 //        print("\(ingredientsDiscription)\n\n\n")
     
@@ -76,7 +76,7 @@ extension MealPresenter: MealPresenterProtocol {
         
 //        print(ingredientsDiscription)
 
-        guard let dictImage = presentedMeal.data[DictValues.Meal.image] else { return }
+        guard let dictImage = presentedMeal.data[DictKeys.Meal.image] else { return }
         let imageURL = URL(string: dictImage)
 
         guard let imageURL else { return }

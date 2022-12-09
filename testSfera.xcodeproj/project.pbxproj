@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EB0CF5FA2942EE3800CC248F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF5F92942EE3800CC248F /* String.swift */; };
+		EB0CF5FC2943387F00CC248F /* BaseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF5FB2943387F00CC248F /* BaseEntity.swift */; };
 		EBDB97C12934FEB8000683C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C02934FEB8000683C1 /* AppDelegate.swift */; };
 		EBDB97C52934FEB8000683C1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C42934FEB8000683C1 /* BaseViewController.swift */; };
 		EBDB97CA2934FEB9000683C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBDB97C92934FEB9000683C1 /* Assets.xcassets */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		EB0CF5F92942EE3800CC248F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		EB0CF5FB2943387F00CC248F /* BaseEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEntity.swift; sourceTree = "<group>"; };
 		EBDB97BD2934FEB8000683C1 /* testSfera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testSfera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDB97C02934FEB8000683C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBDB97C42934FEB8000683C1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				EBDB97C42934FEB8000683C1 /* BaseViewController.swift */,
+				EB0CF5FB2943387F00CC248F /* BaseEntity.swift */,
 			);
 			path = BaseClasses;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				EBDB9869293938C0000683C1 /* FavoritesRouter.swift in Sources */,
 				EBDB987129393C27000683C1 /* RandomDrinkService.swift in Sources */,
 				EBDB984729393691000683C1 /* NavBarPresenter.swift in Sources */,
+				EB0CF5FC2943387F00CC248F /* BaseEntity.swift in Sources */,
 				EBDB985329393778000683C1 /* MealRouter.swift in Sources */,
 				EB0CF5FA2942EE3800CC248F /* String.swift in Sources */,
 				EBDB985529393778000683C1 /* MealInteractor.swift in Sources */,

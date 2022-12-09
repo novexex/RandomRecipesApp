@@ -9,16 +9,15 @@ import UIKit
 
 protocol FavoritesViewProtocol: AnyObject {
     func getEntity(meal: ParcedMeal)
-    func getEntity(drink: ParcedDrink)
+    func getEntity(drink: ParcedDrinkClass)
 }
 
 class FavoritesViewController: UIViewController {
-    // MARK: - Public
     var presenter: FavoritesPresenterProtocol?
-    var tableView = UITableView()
-    var recipesTuple: ()
+    let tableViewController = UITableViewController()
+    var savedRecipe = [AnyObject]()
+    let identifier = "cell"
 
-    // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
@@ -28,46 +27,38 @@ class FavoritesViewController: UIViewController {
     }
 }
 
-// MARK: - Private functions
-extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
-    //устанавливаем количество строчек
+extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, FavoritesViewProtocol {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        savedRecipe.isEmpty ? 0 : savedRecipe.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        guard !savedRecipe.isEmpty else { return cell }
+        if let drink = savedRecipe[indexPath.row] as? ParcedDrinkClass {
+            cell.textLabel?.text = drink.strDrink
         }
-        cell?.textLabel?.text = "123123123"
-        guard let cell else { return UITableViewCell() }
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("asd")
+        print(indexPath.row)
     }
     
     func initialize() {
-        view.addSubview(tableView)
-        setTableViewDelegates()
+        view.addSubview(tableViewController.tableView)
         //tableView.rowHeight = 100
-        tableView.pin(to: view)
+        tableViewController.tableView.pin(to: view)
+        tableViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
+        tableViewController.tableView.delegate = self
+        tableViewController.tableView.dataSource = self
     }
-    func setTableViewDelegates() {
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-}
 
-// MARK: - FavoritesViewProtocol
-extension FavoritesViewController: FavoritesViewProtocol {
+    func getEntity(drink: ParcedDrinkClass) {
+        savedRecipe.append(drink)
+    }
+    
     func getEntity(meal: ParcedMeal) {
         
     }
-    
-    func getEntity(drink: ParcedDrink) {
-        //recipesTuple.
-    }
-    
 }
