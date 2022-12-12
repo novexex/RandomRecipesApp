@@ -66,18 +66,15 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = UIViewController()
-        let label = UILabel()
-        
-        if let meal = savedRecipes[indexPath.row] as? ParcedMealClass {
-            label.text = meal.strMeal
-        } else if let drink = savedRecipes[indexPath.row] as? ParcedDrinkClass {
-            label.text = drink.strDrink
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            savedRecipes.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
-        
-        vc.view.addSubview(label)
-        myVC.present(vc, animated: false)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.detailView(recipeEntity: savedRecipes[indexPath.row])
     }
     
     func initialize() {

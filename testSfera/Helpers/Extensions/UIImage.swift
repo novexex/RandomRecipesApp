@@ -13,8 +13,9 @@ extension UIImage {
         let urlImage = URL(string: url)
         
         guard let urlImage else { return UIImage() }
-        let data = try? Data(contentsOf: urlImage)
 
+        let data = try? Data(contentsOf: urlImage)
+        
         guard let data else { return UIImage() }
         let image = UIImage(data: data)
 

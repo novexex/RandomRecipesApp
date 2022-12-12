@@ -22,7 +22,7 @@ class TabBarPresenter {
 
 extension TabBarPresenter: TabBarPresenterProtocol {
     func didLoad(meal: Meal) {
-        //print(meal.meals)
+
     }
     
     func didLoad(drink: Drink) {

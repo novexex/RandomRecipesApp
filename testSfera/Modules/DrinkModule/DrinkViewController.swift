@@ -8,7 +8,8 @@
 import UIKit
 
 protocol DrinkViewProtocol: AnyObject {
-    func viewInput(discription: String, image: UIImage)
+    func viewInput(description: String, image: UIImage)
+    func showAlert(alert: UIAlertController)
     func viewOutput()
 }
 
@@ -28,7 +29,7 @@ class DrinkViewController: BaseViewController {
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
+
         title = Resources.Titles.NavBar.drink
         navigationController?.tabBarItem.title = Resources.Titles.TabBar.drink
         addNavBarButton(at: .left, with: Resources.Titles.NavBar.Actions.left)
@@ -45,28 +46,25 @@ class DrinkViewController: BaseViewController {
         subtitleLabel = UILabel()
         
         setupViews()
-        presenter?.viewInput()
+        presenter?.viewOutput()
     }
     
     override func navBarRightButtonHandler() {
-        presenter?.buttonSaveTapped()
-    }
-    
-}
-
-// MARK: - Private functions
-private extension DrinkViewController {
-    func initialize() {
+        presenter?.buttonSavePressed()
     }
 }
 
 // MARK: - DrinkViewProtocol
 extension DrinkViewController: DrinkViewProtocol {
-    func viewInput(discription: String, image: UIImage) {
+    func showAlert(alert: UIAlertController) {
+        self.present(alert, animated: true)
+    }
+    
+    func viewInput(description: String, image: UIImage) {
         DispatchQueue.main.async {
             let subtitleLabel: UILabel = {
                 let label = UILabel()
-                label.text = discription
+                label.text = description
                 label.numberOfLines = 0
                 label.sizeToFit()
                 label.textColor = UIColor.black
@@ -89,10 +87,7 @@ extension DrinkViewController: DrinkViewProtocol {
     func viewOutput() {
         
     }
-    
-}
 
-extension DrinkViewController {
     override func setupViews() {
         super.setupViews()
         

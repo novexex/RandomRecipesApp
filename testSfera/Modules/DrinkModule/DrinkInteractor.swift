@@ -9,9 +9,22 @@ import Foundation
 
 protocol DrinkInteractorProtocol: AnyObject {
     func loadCocktail()
+    func buttonSavePressed()
 }
 
 class DrinkInteractor: DrinkInteractorProtocol {
+    func buttonSavePressed() {
+        if presenter?.countOfSaveButtonPress != 1 {
+            presenter?.showAlert()
+        } else {
+            presenter?.callRouter()
+        }
+    }
+    
+    func checkForRepeat() {
+        
+    }
+    
     weak var presenter: DrinkPresenterProtocol?
     
     let randomDrinkService = RandomDrinkService()
@@ -20,5 +33,7 @@ class DrinkInteractor: DrinkInteractorProtocol {
         randomDrinkService.getDate { [weak self] drink in
             self?.presenter?.didLoad(drink: drink)
         }
+        presenter?.countOfSaveButtonPress = 0
     }
 }
+

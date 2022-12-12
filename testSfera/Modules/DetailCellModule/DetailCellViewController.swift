@@ -1,60 +1,39 @@
 //
-//  MealViewController.swift
+//  DetailCellViewController.swift
 //  testSfera
 //
-//  Created by Artour Ilyasov on 01.12.2022
+//  Created by Artour Ilyasov on 12.12.2022
 //
 
 import UIKit
 
-protocol MealViewProtocol: AnyObject {
+protocol DetailCellViewProtocol: AnyObject {
     func viewInput(description: String, image: UIImage)
-    func viewOutput()
 }
 
-class MealViewController: BaseViewController {
+class DetailCellViewController: UIViewController {
     // MARK: - Public
-    var presenter: MealPresenterProtocol? {
+    var presenter: DetailCellPresenterProtocol? {
         didSet {
-            presenter?.viewDidLoaded()
+            presenter?.viewDidLoad()
         }
     }
     var scrollView = UIScrollView()
     var contentView = UIView()
     var imageView = UIImageView()
     var subtitleLabel = UILabel()
-    
+
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = Resources.Titles.NavBar.meal
-        navigationController?.tabBarItem.title = Resources.Titles.TabBar.meal
-        addNavBarButton(at: .left, with: Resources.Titles.NavBar.Actions.left)
-        addNavBarButton(at: .right, with: Resources.Titles.NavBar.Actions.right)
-        
+        view.backgroundColor = .white
         setupViews()
     }
-    
-    override func navBarLeftButtonHandler() {
-        view.subviews.forEach({ $0.removeFromSuperview() })
-        scrollView = UIScrollView()
-        contentView = UIView()
-        imageView = UIImageView()
-        subtitleLabel = UILabel()
-        
-        setupViews()
-        presenter?.viewInput()
-    }
-    
-    override func navBarRightButtonHandler() {
-        presenter?.buttonSaveTapped()
-    }
-    
 }
 
-// MARK: - MealViewProtocol
-extension MealViewController: MealViewProtocol {
+
+// MARK: - DetailCellViewProtocol
+extension DetailCellViewController: DetailCellViewProtocol {
     func viewInput(description: String, image: UIImage) {
         DispatchQueue.main.async {
             let subtitleLabel: UILabel = {
@@ -82,25 +61,23 @@ extension MealViewController: MealViewProtocol {
     func viewOutput() {
         
     }
-    
-    override func setupViews() {
-        super.setupViews()
-        
+
+    func setupViews() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
     }
+
+
     
-    override func constraintViews() {
-        super.constraintViews()
-        
+    func constraintViews() {
         NSLayoutConstraint.activate([
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 100),
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
+            
             contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
@@ -124,4 +101,5 @@ extension MealViewController: MealViewProtocol {
             subtitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
+    
 }
