@@ -14,3 +14,13 @@ struct ParcedMeal {
     var data = [String: String]()
 }
 
+final class ParcedMealClass: BaseEntity {
+    let strMeal: String
+    let strArea: String
+    
+    init(strMeal: String, strArea: String, image: String, category: String, instructions: String) {
+        self.strMeal = strMeal
+        self.strArea = strArea
+        super.init(category: category, instructions: instructions, image: image)
+    }
+}

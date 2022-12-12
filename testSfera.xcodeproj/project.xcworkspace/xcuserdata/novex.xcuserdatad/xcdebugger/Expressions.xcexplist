@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "MealRouter.buttonSavePressed(meal:):MealRouter.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FavoritesViewController.tableView(_:cellForRowAt:):FavoritesViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "savedRecipes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FavoritesViewController.getEntity(meal:):FavoritesViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "savedRecipes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MealPresenter.buttonSaveTapped():MealPresenter.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

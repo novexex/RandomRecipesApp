@@ -49,7 +49,7 @@ class MealViewController: BaseViewController {
     }
     
     override func navBarRightButtonHandler() {
-        print("Meal NavBar button Save tapped")
+        presenter?.buttonSaveTapped()
     }
     
 }

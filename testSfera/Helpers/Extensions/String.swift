@@ -15,10 +15,6 @@ extension String {
         self = self.replacingOccurrences(of: ":  ,", with: "")
         self = self.replacingOccurrences(of: ": ,", with: "")
         self = self.replacingOccurrences(of: " ,", with: ",")
-        self.removeNewLinesAndComma()
-    }
-    
-    mutating func removeNewLinesAndComma() {
         while self.last == "\n" || self.last == "," {
             self.removeLast()
         }

@@ -65,19 +65,11 @@ extension DrinkPresenter: DrinkPresenterProtocol {
 
         ingredientsDiscription.formatting()
 
-        let urlImage = URL(string: presentedDrink.image)
+        let image = UIImage().getImageFromURL(url: presentedDrink.image)
         
-        guard let urlImage else { return }
-        let data = try? Data(contentsOf: urlImage)
-        
-        guard let data else { return }
-        let image = UIImage(data: data)
-        
-        guard let image else { return }
         view?.viewInput(discription: drinkDiscription + categoryDiscription + ingredientsDiscription + instructionDiscription,
                         image: image)
-        
-        
+
             // MARK: Dictionary style
             /*
              var presentedDrink = ParcedDrink()

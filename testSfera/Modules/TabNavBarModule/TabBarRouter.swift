@@ -14,7 +14,7 @@ class TabBarRouter: TabBarRouterProtocol {
     
     func setupViews() {
         let favoritesVC = FavoritesBuilder.build()
-        let mealVC = MealBuilder.build()
+        let mealVC = MealBuilder.build(favoritesVC: favoritesVC)
         let drinkVC = DrinkBuilder.build(favoritesVC: favoritesVC)
         
         let navArray = NavBarBuilder.build(mealVC: mealVC, drinkVC: drinkVC, favoritesVC: favoritesVC)

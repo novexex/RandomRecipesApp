@@ -6,9 +6,9 @@
 //
 
 class MealBuilder {
-    static func build() -> MealViewController {
+    static func build(favoritesVC: FavoritesViewController) -> MealViewController {
         let interactor = MealInteractor()
-        let router = MealRouter()
+        let router = MealRouter(favoritesVC: favoritesVC)
         let presenter = MealPresenter(interactor: interactor, router: router)
         let viewController = MealViewController()
         presenter.view  = viewController
