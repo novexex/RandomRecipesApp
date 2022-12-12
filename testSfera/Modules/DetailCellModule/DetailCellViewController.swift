@@ -12,7 +12,6 @@ protocol DetailCellViewProtocol: AnyObject {
 }
 
 class DetailCellViewController: UIViewController {
-    // MARK: - Public
     var presenter: DetailCellPresenterProtocol? {
         didSet {
             presenter?.viewDidLoad()
@@ -23,7 +22,6 @@ class DetailCellViewController: UIViewController {
     var imageView = UIImageView()
     var subtitleLabel = UILabel()
 
-    // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -31,8 +29,6 @@ class DetailCellViewController: UIViewController {
     }
 }
 
-
-// MARK: - DetailCellViewProtocol
 extension DetailCellViewController: DetailCellViewProtocol {
     func viewInput(description: String, image: UIImage) {
         DispatchQueue.main.async {
@@ -57,10 +53,6 @@ extension DetailCellViewController: DetailCellViewProtocol {
             self.constraintViews()
         }
     }
-    
-    func viewOutput() {
-        
-    }
 
     func setupViews() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -69,8 +61,6 @@ extension DetailCellViewController: DetailCellViewProtocol {
         scrollView.addSubview(contentView)
     }
 
-
-    
     func constraintViews() {
         NSLayoutConstraint.activate([
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

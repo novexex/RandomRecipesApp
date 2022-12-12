@@ -8,8 +8,8 @@
 import UIKit
 
 class DetailCellBuilder {
-    static func build(mealEntity: AnyObject) -> DetailCellViewController {
-        let interactor = DetailCellInteractor(mealEntity: mealEntity)
+    static func build(entity: AnyObject) -> DetailCellViewController {
+        let interactor = DetailCellInteractor(entity: entity)
         let router = DetailCellRouter()
         let presenter = DetailCellPresenter(interactor: interactor, router: router)
         let viewController = DetailCellViewController()

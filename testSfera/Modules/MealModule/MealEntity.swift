@@ -7,16 +7,11 @@
 
 import UIKit
 
-// MARK: - Meals
 struct Meal: Codable {
     var meals: [[String: String?]]
 }
 
-struct ParcedMeal {
-    var data = [String: String]()
-}
-
-final class ParcedMealClass: BaseEntity {
+final class ParcedMeal: BaseEntity {
     let strMeal: String
     let strArea: String
     

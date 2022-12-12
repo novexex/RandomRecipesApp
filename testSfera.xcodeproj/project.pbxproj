@@ -15,6 +15,8 @@
 		EB0CF6072946E5A700CC248F /* DetailCellRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF6022946E5A700CC248F /* DetailCellRouter.swift */; };
 		EB0CF6082946E5A700CC248F /* DetailCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF6032946E5A700CC248F /* DetailCellViewController.swift */; };
 		EB0CF6092946E5A700CC248F /* DetailCellInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF6042946E5A700CC248F /* DetailCellInteractor.swift */; };
+		EB0CF60C29473BE400CC248F /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF60A29473BE400CC248F /* CoreData.xcdatamodeld */; };
+		EB0CF60E29473DF400CC248F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF60D29473DF400CC248F /* StorageManager.swift */; };
 		EBDB97C12934FEB8000683C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C02934FEB8000683C1 /* AppDelegate.swift */; };
 		EBDB97C52934FEB8000683C1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C42934FEB8000683C1 /* BaseViewController.swift */; };
 		EBDB97CA2934FEB9000683C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBDB97C92934FEB9000683C1 /* Assets.xcassets */; };
@@ -62,6 +64,8 @@
 		EB0CF6022946E5A700CC248F /* DetailCellRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellRouter.swift; sourceTree = "<group>"; };
 		EB0CF6032946E5A700CC248F /* DetailCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellViewController.swift; sourceTree = "<group>"; };
 		EB0CF6042946E5A700CC248F /* DetailCellInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellInteractor.swift; sourceTree = "<group>"; };
+		EB0CF60B29473BE400CC248F /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
+		EB0CF60D29473DF400CC248F /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		EBDB97BD2934FEB8000683C1 /* testSfera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testSfera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDB97C02934FEB8000683C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBDB97C42934FEB8000683C1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				EBDB97C02934FEB8000683C1 /* AppDelegate.swift */,
+				EB0CF60D29473DF400CC248F /* StorageManager.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 				EBDB97C92934FEB9000683C1 /* Assets.xcassets */,
 				EBDB97CE2934FEB9000683C1 /* Info.plist */,
 				EBDB97CB2934FEB9000683C1 /* LaunchScreen.storyboard */,
+				EB0CF60A29473BE400CC248F /* CoreData.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -379,6 +385,7 @@
 				EBDB987129393C27000683C1 /* RandomDrinkService.swift in Sources */,
 				EBDB984729393691000683C1 /* NavBarPresenter.swift in Sources */,
 				EB0CF5FC2943387F00CC248F /* BaseEntity.swift in Sources */,
+				EB0CF60C29473BE400CC248F /* CoreData.xcdatamodeld in Sources */,
 				EBDB985329393778000683C1 /* MealRouter.swift in Sources */,
 				EB0CF5FA2942EE3800CC248F /* String.swift in Sources */,
 				EBDB985529393778000683C1 /* MealInteractor.swift in Sources */,
@@ -389,6 +396,7 @@
 				EBDB985429393778000683C1 /* MealViewController.swift in Sources */,
 				EBDB97D9293501DB000683C1 /* MealEntity.swift in Sources */,
 				EBDB97E929351C8A000683C1 /* TabBarRouter.swift in Sources */,
+				EB0CF60E29473DF400CC248F /* StorageManager.swift in Sources */,
 				EBDB97E529351C69000683C1 /* TabBarInteractor.swift in Sources */,
 				EBDB985F29393833000683C1 /* DrinkViewController.swift in Sources */,
 				EBDB986F29393C1D000683C1 /* RandomMealService.swift in Sources */,
@@ -612,6 +620,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EB0CF60A29473BE400CC248F /* CoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EB0CF60B29473BE400CC248F /* CoreData.xcdatamodel */,
+			);
+			currentVersion = EB0CF60B29473BE400CC248F /* CoreData.xcdatamodel */;
+			path = CoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = EBDB97B52934FEB7000683C1 /* Project object */;
 }

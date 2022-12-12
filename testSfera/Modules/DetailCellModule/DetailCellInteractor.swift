@@ -11,13 +11,13 @@ protocol DetailCellInteractorProtocol: AnyObject {
 
 class DetailCellInteractor: DetailCellInteractorProtocol {
     func getDetailEntity() -> AnyObject {
-        return mealEntity
+        return entity
     }
     
     weak var presenter: DetailCellPresenterProtocol?
-    let mealEntity: AnyObject
+    let entity: AnyObject
     
-    init(mealEntity: AnyObject) {
-        self.mealEntity = mealEntity
+    init(entity: AnyObject) {
+        self.entity = entity
     }
 }

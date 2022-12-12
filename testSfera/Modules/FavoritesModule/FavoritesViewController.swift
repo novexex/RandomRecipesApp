@@ -8,8 +8,8 @@
 import UIKit
 
 protocol FavoritesViewProtocol: AnyObject {
-    func getEntity(meal: ParcedMealClass)
-    func getEntity(drink: ParcedDrinkClass)
+    func getEntity(meal: ParcedMeal)
+    func getEntity(drink: ParcedDrink)
 }
 
 class FavoritesViewController: UIViewController {
@@ -17,9 +17,9 @@ class FavoritesViewController: UIViewController {
     let tableViewController = UITableViewController()
     let myVC = UITableViewController()
     var savedRecipes = [AnyObject]()
-    let identifier = "cell"
     let refresh = UIRefreshControl()
-    
+    let identifier = "cell"
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
@@ -28,16 +28,13 @@ class FavoritesViewController: UIViewController {
     }
     
     @objc func handleRefresh() {
-        
         refresh.endRefreshing()
         guard !savedRecipes.isEmpty else { return }
         let indexPathRow = IndexPath(row: savedRecipes.count - 1, section: 0)
         guard tableViewController.tableView.numberOfRows(inSection: 0) == indexPathRow.row else { return }
         tableViewController.tableView.insertRows(at: [indexPathRow], with: .automatic)
-        
     }
 }
-
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, FavoritesViewProtocol {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,16 +46,16 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
         guard !savedRecipes.isEmpty else { return cell }
         if #available(iOS 14.0, *) {
             var content = cell.defaultContentConfiguration()
-            if let meal = savedRecipes[indexPath.row] as? ParcedMealClass {
+            if let meal = savedRecipes[indexPath.row] as? ParcedMeal {
                 content.text = meal.strMeal
-            } else if let drink = savedRecipes[indexPath.row] as? ParcedDrinkClass {
+            } else if let drink = savedRecipes[indexPath.row] as? ParcedDrink {
                 content.text = drink.strDrink
             }
             cell.contentConfiguration = content
         } else {
-            if let meal = savedRecipes[indexPath.row] as? ParcedMealClass {
+            if let meal = savedRecipes[indexPath.row] as? ParcedMeal {
                 cell.textLabel?.text = meal.strMeal
-            } else if let drink = savedRecipes[indexPath.row] as? ParcedDrinkClass {
+            } else if let drink = savedRecipes[indexPath.row] as? ParcedDrink {
                 cell.textLabel?.text = drink.strDrink
             }
             
@@ -87,11 +84,11 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
         tableViewController.tableView.dataSource = self
     }
     
-    func getEntity(drink: ParcedDrinkClass) {
+    func getEntity(drink: ParcedDrink) {
         savedRecipes.append(drink)
     }
     
-    func getEntity(meal: ParcedMealClass) {
+    func getEntity(meal: ParcedMeal) {
         savedRecipes.append(meal)
     }
 }

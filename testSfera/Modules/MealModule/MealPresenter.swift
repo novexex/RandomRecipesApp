@@ -18,7 +18,7 @@ class MealPresenter {
     weak var view: MealViewProtocol?
     var router: MealRouterProtocol
     var interactor: MealInteractorProtocol
-    var lastLoadedMeal: ParcedMealClass?
+    var lastLoadedMeal: ParcedMeal?
     
     init(interactor: MealInteractorProtocol, router: MealRouterProtocol) {
         self.interactor = interactor
@@ -41,7 +41,7 @@ extension MealPresenter: MealPresenterProtocol {
     }
     
     func didLoad(meal: Meal) {
-        let presentedMeal = ParcedMealClass(strMeal: (meal.meals[0][DictKeys.Meal.name] ?? "") ?? "",
+        let presentedMeal = ParcedMeal(strMeal: (meal.meals[0][DictKeys.Meal.name] ?? "") ?? "",
                                              strArea: (meal.meals[0][DictKeys.Meal.area] ?? "") ?? "",
                                             image: UIImage().getImageFromURL(url: (meal.meals[0][DictKeys.Meal.image] ?? "") ?? ""),
                                              category: (meal.meals[0][DictKeys.category] ?? "") ?? "",

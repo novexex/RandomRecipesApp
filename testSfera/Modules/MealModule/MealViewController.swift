@@ -13,7 +13,6 @@ protocol MealViewProtocol: AnyObject {
 }
 
 class MealViewController: BaseViewController {
-    // MARK: - Public
     var presenter: MealPresenterProtocol? {
         didSet {
             presenter?.viewDidLoaded()
@@ -24,7 +23,6 @@ class MealViewController: BaseViewController {
     var imageView = UIImageView()
     var subtitleLabel = UILabel()
     
-    // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +30,6 @@ class MealViewController: BaseViewController {
         navigationController?.tabBarItem.title = Resources.Titles.TabBar.meal
         addNavBarButton(at: .left, with: Resources.Titles.NavBar.Actions.left)
         addNavBarButton(at: .right, with: Resources.Titles.NavBar.Actions.right)
-        
         setupViews()
     }
     
@@ -42,7 +39,6 @@ class MealViewController: BaseViewController {
         contentView = UIView()
         imageView = UIImageView()
         subtitleLabel = UILabel()
-        
         setupViews()
         presenter?.viewInput()
     }
@@ -50,10 +46,8 @@ class MealViewController: BaseViewController {
     override func navBarRightButtonHandler() {
         presenter?.buttonSaveTapped()
     }
-    
 }
 
-// MARK: - MealViewProtocol
 extension MealViewController: MealViewProtocol {
     func viewInput(description: String, image: UIImage) {
         DispatchQueue.main.async {

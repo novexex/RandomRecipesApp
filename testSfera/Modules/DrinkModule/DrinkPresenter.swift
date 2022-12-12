@@ -13,16 +13,13 @@ protocol DrinkPresenterProtocol: AnyObject {
     func viewOutput()
     func buttonSavePressed()
     func callRouter()
-    func showAlert()
-    var countOfSaveButtonPress: Int { get set }
 }
 
 class DrinkPresenter {
     weak var view: DrinkViewProtocol?
     var router: DrinkRouterProtocol
     var interactor: DrinkInteractorProtocol
-    var lastLoadedDrink: ParcedDrinkClass?
-    var countOfSaveButtonPress = 0
+    var lastLoadedDrink: ParcedDrink?
     
     init(interactor: DrinkInteractorProtocol, router: DrinkRouterProtocol) {
         self.interactor = interactor
@@ -31,19 +28,12 @@ class DrinkPresenter {
 }
 
 extension DrinkPresenter: DrinkPresenterProtocol {
-    func showAlert() {
-        let alert = UIAlertController(title: "Error", message: "This recipe is already saved", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default))
-        view?.showAlert(alert: alert)
-    }
-    
     func callRouter() {
         guard let lastLoadedDrink else { return }
         router.buttonSavePressed(drink: lastLoadedDrink)
     }
     
     func buttonSavePressed() {
-        countOfSaveButtonPress += 1
         interactor.buttonSavePressed()
     }
     
@@ -56,11 +46,13 @@ extension DrinkPresenter: DrinkPresenterProtocol {
     }
     
     func didLoad(drink: Drink) {
-        let presentedDrink = ParcedDrinkClass(strDrink: (drink.drinks[0][DictKeys.Drink.name] ?? "") ?? "",
+        // initialize model
+        let presentedDrink = ParcedDrink(strDrink: (drink.drinks[0][DictKeys.Drink.name] ?? "") ?? "",
                                               strAlcoholic: (drink.drinks[0][DictKeys.Drink.alco] ?? "") ?? "",
                                               image: UIImage().getImageFromURL(url: (drink.drinks[0][DictKeys.Drink.image] ?? "") ?? ""),
                                               category: (drink.drinks[0][DictKeys.category] ?? "") ?? "",
                                               instructions: (drink.drinks[0][DictKeys.instruct] ?? "") ?? "")
+        //fill arrays in model
         for i in DictKeys.ingr {
             presentedDrink.ingredients.append(drink.drinks[0][i] ?? nil)
         }
@@ -70,6 +62,7 @@ extension DrinkPresenter: DrinkPresenterProtocol {
 
         lastLoadedDrink = presentedDrink
         
+        //prepare for view
         let drinkDiscription = "Drink: \(presentedDrink.strDrink)\n\n"
         let categoryDiscription = "Category: \(presentedDrink.category), \(presentedDrink.strAlcoholic)\n\n"
         let instructionDiscription = "\n\nInstructions:\n\(presentedDrink.instructions)"
@@ -83,5 +76,5 @@ extension DrinkPresenter: DrinkPresenterProtocol {
         
         view?.viewInput(description: drinkDiscription + categoryDiscription + ingredientsDiscription + instructionDiscription,
                         image: presentedDrink.image)
-        }
     }
+}

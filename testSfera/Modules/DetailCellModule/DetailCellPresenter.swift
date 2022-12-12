@@ -21,7 +21,7 @@ class DetailCellPresenter {
         self.router = router
     }
     
-    func prepareEntity(meal: ParcedMealClass) -> String {
+    func prepareEntity(meal: ParcedMeal) -> String {
         let mealDiscription = "Meal: \(meal.strMeal)\n\n"
         let categoryDiscription = "Category: \(meal.category), \(meal.strArea)\n\n"
         let instructionDiscription = "\n\nInstructions:\n\(meal.instructions)"
@@ -36,7 +36,7 @@ class DetailCellPresenter {
         return mealDiscription + categoryDiscription + instructionDiscription + instructionDiscription + ingredientsDiscription
     }
     
-    func prepareEntity(drink: ParcedDrinkClass) -> String {
+    func prepareEntity(drink: ParcedDrink) -> String {
         let drinkDiscription = "Drink: \(drink.strDrink)\n\n"
         let categoryDiscription = "Category: \(drink.category), \(drink.strAlcoholic)\n\n"
         let instructionDiscription = "\n\nInstructions:\n\(drink.instructions)"
@@ -55,10 +55,10 @@ class DetailCellPresenter {
 extension DetailCellPresenter: DetailCellPresenterProtocol {
     func viewDidLoad() {
         let entity = interactor.getDetailEntity()
-        if let entity = entity as? ParcedMealClass {
+        if let entity = entity as? ParcedMeal {
             let description = prepareEntity(meal: entity)
             view?.viewInput(description: description, image: entity.image)
-        } else if let entity = entity as? ParcedDrinkClass {
+        } else if let entity = entity as? ParcedDrink {
             let description = prepareEntity(drink: entity)
             view?.viewInput(description: description, image: entity.image)
         }

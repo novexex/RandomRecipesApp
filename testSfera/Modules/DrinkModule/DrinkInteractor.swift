@@ -14,15 +14,7 @@ protocol DrinkInteractorProtocol: AnyObject {
 
 class DrinkInteractor: DrinkInteractorProtocol {
     func buttonSavePressed() {
-        if presenter?.countOfSaveButtonPress != 1 {
-            presenter?.showAlert()
-        } else {
-            presenter?.callRouter()
-        }
-    }
-    
-    func checkForRepeat() {
-        
+        presenter?.callRouter()
     }
     
     weak var presenter: DrinkPresenterProtocol?
@@ -33,7 +25,6 @@ class DrinkInteractor: DrinkInteractorProtocol {
         randomDrinkService.getDate { [weak self] drink in
             self?.presenter?.didLoad(drink: drink)
         }
-        presenter?.countOfSaveButtonPress = 0
     }
 }
 

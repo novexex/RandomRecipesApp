@@ -11,7 +11,7 @@ protocol FavoritesRouterProtocol {
 
 class FavoritesRouter: FavoritesRouterProtocol {
     func detailView(recipeEntity: AnyObject) {
-        let vc = DetailCellBuilder.build(mealEntity: recipeEntity)
+        let vc = DetailCellBuilder.build(entity: recipeEntity)
         viewController?.present(vc, animated: true)
     }
     

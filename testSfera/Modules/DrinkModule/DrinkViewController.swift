@@ -9,32 +9,26 @@ import UIKit
 
 protocol DrinkViewProtocol: AnyObject {
     func viewInput(description: String, image: UIImage)
-    func showAlert(alert: UIAlertController)
-    func viewOutput()
 }
 
 class DrinkViewController: BaseViewController {
-    // MARK: - Public
     var presenter: DrinkPresenterProtocol? {
         didSet {
             presenter?.viewDidLoaded()
         }
     }
-    var scrollView = UIScrollView()
-    var contentView = UIView()
-    var imageView = UIImageView()
-    var subtitleLabel = UILabel()
-    
-    
-    // MARK: - View lifecycle
+    private var scrollView = UIScrollView()
+    private var contentView = UIView()
+    private var imageView = UIImageView()
+    private var subtitleLabel = UILabel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         title = Resources.Titles.NavBar.drink
         navigationController?.tabBarItem.title = Resources.Titles.TabBar.drink
         addNavBarButton(at: .left, with: Resources.Titles.NavBar.Actions.left)
         addNavBarButton(at: .right, with: Resources.Titles.NavBar.Actions.right)
-        
         setupViews()
     }
     
@@ -44,7 +38,6 @@ class DrinkViewController: BaseViewController {
         contentView = UIView()
         imageView = UIImageView()
         subtitleLabel = UILabel()
-        
         setupViews()
         presenter?.viewOutput()
     }
@@ -54,77 +47,60 @@ class DrinkViewController: BaseViewController {
     }
 }
 
-// MARK: - DrinkViewProtocol
 extension DrinkViewController: DrinkViewProtocol {
-    func showAlert(alert: UIAlertController) {
-        self.present(alert, animated: true)
-    }
-    
     func viewInput(description: String, image: UIImage) {
         DispatchQueue.main.async {
-            let subtitleLabel: UILabel = {
+            self.subtitleLabel = {
                 let label = UILabel()
                 label.text = description
                 label.numberOfLines = 0
                 label.sizeToFit()
                 label.textColor = UIColor.black
-                label.translatesAutoresizingMaskIntoConstraints = false
                 return label
             }()
-            let imageView: UIImageView = {
+            self.imageView = {
                 let imageView = UIImageView()
                 imageView.image = image
                 imageView.contentMode = .scaleAspectFit
-                imageView.translatesAutoresizingMaskIntoConstraints = false
                 return imageView
             }()
-            self.subtitleLabel = subtitleLabel
-            self.imageView = imageView
             self.constraintViews()
         }
     }
     
-    func viewOutput() {
-        
-    }
 
     override func setupViews() {
         super.setupViews()
         
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        contentView.addSubview(imageView)
+        contentView.addSubview(subtitleLabel)
+        view.addSubview(scrollView)
     }
-
-
     
     override func constraintViews() {
         super.constraintViews()
+
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 100),
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
+
             contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
-        ])
-        
-        contentView.addSubview(imageView)
-        
-        NSLayoutConstraint.activate([
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -150),
-            imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4)
-        ])
-        
-        contentView.addSubview(subtitleLabel)
-        
-        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4),
+
             subtitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             subtitleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -150),
             subtitleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4),

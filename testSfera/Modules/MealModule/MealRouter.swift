@@ -6,7 +6,7 @@
 //
 
 protocol MealRouterProtocol {
-    func buttonSavePressed(meal: ParcedMealClass)
+    func buttonSavePressed(meal: ParcedMeal)
 }
 
 class MealRouter: MealRouterProtocol {
@@ -17,7 +17,7 @@ class MealRouter: MealRouterProtocol {
         self.favoritesVC = favoritesVC
     }
     
-    func buttonSavePressed(meal: ParcedMealClass) {
+    func buttonSavePressed(meal: ParcedMeal) {
         favoritesVC?.getEntity(meal: meal)
     }
 }
