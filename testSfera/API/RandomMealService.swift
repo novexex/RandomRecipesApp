@@ -21,7 +21,7 @@ class RandomMealService {
                     let model = try JSONDecoder().decode(Meal.self, from: data)
                     completion(model)
                 } catch {
-                    print(error)
+                    print(error.localizedDescription)
                 }
             }.resume()
         }

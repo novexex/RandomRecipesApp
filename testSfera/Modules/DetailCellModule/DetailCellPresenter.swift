@@ -57,10 +57,17 @@ extension DetailCellPresenter: DetailCellPresenterProtocol {
         let entity = interactor.getDetailEntity()
         if let entity = entity as? ParcedMeal {
             let description = prepareEntity(meal: entity)
-            view?.viewInput(description: description, image: entity.image)
+            //let image = UIImage().getImageFromString(url: entity.image)
+            let imageURL = URL(string: entity.image)
+            var pureImage = UIImage()
+            if let imageURL { UIImage().getImage(url: imageURL) { image in
+                pureImage = image!
+            }}
+            view?.viewInput(description: description, image: pureImage)
         } else if let entity = entity as? ParcedDrink {
             let description = prepareEntity(drink: entity)
-            view?.viewInput(description: description, image: entity.image)
+            let image = UIImage().getImageFromString(url: entity.image)
+            view?.viewInput(description: description, image: image)
         }
     }
     

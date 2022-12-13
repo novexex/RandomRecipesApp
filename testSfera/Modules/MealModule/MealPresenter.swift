@@ -43,7 +43,7 @@ extension MealPresenter: MealPresenterProtocol {
     func didLoad(meal: Meal) {
         let presentedMeal = ParcedMeal(strMeal: (meal.meals[0][DictKeys.Meal.name] ?? "") ?? "",
                                              strArea: (meal.meals[0][DictKeys.Meal.area] ?? "") ?? "",
-                                            image: UIImage().getImageFromURL(url: (meal.meals[0][DictKeys.Meal.image] ?? "") ?? ""),
+                                            image: (meal.meals[0][DictKeys.Meal.image] ?? "") ?? "",
                                              category: (meal.meals[0][DictKeys.category] ?? "") ?? "",
                                              instructions: (meal.meals[0][DictKeys.instruct] ?? "") ?? "")
         for i in DictKeys.ingr {
@@ -65,8 +65,10 @@ extension MealPresenter: MealPresenterProtocol {
         
         ingredientsDiscription.formatting()
 
+        let image = UIImage().getImageFromString(url: presentedMeal.image)
+        
         view?.viewInput(description: mealDiscription + categoryDiscription + ingredientsDiscription + instructionDiscription,
-                        image: presentedMeal.image)
+                        image: image)
     }
 }
 

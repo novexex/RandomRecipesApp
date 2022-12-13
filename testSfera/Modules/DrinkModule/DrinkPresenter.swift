@@ -49,7 +49,7 @@ extension DrinkPresenter: DrinkPresenterProtocol {
         // initialize model
         let presentedDrink = ParcedDrink(strDrink: (drink.drinks[0][DictKeys.Drink.name] ?? "") ?? "",
                                               strAlcoholic: (drink.drinks[0][DictKeys.Drink.alco] ?? "") ?? "",
-                                              image: UIImage().getImageFromURL(url: (drink.drinks[0][DictKeys.Drink.image] ?? "") ?? ""),
+                                              image: (drink.drinks[0][DictKeys.Drink.image] ?? "") ?? "",
                                               category: (drink.drinks[0][DictKeys.category] ?? "") ?? "",
                                               instructions: (drink.drinks[0][DictKeys.instruct] ?? "") ?? "")
         //fill arrays in model
@@ -74,7 +74,9 @@ extension DrinkPresenter: DrinkPresenterProtocol {
 
         ingredientsDiscription.formatting()
         
+        let image = UIImage().getImageFromString(url: presentedDrink.image)
+        
         view?.viewInput(description: drinkDiscription + categoryDiscription + ingredientsDiscription + instructionDiscription,
-                        image: presentedDrink.image)
+                        image: image)
     }
 }
