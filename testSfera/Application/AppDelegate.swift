@@ -14,18 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-//        let tabBarController = TabBarBuilder.build()
-//        let navBarController = NavBarBuilder.build()
+        let dataProvider = DataProvider()
         let favoritesVC = FavoritesBuilder.build()
         let mealVC = MealBuilder.build(favoritesVC: favoritesVC)
-        let drinkVC = DrinkBuilder.build(favoritesVC: favoritesVC)
+        let drinkVC = DrinkBuilder.build(favoritesVC: favoritesVC, dataProvider: dataProvider)
         
         let navArray = NavBarBuilder.build(mealVC: mealVC, drinkVC: drinkVC, favoritesVC: favoritesVC)
         
         let tabBarController = UITabBarController()
         tabBarController.setViewControllers(navArray, animated: true)
-//        эта функция должна собрать с билдеров вьюконтролеры и за инициализировать в таббар
-        //setupAppearanceTabBar(with: tabBarController)
+        tabBarController.tabBar.backgroundColor = .white
+        
         window = UIWindow()
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
@@ -35,9 +34,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         StorageManager.saveContext()
-    }
-    
-    func setupAppearanceTabBar() {
-        
     }
 }

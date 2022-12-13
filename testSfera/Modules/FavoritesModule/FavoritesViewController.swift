@@ -18,13 +18,31 @@ class FavoritesViewController: UIViewController {
     let myVC = UITableViewController()
     var savedRecipes = [AnyObject]()
     let refresh = UIRefreshControl()
+    var welcomeLabel = UILabel()
     let identifier = "cell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         initialize()
+        configureWelcomeLabel()
         title = Resources.Titles.NavBar.favorites
         navigationController?.tabBarItem.title = Resources.Titles.TabBar.favorites
+    }
+    
+    func configureWelcomeLabel() {
+        welcomeLabel = {
+            let label = UILabel()
+            label.text = "You haven't saved any recipes yet,\n when you do drag up to refresh this page"
+            label.numberOfLines = 0
+            label.textAlignment = .center
+            label.sizeToFit()
+            label.textColor = .gray
+            
+            return label
+        }()
+        view.addSubview(welcomeLabel)
+        welcomeLabel.pin(to: view)
     }
     
     @objc func handleRefresh() {
@@ -42,6 +60,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        welcomeLabel.removeFromSuperview()
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         guard !savedRecipes.isEmpty else { return cell }
         if #available(iOS 14.0, *) {

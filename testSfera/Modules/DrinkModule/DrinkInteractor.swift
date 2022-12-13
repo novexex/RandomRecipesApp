@@ -9,22 +9,17 @@ import Foundation
 
 protocol DrinkInteractorProtocol: AnyObject {
     func loadCocktail()
-    func buttonSavePressed()
 }
 
-class DrinkInteractor: DrinkInteractorProtocol {
-    func buttonSavePressed() {
-        presenter?.callRouter()
-    }
-    
+class DrinkInteractor {
     weak var presenter: DrinkPresenterProtocol?
-    
     let randomDrinkService = RandomDrinkService()
-    
+}
+
+extension DrinkInteractor: DrinkInteractorProtocol {
     func loadCocktail() {
         randomDrinkService.getDate { [weak self] drink in
-            self?.presenter?.didLoad(drink: drink)
+            self?.presenter?.interactorDidLoad(drink: drink)
         }
     }
 }
-

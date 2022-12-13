@@ -9,10 +9,10 @@ import UIKit
 
 protocol DrinkPresenterProtocol: AnyObject {
     func viewDidLoaded()
-    func didLoad(drink: Drink)
+    func interactorDidLoad(drink: Drink)
     func viewOutput()
     func buttonSavePressed()
-    func callRouter()
+    func buttonNextPressed()
 }
 
 class DrinkPresenter {
@@ -20,63 +20,66 @@ class DrinkPresenter {
     var router: DrinkRouterProtocol
     var interactor: DrinkInteractorProtocol
     var lastLoadedDrink: ParcedDrink?
+    var dataProvider: DataProvider
     
-    init(interactor: DrinkInteractorProtocol, router: DrinkRouterProtocol) {
+    init(interactor: DrinkInteractorProtocol, router: DrinkRouterProtocol, dataProvider: DataProvider) {
         self.interactor = interactor
         self.router = router
+        self.dataProvider = dataProvider
     }
 }
 
 extension DrinkPresenter: DrinkPresenterProtocol {
-    func callRouter() {
-        guard let lastLoadedDrink else { return }
-        router.buttonSavePressed(drink: lastLoadedDrink)
-    }
-    
-    func buttonSavePressed() {
-        interactor.buttonSavePressed()
-    }
-    
-    func viewOutput() {
-        interactor.loadCocktail()
-    }
-    
     func viewDidLoaded() {
-        interactor.loadCocktail()
+        view?.startActivityIndicator()
+        viewOutput()
     }
     
-    func didLoad(drink: Drink) {
-        // initialize model
+    func interactorDidLoad(drink: Drink) {
         let presentedDrink = ParcedDrink(strDrink: (drink.drinks[0][DictKeys.Drink.name] ?? "") ?? "",
-                                              strAlcoholic: (drink.drinks[0][DictKeys.Drink.alco] ?? "") ?? "",
-                                              image: (drink.drinks[0][DictKeys.Drink.image] ?? "") ?? "",
-                                              category: (drink.drinks[0][DictKeys.category] ?? "") ?? "",
-                                              instructions: (drink.drinks[0][DictKeys.instruct] ?? "") ?? "")
-        //fill arrays in model
+                                         strAlcoholic: (drink.drinks[0][DictKeys.Drink.alco] ?? "") ?? "",
+                                         image: (drink.drinks[0][DictKeys.Drink.image] ?? "") ?? "",
+                                         category: (drink.drinks[0][DictKeys.category] ?? "") ?? "",
+                                         instructions: (drink.drinks[0][DictKeys.instruct] ?? "") ?? "")
         for i in DictKeys.ingr {
             presentedDrink.ingredients.append(drink.drinks[0][i] ?? nil)
         }
         for i in DictKeys.meas {
             presentedDrink.measure.append(drink.drinks[0][i] ?? nil)
         }
-
-        lastLoadedDrink = presentedDrink
         
-        //prepare for view
+        lastLoadedDrink = presentedDrink
+
         let drinkDiscription = "Drink: \(presentedDrink.strDrink)\n\n"
         let categoryDiscription = "Category: \(presentedDrink.category), \(presentedDrink.strAlcoholic)\n\n"
+        // TODO: if instructions not recived should not to print
         let instructionDiscription = "\n\nInstructions:\n\(presentedDrink.instructions)"
-        var ingredientsDiscription = ""
+        var ingredientsDiscription = "Ingredients:\n"
         
         for (index, _) in presentedDrink.ingredients.enumerated() {
             ingredientsDiscription += "\(presentedDrink.ingredients[index] ?? "del"): \(presentedDrink.measure[index] ?? "del"),\n"
         }
-
+        
         ingredientsDiscription.formatting()
         
-        let image = UIImage().getImageFromString(url: presentedDrink.image)
-        
-        view?.viewInput(description: drinkDiscription + categoryDiscription + ingredientsDiscription + instructionDiscription,
-                        image: image)
+        DispatchQueue.main.async {
+            let imageView = UIImageView().getImageFromURL(url: presentedDrink.image)
+            self.view?.viewInput(description: drinkDiscription + categoryDiscription + ingredientsDiscription + instructionDiscription,
+                                 image: imageView)
+        }
+    }
+    func viewOutput() {
+        interactor.loadCocktail()
+    }
+    
+    func buttonNextPressed() {
+        view?.refreshView()
+        view?.startActivityIndicator()
+        viewOutput()
+    }
+    
+    func buttonSavePressed() {
+        guard let lastLoadedDrink else { return }
+        router.buttonSavePressed(drink: lastLoadedDrink)
     }
 }

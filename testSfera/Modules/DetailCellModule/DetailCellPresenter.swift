@@ -33,7 +33,7 @@ class DetailCellPresenter {
         
         ingredientsDiscription.formatting()
 
-        return mealDiscription + categoryDiscription + instructionDiscription + instructionDiscription + ingredientsDiscription
+        return mealDiscription + categoryDiscription + ingredientsDiscription + instructionDiscription
     }
     
     func prepareEntity(drink: ParcedDrink) -> String {
@@ -48,7 +48,7 @@ class DetailCellPresenter {
 
         ingredientsDiscription.formatting()
 
-        return drinkDiscription + categoryDiscription + instructionDiscription + instructionDiscription + ingredientsDiscription
+        return drinkDiscription + categoryDiscription + ingredientsDiscription + instructionDiscription
     }
 }
 
@@ -57,17 +57,12 @@ extension DetailCellPresenter: DetailCellPresenterProtocol {
         let entity = interactor.getDetailEntity()
         if let entity = entity as? ParcedMeal {
             let description = prepareEntity(meal: entity)
-            //let image = UIImage().getImageFromString(url: entity.image)
-            let imageURL = URL(string: entity.image)
-            var pureImage = UIImage()
-            if let imageURL { UIImage().getImage(url: imageURL) { image in
-                pureImage = image!
-            }}
-            view?.viewInput(description: description, image: pureImage)
+            let imageView = UIImageView().getImageFromURL(url: entity.image)
+            view?.viewInput(description: description, image: imageView)
         } else if let entity = entity as? ParcedDrink {
             let description = prepareEntity(drink: entity)
-            let image = UIImage().getImageFromString(url: entity.image)
-            view?.viewInput(description: description, image: image)
+            let imageView = UIImageView().getImageFromURL(url: entity.image)
+            view?.viewInput(description: description, image: imageView)
         }
     }
     

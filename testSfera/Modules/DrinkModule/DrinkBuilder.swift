@@ -6,10 +6,10 @@
 //
 
 class DrinkBuilder {
-    static func build(favoritesVC: FavoritesViewController) -> DrinkViewController {
+    static func build(favoritesVC: FavoritesViewController, dataProvider: DataProvider) -> DrinkViewController {
         let interactor = DrinkInteractor()
         let router = DrinkRouter(favoritesVC: favoritesVC)
-        let presenter = DrinkPresenter(interactor: interactor, router: router)
+        let presenter = DrinkPresenter(interactor: interactor, router: router, dataProvider: dataProvider)
         let viewController = DrinkViewController()
         presenter.view  = viewController
         viewController.presenter = presenter

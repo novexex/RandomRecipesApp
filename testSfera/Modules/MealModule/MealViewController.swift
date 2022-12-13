@@ -8,8 +8,10 @@
 import UIKit
 
 protocol MealViewProtocol: AnyObject {
-    func viewInput(description: String, image: UIImage)
-    func viewOutput()
+    func viewInput(description: String, image: UIImageView)
+    func refreshView()
+    func startActivityIndicator()
+    func stopActivityIndicator()
 }
 
 class MealViewController: BaseViewController {
@@ -18,10 +20,11 @@ class MealViewController: BaseViewController {
             presenter?.viewDidLoaded()
         }
     }
-    var scrollView = UIScrollView()
-    var contentView = UIView()
-    var imageView = UIImageView()
-    var subtitleLabel = UILabel()
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
+    private let activityIndicator = UIActivityIndicatorView()
+    private var imageView = UIImageView()
+    private var subtitleLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,88 +37,107 @@ class MealViewController: BaseViewController {
     }
     
     override func navBarLeftButtonHandler() {
-        view.subviews.forEach({ $0.removeFromSuperview() })
-        scrollView = UIScrollView()
-        contentView = UIView()
-        imageView = UIImageView()
-        subtitleLabel = UILabel()
-        setupViews()
-        presenter?.viewInput()
+        presenter?.buttonNextPressed()
     }
     
     override func navBarRightButtonHandler() {
-        presenter?.buttonSaveTapped()
+        presenter?.buttonSavePressed()
+    }
+    
+    override func setupViews() {
+        DispatchQueue.main.async {
+            super.setupViews()
+            self.view.addSubview(self.scrollView)
+            self.scrollView.addSubview(self.contentView)
+        }
+    }
+    
+    override func constraintViews() {
+        DispatchQueue.main.async {
+            super.constraintViews()
+            
+            self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+            self.imageView.translatesAutoresizingMaskIntoConstraints = false
+            self.scrollView.translatesAutoresizingMaskIntoConstraints = false
+            self.contentView.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                self.scrollView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                self.scrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 100),
+                self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
+                self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+                
+                self.contentView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
+                self.contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor),
+                self.contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
+                self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor)
+            ])
+            
+            self.contentView.addSubview(self.imageView)
+            
+            NSLayoutConstraint.activate([
+                self.imageView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+                self.imageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: -150),
+                self.imageView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 3/4)
+            ])
+            
+            self.contentView.addSubview(self.subtitleLabel)
+            
+            NSLayoutConstraint.activate([
+                self.subtitleLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+                self.subtitleLabel.topAnchor.constraint(equalTo: self.imageView.bottomAnchor, constant: -150),
+                self.subtitleLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 3/4),
+                self.subtitleLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
+            ])
+        }
     }
 }
 
 extension MealViewController: MealViewProtocol {
-    func viewInput(description: String, image: UIImage) {
-        DispatchQueue.main.async {
-            let subtitleLabel: UILabel = {
-                let label = UILabel()
-                label.text = description
-                label.numberOfLines = 0
-                label.sizeToFit()
-                label.textColor = UIColor.black
-                label.translatesAutoresizingMaskIntoConstraints = false
-                return label
+    func viewInput(description: String, image: UIImageView) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.subtitleLabel = {
+                let subtitleLabel = UILabel()
+                subtitleLabel.text = description
+                subtitleLabel.numberOfLines = 0
+                subtitleLabel.sizeToFit()
+                subtitleLabel.textColor = UIColor.black
+                return subtitleLabel
             }()
-            let imageView: UIImageView = {
-                let imageView = UIImageView()
-                imageView.image = image
+            self.imageView = {
+                let imageView = image
                 imageView.contentMode = .scaleAspectFit
-                imageView.translatesAutoresizingMaskIntoConstraints = false
                 return imageView
             }()
-            self.subtitleLabel = subtitleLabel
-            self.imageView = imageView
             self.constraintViews()
+            self.stopActivityIndicator()
         }
     }
     
-    func viewOutput() {
-        
+    func refreshView() {
+        DispatchQueue.main.async {
+            self.scrollView.removeFromSuperview()
+            self.contentView.removeFromSuperview()
+            self.imageView.removeFromSuperview()
+            self.subtitleLabel.removeFromSuperview()
+            self.setupViews()
+        }
     }
     
-    override func setupViews() {
-        super.setupViews()
-        
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
+    func startActivityIndicator() {
+        DispatchQueue.main.async {
+            self.view.addSubview(self.activityIndicator)
+            self.activityIndicator.pin(to: self.view)
+            self.activityIndicator.startAnimating()
+            self.activityIndicator.isHidden = false
+        }
     }
     
-    override func constraintViews() {
-        super.constraintViews()
-        
-        NSLayoutConstraint.activate([
-            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 100),
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
-            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
-        ])
-        
-        contentView.addSubview(imageView)
-        
-        NSLayoutConstraint.activate([
-            imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -150),
-            imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4)
-        ])
-        
-        contentView.addSubview(subtitleLabel)
-        
-        NSLayoutConstraint.activate([
-            subtitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            subtitleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -150),
-            subtitleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4),
-            subtitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
+    func stopActivityIndicator() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.isHidden = true
+            self.activityIndicator.removeFromSuperview()
+        }
     }
 }

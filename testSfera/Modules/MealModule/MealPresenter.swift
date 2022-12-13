@@ -9,9 +9,10 @@ import UIKit
 
 protocol MealPresenterProtocol: AnyObject {
     func viewDidLoaded()
-    func didLoad(meal: Meal)
-    func viewInput()
-    func buttonSaveTapped()
+    func interactorDidLoad(meal: Meal)
+    func viewOutput()
+    func buttonSavePressed()
+    func buttonNextPressed()
 }
 
 class MealPresenter {
@@ -27,25 +28,17 @@ class MealPresenter {
 }
 
 extension MealPresenter: MealPresenterProtocol {
-    func buttonSaveTapped() {
-        guard let lastLoadedMeal else { return }
-        router.buttonSavePressed(meal: lastLoadedMeal)
-    }
-    
-    func viewInput() {
-        interactor.loadMeal()
-    }
-    
     func viewDidLoaded() {
-        interactor.loadMeal()
+        view?.startActivityIndicator()
+        viewOutput()
     }
     
-    func didLoad(meal: Meal) {
+    func interactorDidLoad(meal: Meal) {
         let presentedMeal = ParcedMeal(strMeal: (meal.meals[0][DictKeys.Meal.name] ?? "") ?? "",
-                                             strArea: (meal.meals[0][DictKeys.Meal.area] ?? "") ?? "",
-                                            image: (meal.meals[0][DictKeys.Meal.image] ?? "") ?? "",
-                                             category: (meal.meals[0][DictKeys.category] ?? "") ?? "",
-                                             instructions: (meal.meals[0][DictKeys.instruct] ?? "") ?? "")
+                                       strArea: (meal.meals[0][DictKeys.Meal.area] ?? "") ?? "",
+                                       image: (meal.meals[0][DictKeys.Meal.image] ?? "") ?? "",
+                                       category: (meal.meals[0][DictKeys.category] ?? "") ?? "",
+                                       instructions: (meal.meals[0][DictKeys.instruct] ?? "") ?? "")
         for i in DictKeys.ingr {
             presentedMeal.ingredients.append(meal.meals[0][i] ?? nil)
         }
@@ -57,18 +50,33 @@ extension MealPresenter: MealPresenterProtocol {
         let mealDiscription = "Meal: \(presentedMeal.strMeal)\n\n"
         let categoryDiscription = "Category: \(presentedMeal.category), \(presentedMeal.strArea)\n\n"
         let instructionDiscription = "\n\nInstructions:\n\(presentedMeal.instructions)"
-        var ingredientsDiscription = ""
+        var ingredientsDiscription = "Ingredients:\n"
         
         for (index, _) in presentedMeal.ingredients.enumerated() {
             ingredientsDiscription += "\(presentedMeal.ingredients[index] ?? "del"): \(presentedMeal.measure[index] ?? "del"),\n"
         }
         
         ingredientsDiscription.formatting()
-
-        let image = UIImage().getImageFromString(url: presentedMeal.image)
         
-        view?.viewInput(description: mealDiscription + categoryDiscription + ingredientsDiscription + instructionDiscription,
-                        image: image)
+        DispatchQueue.main.async {
+            let image = UIImageView().getImageFromURL(url: presentedMeal.image)
+            self.view?.viewInput(description: mealDiscription + categoryDiscription + ingredientsDiscription + instructionDiscription,
+                                 image: image)
+        }
+    }
+    
+    func viewOutput() {
+        interactor.loadMeal()
+    }
+    
+    func buttonNextPressed() {
+        view?.refreshView()
+        view?.startActivityIndicator()
+        viewOutput()
+    }
+    
+    func buttonSavePressed() {
+        guard let lastLoadedMeal else { return }
+        router.buttonSavePressed(meal: lastLoadedMeal)
     }
 }
-

@@ -9,14 +9,15 @@ protocol MealInteractorProtocol: AnyObject {
     func loadMeal()
 }
 
-class MealInteractor: MealInteractorProtocol {
+class MealInteractor {
     weak var presenter: MealPresenterProtocol?
-    
     let randomMealService = RandomMealService()
-    
+}
+
+extension MealInteractor: MealInteractorProtocol {
     func loadMeal() {
         randomMealService.getDate { [weak self] meal in
-            self?.presenter?.didLoad(meal: meal)
+            self?.presenter?.interactorDidLoad(meal: meal)
         }
     }
 }

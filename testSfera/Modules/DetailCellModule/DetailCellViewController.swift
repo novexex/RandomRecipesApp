@@ -8,7 +8,7 @@
 import UIKit
 
 protocol DetailCellViewProtocol: AnyObject {
-    func viewInput(description: String, image: UIImage)
+    func viewInput(description: String, image: UIImageView)
 }
 
 class DetailCellViewController: UIViewController {
@@ -17,6 +17,7 @@ class DetailCellViewController: UIViewController {
             presenter?.viewDidLoad()
         }
     }
+    
     var scrollView = UIScrollView()
     var contentView = UIView()
     var imageView = UIImageView()
@@ -30,7 +31,7 @@ class DetailCellViewController: UIViewController {
 }
 
 extension DetailCellViewController: DetailCellViewProtocol {
-    func viewInput(description: String, image: UIImage) {
+    func viewInput(description: String, image: UIImageView) {
         DispatchQueue.main.async {
             let subtitleLabel: UILabel = {
                 let label = UILabel()
@@ -42,8 +43,7 @@ extension DetailCellViewController: DetailCellViewProtocol {
                 return label
             }()
             let imageView: UIImageView = {
-                let imageView = UIImageView()
-                imageView.image = image
+                let imageView = image
                 imageView.contentMode = .scaleAspectFit
                 imageView.translatesAutoresizingMaskIntoConstraints = false
                 return imageView

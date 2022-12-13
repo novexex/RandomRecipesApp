@@ -9,14 +9,16 @@ protocol MealRouterProtocol {
     func buttonSavePressed(meal: ParcedMeal)
 }
 
-class MealRouter: MealRouterProtocol {
+class MealRouter {
     weak var viewController: MealViewController?
     var favoritesVC: FavoritesViewProtocol?
     
     init(favoritesVC: FavoritesViewProtocol) {
         self.favoritesVC = favoritesVC
     }
-    
+}
+
+extension MealRouter: MealRouterProtocol {
     func buttonSavePressed(meal: ParcedMeal) {
         favoritesVC?.getEntity(meal: meal)
     }
