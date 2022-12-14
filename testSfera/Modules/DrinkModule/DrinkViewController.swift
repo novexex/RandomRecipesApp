@@ -96,7 +96,7 @@ class DrinkViewController: BaseViewController {
 
 extension DrinkViewController: DrinkViewProtocol {
     func viewInput(description: String, image: UIImageView) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.subtitleLabel = {
                 let subtitleLabel = UILabel()
                 subtitleLabel.text = description

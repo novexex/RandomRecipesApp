@@ -33,7 +33,7 @@ class FavoritesViewController: UIViewController {
     func configureWelcomeLabel() {
         welcomeLabel = {
             let label = UILabel()
-            label.text = "You haven't saved any recipes yet,\n when you do drag up to refresh this page"
+            label.text = "You haven't saved any recipes yet\n When you do, drag up to refresh this page"
             label.numberOfLines = 0
             label.textAlignment = .center
             label.sizeToFit()
@@ -77,7 +77,6 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
             } else if let drink = savedRecipes[indexPath.row] as? ParcedDrink {
                 cell.textLabel?.text = drink.strDrink
             }
-            
         }
         return cell
     }
@@ -86,6 +85,9 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
         if editingStyle == .delete {
             savedRecipes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        if savedRecipes.isEmpty {
+            configureWelcomeLabel()
         }
     }
     

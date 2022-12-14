@@ -95,7 +95,7 @@ class MealViewController: BaseViewController {
 
 extension MealViewController: MealViewProtocol {
     func viewInput(description: String, image: UIImageView) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
             self.subtitleLabel = {
                 let subtitleLabel = UILabel()
                 subtitleLabel.text = description

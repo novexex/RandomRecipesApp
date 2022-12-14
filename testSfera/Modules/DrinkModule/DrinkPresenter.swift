@@ -20,12 +20,10 @@ class DrinkPresenter {
     var router: DrinkRouterProtocol
     var interactor: DrinkInteractorProtocol
     var lastLoadedDrink: ParcedDrink?
-    var dataProvider: DataProvider
     
-    init(interactor: DrinkInteractorProtocol, router: DrinkRouterProtocol, dataProvider: DataProvider) {
+    init(interactor: DrinkInteractorProtocol, router: DrinkRouterProtocol) {
         self.interactor = interactor
         self.router = router
-        self.dataProvider = dataProvider
     }
 }
 
