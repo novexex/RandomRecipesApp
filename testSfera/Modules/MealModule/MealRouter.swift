@@ -5,21 +5,19 @@
 //  Created by Artour Ilyasov on 01.12.2022
 //
 
+import Foundation
+
 protocol MealRouterProtocol {
-    func buttonSavePressed(meal: ParcedMeal)
+    func post(meal: ParcedMeal)
 }
 
 class MealRouter {
-    weak var viewController: MealViewController?
-    var favoritesVC: FavoritesViewProtocol?
-    
-    init(favoritesVC: FavoritesViewProtocol) {
-        self.favoritesVC = favoritesVC
-    }
+    weak var presenter: MealPresenterProtocol?
+    private let notificationCenter = NotificationCenter.default
 }
 
 extension MealRouter: MealRouterProtocol {
-    func buttonSavePressed(meal: ParcedMeal) {
-        favoritesVC?.getEntity(meal: meal)
+    func post(meal: ParcedMeal) {
+        notificationCenter.post(name: .sendEntityNotification, object: self, userInfo: ["meal":meal])
     }
 }

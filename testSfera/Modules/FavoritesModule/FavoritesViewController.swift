@@ -10,6 +10,7 @@ import UIKit
 protocol FavoritesViewProtocol: AnyObject {
     func getEntity(meal: ParcedMeal)
     func getEntity(drink: ParcedDrink)
+    func presenterOutput(vc: DetailCellViewController)
 }
 
 class FavoritesViewController: UIViewController {
@@ -23,7 +24,7 @@ class FavoritesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         initialize()
         configureWelcomeLabel()
         title = Resources.Titles.NavBar.favorites
@@ -55,6 +56,10 @@ class FavoritesViewController: UIViewController {
 }
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, FavoritesViewProtocol {
+    func presenterOutput(vc: DetailCellViewController) {
+        self.present(vc, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         savedRecipes.isEmpty ? 0 : savedRecipes.count
     }

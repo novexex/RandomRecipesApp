@@ -9,5 +9,5 @@ protocol NavBarRouterProtocol {
 }
 
 class NavBarRouter: NavBarRouterProtocol {
-    weak var viewController: NavBarViewController?
+    weak var presenter: NavBarPresenter?
 }

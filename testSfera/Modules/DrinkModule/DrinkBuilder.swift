@@ -8,13 +8,13 @@
 class DrinkBuilder {
     static func build(favoritesVC: FavoritesViewController) -> DrinkViewController {
         let interactor = DrinkInteractor()
-        let router = DrinkRouter(favoritesVC: favoritesVC)
+        let router = DrinkRouter()
         let presenter = DrinkPresenter(interactor: interactor, router: router)
         let viewController = DrinkViewController()
         presenter.view  = viewController
         viewController.presenter = presenter
         interactor.presenter = presenter
-        router.viewController = viewController
+        router.presenter = presenter
         
         return viewController
     }

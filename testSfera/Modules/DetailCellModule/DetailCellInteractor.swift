@@ -15,7 +15,7 @@ class DetailCellInteractor: DetailCellInteractorProtocol {
     }
     
     weak var presenter: DetailCellPresenterProtocol?
-    let entity: AnyObject
+    private let entity: AnyObject
     
     init(entity: AnyObject) {
         self.entity = entity

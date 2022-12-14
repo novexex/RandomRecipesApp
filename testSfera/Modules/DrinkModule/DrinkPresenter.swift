@@ -78,6 +78,6 @@ extension DrinkPresenter: DrinkPresenterProtocol {
     
     func buttonSavePressed() {
         guard let lastLoadedDrink else { return }
-        router.buttonSavePressed(drink: lastLoadedDrink)
+        router.post(drink: lastLoadedDrink)
     }
 }

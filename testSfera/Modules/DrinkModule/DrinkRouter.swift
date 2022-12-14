@@ -5,21 +5,20 @@
 //  Created by Artour Ilyasov on 01.12.2022
 //
 
+import Foundation
+
 protocol DrinkRouterProtocol {
-    func buttonSavePressed(drink: ParcedDrink)
+    func post(drink: ParcedDrink)
+    
 }
 
 class DrinkRouter {
-    weak var viewController: DrinkViewController?
-    var favoritesVC: FavoritesViewProtocol?
-
-    init(favoritesVC: FavoritesViewProtocol) {
-        self.favoritesVC = favoritesVC
-    }
+    weak var presenter: DrinkPresenterProtocol?
+    let notificationCenter = NotificationCenter.default
 }
 
 extension DrinkRouter: DrinkRouterProtocol {
-    func buttonSavePressed(drink: ParcedDrink) {
-        favoritesVC?.getEntity(drink: drink)
+    func post(drink: ParcedDrink) {
+        notificationCenter.post(name: .sendEntityNotification, object: self, userInfo: ["drink":drink])
     }
 }

@@ -17,10 +17,10 @@ class NavBarBuilder {
         let drinkNavigation = NavBarViewController(rootViewController: drinkVC, tab: .drink)
         let favoritesNavigation = NavBarViewController(rootViewController: favoritesVC, tab: .favorites)
         
-        presenter.view  = favoritesNavigation
+        presenter.view = favoritesNavigation
         favoritesNavigation.presenter = presenter
         interactor.presenter = presenter
-        router.viewController = favoritesNavigation
+        router.presenter = presenter
         
         return [mealNavigation, drinkNavigation, favoritesNavigation]
     }

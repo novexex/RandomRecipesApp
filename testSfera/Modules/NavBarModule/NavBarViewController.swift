@@ -10,7 +10,6 @@ import UIKit
 protocol NavBarViewProtocol: AnyObject {}
 
 class NavBarViewController: UINavigationController {
-    // MARK: - Public
     var presenter: NavBarPresenterProtocol?
     
     convenience init(rootViewController: UIViewController, tab: Tabs) {
@@ -18,14 +17,12 @@ class NavBarViewController: UINavigationController {
         configureNavigation(tab: tab)
     }
     
-    // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
     }
 }
 
-// MARK: - Private functions
 private extension NavBarViewController {
     func configure() {
         view.backgroundColor = .white
@@ -56,6 +53,5 @@ private extension NavBarViewController {
     
 }
 
-// MARK: - NavBarViewProtocol
 extension NavBarViewController: NavBarViewProtocol {
 }

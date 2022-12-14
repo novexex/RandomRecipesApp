@@ -77,6 +77,6 @@ extension MealPresenter: MealPresenterProtocol {
     
     func buttonSavePressed() {
         guard let lastLoadedMeal else { return }
-        router.buttonSavePressed(meal: lastLoadedMeal)
+        router.post(meal: lastLoadedMeal)
     }
 }
