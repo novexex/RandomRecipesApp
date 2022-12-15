@@ -50,8 +50,7 @@ extension DrinkPresenter: DrinkPresenterProtocol {
 
         let drinkDiscription = "Drink: \(presentedDrink.strDrink)\n\n"
         let categoryDiscription = "Category: \(presentedDrink.category), \(presentedDrink.strAlcoholic)\n\n"
-        // TODO: if instructions not recived should not to print
-        let instructionDiscription = "\n\nInstructions:\n\(presentedDrink.instructions)"
+        let instructionDiscription = presentedDrink.instructions.isEmpty ? "" : "\n\nInstructions:\n\(presentedDrink.instructions)"
         var ingredientsDiscription = "Ingredients:\n"
         
         for (index, _) in presentedDrink.ingredients.enumerated() {

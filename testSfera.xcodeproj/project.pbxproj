@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		EB0C28C629487B6F0051BB34 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EB0C28C529487B6F0051BB34 /* Kingfisher */; };
-		EB0C28C92948BC910051BB34 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C28C82948BC910051BB34 /* Coordinator.swift */; };
 		EB0C28CB2949C2900051BB34 /* NSNotification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C28CA2949C2900051BB34 /* NSNotification.Name.swift */; };
 		EB0CF5FA2942EE3800CC248F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF5F92942EE3800CC248F /* String.swift */; };
 		EB0CF5FC2943387F00CC248F /* BaseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF5FB2943387F00CC248F /* BaseEntity.swift */; };
@@ -55,7 +54,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EB0C28C82948BC910051BB34 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		EB0C28CA2949C2900051BB34 /* NSNotification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotification.Name.swift; sourceTree = "<group>"; };
 		EB0CF5F92942EE3800CC248F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		EB0CF5FB2943387F00CC248F /* BaseEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEntity.swift; sourceTree = "<group>"; };
@@ -115,14 +113,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EB0C28C72948BC810051BB34 /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				EB0C28C82948BC910051BB34 /* Coordinator.swift */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
 		EB0CF5FF2946E59000CC248F /* DetailCellModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,7 +266,6 @@
 		EBDB986C29393920000683C1 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				EB0C28C72948BC810051BB34 /* Coordinator */,
 				EB0CF5FF2946E59000CC248F /* DetailCellModule */,
 				EBDB986129393899000683C1 /* FavoritesModule */,
 				EBDB985629393828000683C1 /* DrinkModule */,
@@ -393,7 +382,6 @@
 				EBDB987129393C27000683C1 /* RandomDrinkService.swift in Sources */,
 				EBDB984729393691000683C1 /* NavBarPresenter.swift in Sources */,
 				EB0CF5FC2943387F00CC248F /* BaseEntity.swift in Sources */,
-				EB0C28C92948BC910051BB34 /* Coordinator.swift in Sources */,
 				EB0CF60C29473BE400CC248F /* CoreData.xcdatamodeld in Sources */,
 				EB0CF61129484EF000CC248F /* Tabs.swift in Sources */,
 				EB0C28CB2949C2900051BB34 /* NSNotification.Name.swift in Sources */,

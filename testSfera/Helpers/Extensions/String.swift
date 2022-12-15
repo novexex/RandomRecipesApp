@@ -5,8 +5,6 @@
 //  Created by Artour Ilyasov on 09.12.2022.
 //
 
-import Foundation
-
 extension String {
     mutating func formatting() {
         self = self.replacingOccurrences(of: "del: del,", with: "")
