@@ -17,7 +17,6 @@ class FavoritesViewController: UIViewController {
     var presenter: FavoritesPresenterProtocol?
     private let tableViewController = UITableViewController()
     private let myVC = UITableViewController()
-    private let refresh = UIRefreshControl()
     private var welcomeLabel = UILabel()
 
     override func viewDidLoad() {
@@ -28,9 +27,8 @@ class FavoritesViewController: UIViewController {
         title = Resources.Titles.NavBar.favorites
         navigationController?.tabBarItem.title = Resources.Titles.TabBar.favorites
     }
-    
-    @objc func handleRefresh() {
-        refresh.endRefreshing()
+     
+    override func viewDidAppear(_ animated: Bool) {
         guard let presenter, !presenter.recipesIsEmpty else { return }
         let indexPathRow = IndexPath(row: presenter.recipesCount - 1, section: 0)
         guard tableViewController.tableView.numberOfRows(inSection: 0) == indexPathRow.row else { return }
@@ -42,7 +40,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     func configureWelcomeLabel() {
         welcomeLabel = {
             let label = UILabel()
-            label.text = "You haven't saved any recipes yet\n When you do, drag up to refresh this page"
+            label.text = "You haven't saved any recipes yet\n Come back when you do"
             label.numberOfLines = 0
             label.textAlignment = .center
             label.sizeToFit()
@@ -81,9 +79,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     
     func initialize() {
         guard let presenter else { return }
-        refresh.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         view.addSubview(tableViewController.tableView)
-        tableViewController.tableView.addSubview(refresh)
         tableViewController.tableView.pin(to: view)
         tableViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: presenter.cellIdentifier)
         tableViewController.tableView.delegate = self

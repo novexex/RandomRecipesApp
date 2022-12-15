@@ -26,6 +26,8 @@ class FavoritesPresenter {
     var interactor: FavoritesInteractorProtocol
     private var savedRecipes = [AnyObject]()
     private let identifier = "cell"
+    
+    let storage = StorageManager()
 
     init(interactor: FavoritesInteractorProtocol, router: FavoritesRouterProtocol) {
         self.interactor = interactor
@@ -49,8 +51,10 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
         if #available(iOS 14.0, *) {
             var content = cell.defaultContentConfiguration()
             if let meal = savedRecipes[indexPath.row] as? ParcedMeal {
+                storage.obtainMeal(meal: meal)
                 content.text = meal.strMeal
             } else if let drink = savedRecipes[indexPath.row] as? ParcedDrink {
+                storage.obtainDrink(drink: drink)
                 content.text = drink.strDrink
             }
             cell.contentConfiguration = content

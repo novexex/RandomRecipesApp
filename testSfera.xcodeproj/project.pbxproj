@@ -17,9 +17,9 @@
 		EB0CF6072946E5A700CC248F /* DetailCellRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF6022946E5A700CC248F /* DetailCellRouter.swift */; };
 		EB0CF6082946E5A700CC248F /* DetailCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF6032946E5A700CC248F /* DetailCellViewController.swift */; };
 		EB0CF6092946E5A700CC248F /* DetailCellInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF6042946E5A700CC248F /* DetailCellInteractor.swift */; };
-		EB0CF60C29473BE400CC248F /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF60A29473BE400CC248F /* CoreData.xcdatamodeld */; };
 		EB0CF60E29473DF400CC248F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF60D29473DF400CC248F /* StorageManager.swift */; };
 		EB0CF61129484EF000CC248F /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF61029484EF000CC248F /* Tabs.swift */; };
+		EB64D8F0294B9BE500A33274 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB64D8EE294B9BE500A33274 /* CoreData.xcdatamodeld */; };
 		EBDB97C12934FEB8000683C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C02934FEB8000683C1 /* AppDelegate.swift */; };
 		EBDB97C52934FEB8000683C1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C42934FEB8000683C1 /* BaseViewController.swift */; };
 		EBDB97CA2934FEB9000683C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBDB97C92934FEB9000683C1 /* Assets.xcassets */; };
@@ -63,9 +63,9 @@
 		EB0CF6022946E5A700CC248F /* DetailCellRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellRouter.swift; sourceTree = "<group>"; };
 		EB0CF6032946E5A700CC248F /* DetailCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellViewController.swift; sourceTree = "<group>"; };
 		EB0CF6042946E5A700CC248F /* DetailCellInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellInteractor.swift; sourceTree = "<group>"; };
-		EB0CF60B29473BE400CC248F /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		EB0CF60D29473DF400CC248F /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		EB0CF61029484EF000CC248F /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
+		EB64D8EF294B9BE500A33274 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		EBDB97BD2934FEB8000683C1 /* testSfera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testSfera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDB97C02934FEB8000683C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBDB97C42934FEB8000683C1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +113,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB0C28CF294B77370051BB34 /* StorageManagerModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = StorageManagerModels;
+			sourceTree = "<group>";
+		};
 		EB0CF5FF2946E59000CC248F /* DetailCellModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +182,7 @@
 			children = (
 				EBDB97C02934FEB8000683C1 /* AppDelegate.swift */,
 				EB0CF60D29473DF400CC248F /* StorageManager.swift */,
+				EB0C28CF294B77370051BB34 /* StorageManagerModels */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -185,7 +193,7 @@
 				EBDB97C92934FEB9000683C1 /* Assets.xcassets */,
 				EBDB97CE2934FEB9000683C1 /* Info.plist */,
 				EBDB97CB2934FEB9000683C1 /* LaunchScreen.storyboard */,
-				EB0CF60A29473BE400CC248F /* CoreData.xcdatamodeld */,
+				EB64D8EE294B9BE500A33274 /* CoreData.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -381,8 +389,8 @@
 				EBDB9869293938C0000683C1 /* FavoritesRouter.swift in Sources */,
 				EBDB987129393C27000683C1 /* RandomDrinkService.swift in Sources */,
 				EBDB984729393691000683C1 /* NavBarPresenter.swift in Sources */,
+				EB64D8F0294B9BE500A33274 /* CoreData.xcdatamodeld in Sources */,
 				EB0CF5FC2943387F00CC248F /* BaseEntity.swift in Sources */,
-				EB0CF60C29473BE400CC248F /* CoreData.xcdatamodeld in Sources */,
 				EB0CF61129484EF000CC248F /* Tabs.swift in Sources */,
 				EB0C28CB2949C2900051BB34 /* NSNotification.Name.swift in Sources */,
 				EBDB985329393778000683C1 /* MealRouter.swift in Sources */,
@@ -637,12 +645,12 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		EB0CF60A29473BE400CC248F /* CoreData.xcdatamodeld */ = {
+		EB64D8EE294B9BE500A33274 /* CoreData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				EB0CF60B29473BE400CC248F /* CoreData.xcdatamodel */,
+				EB64D8EF294B9BE500A33274 /* CoreData.xcdatamodel */,
 			);
-			currentVersion = EB0CF60B29473BE400CC248F /* CoreData.xcdatamodel */;
+			currentVersion = EB64D8EF294B9BE500A33274 /* CoreData.xcdatamodel */;
 			path = CoreData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
