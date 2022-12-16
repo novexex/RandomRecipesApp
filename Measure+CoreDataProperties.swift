@@ -20,6 +20,10 @@ extension Measure {
     @NSManaged public var drinkMeasure: DrinkEntity?
     @NSManaged public var mealMeasure: MealEntity?
 
+    public var wrappedMeasure: String {
+        measure ?? ""
+    }
+    
 }
 
 extension Measure : Identifiable {

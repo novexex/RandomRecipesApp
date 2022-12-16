@@ -20,6 +20,10 @@ extension Ingredients {
     @NSManaged public var drinkIngredients: DrinkEntity?
     @NSManaged public var mealIngredients: MealEntity?
 
+    public var wrappedIngredients: String {
+        ingredients ?? ""
+    }
+    
 }
 
 extension Ingredients : Identifiable {

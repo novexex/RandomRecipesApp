@@ -32,57 +32,47 @@ class StorageManager {
     }
     
     func obtainDrink(drink: ParcedDrink) {
-//        let entityDrink = DrinkEntity(context: viewContext)
-//        entityDrink.strDrink = drink.strDrink
-//        entityDrink.strAlcoholic = drink.strAlcoholic
-//        entityDrink.instructions = drink.instructions
-//        entityDrink.image = drink.image
-//        entityDrink.category = drink.category
-//
+        let entityDrink = DrinkEntity(context: viewContext)
+        entityDrink.strDrink = drink.strDrink
+        entityDrink.strAlcoholic = drink.strAlcoholic
+        entityDrink.instructions = drink.instructions
+        entityDrink.image = drink.image
+        entityDrink.category = drink.category
+        entityDrink.measure = NSSet(array: drink.measure as [Any])
+//        entityDrink.wrappedMeasure
 //        for index in drink.ingredients {
 //            if let index {
-//                entityDrink.drinkIngredients?.setValue(index, forKey: <#T##String#>)
-//            } else {
-//                break
+//                entityDrink
 //            }
 //        }
 //
 //        for index in drink.measure {
 //            if let index {
-//                entityDrink.drinkMeasure?.setValue(index, forKey: <#T##String#>)
-//            } else {
-//                break
+//                entityDrink.measure?.measure?.append(index)
 //            }
-//
-//            print(entityDrink)
 //        }
     }
     
     func obtainMeal(meal: ParcedMeal) {
-//        let entityMeal = MealEntity(context: viewContext)
-//        entityMeal.strMeal = meal.strMeal
-//        entityMeal.strArea = meal.strArea
-//        entityMeal.instructions = meal.instructions
-//        entityMeal.image = meal.image
-//        entityMeal.category = meal.category
-//
+        let entityMeal = MealEntity(context: viewContext)
+        entityMeal.strMeal = meal.strMeal
+        entityMeal.strArea = meal.strArea
+        entityMeal.instructions = meal.instructions
+        entityMeal.image = meal.image
+        entityMeal.category = meal.category
+
 //        for index in meal.ingredients {
 //            if let index {
-//                print(index)
-//                entityMeal.ingredients?.append(index)
-//            } else {
-//                break
+//                entityMeal.ingredients
 //            }
 //        }
-//
+
 //        for index in meal.measure {
 //            if let index {
-//                entityMeal.measure?.append(index)
-//            } else {
-//                break
+//                entityMeal.measure?.measure?.append(index)
 //            }
 //        }
-//
+
 //        print(entityMeal)
     }
 }

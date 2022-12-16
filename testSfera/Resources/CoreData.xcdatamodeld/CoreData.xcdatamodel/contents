@@ -6,8 +6,8 @@
         <attribute name="instructions" optional="YES" attributeType="String"/>
         <attribute name="strAlcoholic" optional="YES" attributeType="String"/>
         <attribute name="strDrink" attributeType="String"/>
-        <relationship name="ingredients" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Ingredients" inverseName="drinkIngredients" inverseEntity="Ingredients"/>
-        <relationship name="measure" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Measure" inverseName="drinkMeasure" inverseEntity="Measure"/>
+        <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredients" inverseName="drinkIngredients" inverseEntity="Ingredients"/>
+        <relationship name="measure" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Measure" inverseName="drinkMeasure" inverseEntity="Measure"/>
     </entity>
     <entity name="Ingredients" representedClassName="Ingredients" syncable="YES">
         <attribute name="ingredients" optional="YES" attributeType="String"/>

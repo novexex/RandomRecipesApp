@@ -24,6 +24,41 @@ extension MealEntity {
     @NSManaged public var ingredients: NSSet?
     @NSManaged public var measure: NSSet?
 
+    public var wrappedCategory: String {
+         category ?? ""
+     }
+     
+     public var wrappedImage: String {
+         image ?? ""
+     }
+     
+     public var wrappedInstructions: String {
+         instructions ?? ""
+     }
+     
+     public var wrappedStrMeal: String {
+         strMeal ?? ""
+     }
+     
+     public var wrappedStrArea: String {
+         strArea ?? ""
+     }
+    
+    public var wrappedIngredients: [Ingredients] {
+        let set = ingredients as? Set<Ingredients> ?? []
+        
+        return set.sorted {
+            $0.wrappedIngredients < $1.wrappedIngredients
+        }
+    }
+    
+    public var wrappedMeasure: [Measure] {
+        let set = measure as? Set<Measure> ?? []
+        
+        return set.sorted {
+            $0.wrappedMeasure < $1.wrappedMeasure
+        }
+    }
 }
 
 // MARK: Generated accessors for ingredients
