@@ -32,30 +32,30 @@ class StorageManager {
     }
     
     func obtainDrink(drink: ParcedDrink) {
-        let entityDrink = DrinkEntity(context: viewContext)
-        entityDrink.strDrink = drink.strDrink
-        entityDrink.strAlcoholic = drink.strAlcoholic
-        entityDrink.instructions = drink.instructions
-        entityDrink.image = drink.image
-        entityDrink.category = drink.category
-
-        for index in drink.ingredients {
-            if let index {
-                entityDrink.drinkIngredients?.setValue(index, forKey: <#T##String#>)
-            } else {
-                break
-            }
-        }
-
-        for index in drink.measure {
-            if let index {
-                entityDrink.drinkMeasure?.setValue(index, forKey: <#T##String#>)
-            } else {
-                break
-            }
-
-            print(entityDrink)
-        }
+//        let entityDrink = DrinkEntity(context: viewContext)
+//        entityDrink.strDrink = drink.strDrink
+//        entityDrink.strAlcoholic = drink.strAlcoholic
+//        entityDrink.instructions = drink.instructions
+//        entityDrink.image = drink.image
+//        entityDrink.category = drink.category
+//
+//        for index in drink.ingredients {
+//            if let index {
+//                entityDrink.drinkIngredients?.setValue(index, forKey: <#T##String#>)
+//            } else {
+//                break
+//            }
+//        }
+//
+//        for index in drink.measure {
+//            if let index {
+//                entityDrink.drinkMeasure?.setValue(index, forKey: <#T##String#>)
+//            } else {
+//                break
+//            }
+//
+//            print(entityDrink)
+//        }
     }
     
     func obtainMeal(meal: ParcedMeal) {
