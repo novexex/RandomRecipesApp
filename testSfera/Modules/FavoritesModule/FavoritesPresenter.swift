@@ -9,15 +9,24 @@ import Foundation
 import UIKit
 
 protocol FavoritesPresenterProtocol: AnyObject {
-    func detailView(didSelectRowAt indexPathRow: Int)
+    func detailView(didSelectRowAt indexPath: IndexPath)
     func routerOutput(notification: Notification)
     func routerOutput(vc: DetailCellViewController)
     func recipesRemoveCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     func recipesAddCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    func viewOutput()
     
     var recipesIsEmpty: Bool { get }
     var recipesCount: Int { get }
     var cellIdentifier: String { get }
+    
+    var mealsArrayIsEmpty: Bool { get }
+    var drinksArrayIsEmpty: Bool { get }
+    
+    var mealsArrayCount: Int { get }
+    var drinksArrayCount: Int { get }
+    
+    func countSections() -> Int
 }
 
 class FavoritesPresenter {
@@ -25,6 +34,8 @@ class FavoritesPresenter {
     var router: FavoritesRouterProtocol
     var interactor: FavoritesInteractorProtocol
     private var savedRecipes = [AnyObject]()
+    private var savedMeals = [ParcedMeal]()
+    private var savedDrinks = [ParcedDrink]()
     private let identifier = "cell"
     
     let storage = StorageManager()
@@ -36,8 +47,39 @@ class FavoritesPresenter {
 }
 
 extension FavoritesPresenter: FavoritesPresenterProtocol {
-    func detailView(didSelectRowAt indexPathRow: Int) {
-        router.detailView(recipeEntity: savedRecipes[indexPathRow])
+    var mealsArrayCount: Int {
+        savedMeals.count
+    }
+    
+    var drinksArrayCount: Int {
+        savedDrinks.count
+    }
+    
+    var mealsArrayIsEmpty: Bool {
+        savedMeals.isEmpty
+    }
+    
+    var drinksArrayIsEmpty: Bool {
+        savedDrinks.isEmpty
+    }
+    
+    func countSections() -> Int {
+        if !savedMeals.isEmpty && !savedDrinks.isEmpty {
+            return 2
+        } else if !savedMeals.isEmpty || !savedDrinks.isEmpty {
+            return 1
+        } else {
+            return 0
+        }
+    }
+    
+    func viewOutput() {
+        savedMeals += storage.fetchMealData()
+        savedDrinks += storage.fetchDrinkData()
+    }
+    
+    func detailView(didSelectRowAt indexPath: IndexPath) {
+        indexPath.section == 0 ? router.detailView(recipeEntity: savedMeals[indexPath.row]) : router.detailView(recipeEntity: savedDrinks[indexPath.row])
     }
     
     var cellIdentifier: String {
@@ -50,27 +92,21 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
         guard !savedRecipes.isEmpty else { return cell }
         if #available(iOS 14.0, *) {
             var content = cell.defaultContentConfiguration()
-            if let meal = savedRecipes[indexPath.row] as? ParcedMeal {
-                storage.obtainMeal(meal: meal)
-                content.text = meal.strMeal
-            } else if let drink = savedRecipes[indexPath.row] as? ParcedDrink {
-                storage.obtainDrink(drink: drink)
-                content.text = drink.strDrink
-            }
+            content.text = indexPath.section == 0 ? savedMeals[indexPath.row].strMeal : savedDrinks[indexPath.row].strDrink
             cell.contentConfiguration = content
         } else {
-            if let meal = savedRecipes[indexPath.row] as? ParcedMeal {
-                cell.textLabel?.text = meal.strMeal
-            } else if let drink = savedRecipes[indexPath.row] as? ParcedDrink {
-                cell.textLabel?.text = drink.strDrink
-            }
+            cell.textLabel?.text = indexPath.section == 0 ? savedMeals[indexPath.row].strMeal : savedDrinks[indexPath.row].strDrink
         }
         return cell
     }
     
     func recipesRemoveCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            savedRecipes.remove(at: indexPath.row)
+            if indexPath.section == 0 {
+                savedMeals.remove(at: indexPath.row)
+            } else {
+                savedDrinks.remove(at: indexPath.row)
+            }
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
         if savedRecipes.isEmpty {
@@ -93,10 +129,12 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     func routerOutput(notification: Notification) {
         if let notification = notification.userInfo as? [String: ParcedDrink] {
             guard let drink = notification["drink"] else { return }
-            savedRecipes.append(drink)
+            savedDrinks.append(drink)
+//            storage.saveDrinkToCoreData(drink: drink)
         } else if let notification = notification.userInfo as? [String: ParcedMeal] {
             guard let meal = notification["meal"] else { return }
-            savedRecipes.append(meal)
+            savedMeals.append(meal)
+//            storage.saveMealToCoreData(meal: meal)
         }
     }
 }

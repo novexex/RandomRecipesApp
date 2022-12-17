@@ -21,18 +21,25 @@ class FavoritesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         initialize()
+        presenter?.viewOutput()
         configureWelcomeLabel()
         title = Resources.Titles.NavBar.favorites
         navigationController?.tabBarItem.title = Resources.Titles.TabBar.favorites
     }
      
     override func viewDidAppear(_ animated: Bool) {
-        guard let presenter, !presenter.recipesIsEmpty else { return }
-        let indexPathRow = IndexPath(row: presenter.recipesCount - 1, section: 0)
-        guard tableViewController.tableView.numberOfRows(inSection: 0) == indexPathRow.row else { return }
-        tableViewController.tableView.insertRows(at: [indexPathRow], with: .automatic)
+        //надо подумать как убрать хардкод
+        guard let presenter, !presenter.mealsArrayIsEmpty else { return }
+        let indexPathMeals = IndexPath(row: presenter.mealsArrayCount - 1, section: 0)
+        guard tableViewController.tableView.numberOfRows(inSection: 0) == indexPathMeals.row else { return }
+        tableViewController.tableView.insertRows(at: [indexPathMeals], with: .automatic)
+        
+//        guard !presenter.drinksArrayIsEmpty else { return }
+//        let indexPathDrinks = IndexPath(row: presenter.drinksArrayCount - 1, section: 1)
+//        guard tableViewController.tableView.numberOfRows(inSection: 1) == indexPathDrinks.row else { return }
+//        tableViewController.tableView.insertRows(at: [indexPathDrinks], with: .automatic)
     }
 }
 
@@ -58,11 +65,16 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let presenter else { return 0 }
-        return presenter.recipesIsEmpty ? 0 : presenter.recipesCount
+        return section == 0 ? presenter.mealsArrayCount : presenter.drinksArrayCount
     }
     
     func removeWelcomeLabel() {
         welcomeLabel.removeFromSuperview()
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        guard let presenter else { return 0 }
+        return presenter.countSections()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,7 +86,20 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.detailView(didSelectRowAt: indexPath.row)
+        presenter?.detailView(didSelectRowAt: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let sectionName: String
+        switch section {
+        case 0:
+            sectionName = "Meals"
+        case 1:
+            sectionName = "Drinks"
+        default:
+            sectionName = ""
+        }
+        return sectionName
     }
     
     func initialize() {
