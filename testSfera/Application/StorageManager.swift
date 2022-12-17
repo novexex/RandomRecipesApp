@@ -38,19 +38,22 @@ class StorageManager {
         entityDrink.instructions = drink.instructions
         entityDrink.image = drink.image
         entityDrink.category = drink.category
-        entityDrink.measure = NSSet(array: drink.measure as [Any])
-//        entityDrink.wrappedMeasure
-//        for index in drink.ingredients {
-//            if let index {
-//                entityDrink
-//            }
-//        }
-//
-//        for index in drink.measure {
-//            if let index {
-//                entityDrink.measure?.measure?.append(index)
-//            }
-//        }
+        
+        var ingredients: [String]? = []
+        for index in drink.ingredients {
+            if let index {
+                ingredients?.append(index)
+            }
+        }
+        entityDrink.ingredients = ingredients
+
+        var measure: [String]? = []
+        for index in drink.measure {
+            if let index {
+                measure?.append(index)
+            }
+        }
+        entityDrink.measure = measure
     }
     
     func obtainMeal(meal: ParcedMeal) {
@@ -61,19 +64,21 @@ class StorageManager {
         entityMeal.image = meal.image
         entityMeal.category = meal.category
 
-//        for index in meal.ingredients {
-//            if let index {
-//                entityMeal.ingredients
-//            }
-//        }
+        var ingredients: [String]? = []
+        for index in meal.ingredients {
+            if let index {
+                ingredients?.append(index)
+            }
+        }
+        entityMeal.ingredients = ingredients
 
-//        for index in meal.measure {
-//            if let index {
-//                entityMeal.measure?.measure?.append(index)
-//            }
-//        }
-
-//        print(entityMeal)
+        var measure: [String]? = []
+        for index in meal.measure {
+            if let index {
+                measure?.append(index)
+            }
+        }
+        entityMeal.measure = measure
     }
 }
 

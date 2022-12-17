@@ -3,29 +3,19 @@
     <entity name="DrinkEntity" representedClassName="DrinkEntity" syncable="YES">
         <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="ingredients" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
         <attribute name="instructions" optional="YES" attributeType="String"/>
+        <attribute name="measure" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
         <attribute name="strAlcoholic" optional="YES" attributeType="String"/>
         <attribute name="strDrink" attributeType="String"/>
-        <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredients" inverseName="drinkIngredients" inverseEntity="Ingredients"/>
-        <relationship name="measure" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Measure" inverseName="drinkMeasure" inverseEntity="Measure"/>
-    </entity>
-    <entity name="Ingredients" representedClassName="Ingredients" syncable="YES">
-        <attribute name="ingredients" optional="YES" attributeType="String"/>
-        <relationship name="drinkIngredients" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DrinkEntity" inverseName="ingredients" inverseEntity="DrinkEntity"/>
-        <relationship name="mealIngredients" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MealEntity" inverseName="ingredients" inverseEntity="MealEntity"/>
     </entity>
     <entity name="MealEntity" representedClassName="MealEntity" syncable="YES">
         <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="ingredients" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
         <attribute name="instructions" optional="YES" attributeType="String"/>
+        <attribute name="measure" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
         <attribute name="strArea" optional="YES" attributeType="String"/>
         <attribute name="strMeal" optional="YES" attributeType="String"/>
-        <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredients" inverseName="mealIngredients" inverseEntity="Ingredients"/>
-        <relationship name="measure" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Measure" inverseName="mealMeasure" inverseEntity="Measure"/>
-    </entity>
-    <entity name="Measure" representedClassName="Measure" syncable="YES">
-        <attribute name="measure" optional="YES" attributeType="String"/>
-        <relationship name="drinkMeasure" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DrinkEntity" inverseName="measure" inverseEntity="DrinkEntity"/>
-        <relationship name="mealMeasure" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MealEntity" inverseName="measure" inverseEntity="MealEntity"/>
     </entity>
 </model>
