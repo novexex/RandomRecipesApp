@@ -18,7 +18,7 @@ class FavoritesViewController: UIViewController {
     private let tableViewController = UITableViewController()
     private let myVC = UITableViewController()
     private var welcomeLabel = UILabel()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,18 +28,32 @@ class FavoritesViewController: UIViewController {
         title = Resources.Titles.NavBar.favorites
         navigationController?.tabBarItem.title = Resources.Titles.TabBar.favorites
     }
-     
+    
     override func viewDidAppear(_ animated: Bool) {
-        //надо подумать как убрать хардкод
+        refreshMealsView()
+        refreshDrinksView()
+    }
+    
+    func refreshMealsView() {
         guard let presenter, !presenter.mealsArrayIsEmpty else { return }
-        let indexPathMeals = IndexPath(row: presenter.mealsArrayCount - 1, section: 0)
-        guard tableViewController.tableView.numberOfRows(inSection: 0) == indexPathMeals.row else { return }
-        tableViewController.tableView.insertRows(at: [indexPathMeals], with: .automatic)
+        let indexPath = IndexPath(row: presenter.mealsArrayCount - 1, section: 0)
         
-//        guard !presenter.drinksArrayIsEmpty else { return }
-//        let indexPathDrinks = IndexPath(row: presenter.drinksArrayCount - 1, section: 1)
-//        guard tableViewController.tableView.numberOfRows(inSection: 1) == indexPathDrinks.row else { return }
-//        tableViewController.tableView.insertRows(at: [indexPathDrinks], with: .automatic)
+        tableViewController.tableView.reloadData()
+        
+        guard tableViewController.tableView.numberOfRows(inSection: 0) == indexPath.row else { return }
+        tableViewController.tableView.insertRows(at: [indexPath], with: .automatic)
+        tableViewController.tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+    
+    func refreshDrinksView() {
+        guard let presenter, !presenter.drinksArrayIsEmpty else { return }
+        let indexPath = IndexPath(row: presenter.drinksArrayCount - 1, section: 1)
+        
+        tableViewController.tableView.reloadData()
+        
+        guard tableViewController.tableView.numberOfRows(inSection: 1) == indexPath.row else { return }
+        tableViewController.tableView.insertRows(at: [indexPath], with: .automatic)
+        tableViewController.tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
 

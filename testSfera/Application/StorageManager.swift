@@ -18,12 +18,13 @@ class StorageManager {
         return container
     }()
     private lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
+    private var entityMealsArray = [MealEntity]()
+    private var entityDrinksArray = [DrinkEntity]()
     
     func saveContext() {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
+        if persistentContainer.viewContext.hasChanges {
             do {
-                try context.save()
+                try persistentContainer.viewContext.save()
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
@@ -31,7 +32,17 @@ class StorageManager {
         }
     }
     
-    func saveDrinkToCoreData(drink: ParcedDrink) {
+    func removeMealContext(rowIndexPath: Int) {
+        persistentContainer.viewContext.delete(entityMealsArray[rowIndexPath])
+        saveContext()
+    }
+    
+    func removeDrinkContext(rowIndexPath: Int) {
+        persistentContainer.viewContext.delete(entityDrinksArray[rowIndexPath])
+        saveContext()
+    }
+        
+    func saveToCoreData(drink: ParcedDrink) {
         let entityDrink = DrinkEntity(context: viewContext)
         entityDrink.strDrink = drink.strDrink
         entityDrink.strAlcoholic = drink.strAlcoholic
@@ -45,6 +56,7 @@ class StorageManager {
                 ingredients?.append(index)
             }
         }
+        
         entityDrink.ingredients = ingredients
 
         var measure: [String]? = []
@@ -53,17 +65,13 @@ class StorageManager {
                 measure?.append(index)
             }
         }
+        
         entityDrink.measure = measure
         
-        do {
-            try viewContext.save()
-            print("Drink Saved Successfully")
-        } catch {
-            print("Drink Save Error: \(error.localizedDescription)")
-        }
+        saveContext()
     }
     
-    func saveMealToCoreData(meal: ParcedMeal) {
+    func saveToCoreData(meal: ParcedMeal) {
         let entityMeal = MealEntity(context: viewContext)
         entityMeal.strMeal = meal.strMeal
         entityMeal.strArea = meal.strArea
@@ -77,6 +85,7 @@ class StorageManager {
                 ingredients?.append(index)
             }
         }
+        
         entityMeal.ingredients = ingredients
 
         var measure: [String]? = []
@@ -85,46 +94,46 @@ class StorageManager {
                 measure?.append(index)
             }
         }
+        
         entityMeal.measure = measure
         
-        do {
-            try viewContext.save()
-            print("Meal Saved Successfully")
-        } catch {
-            print("Meal Save Error: \(error.localizedDescription)")
-        }
+        saveContext()
     }
     
     func fetchMealData() -> [ParcedMeal] {
-        var entityMealArray = [MealEntity]()
-        var parcedMealArray = [ParcedMeal]()
+        var entityMealsArray = [MealEntity]()
+        var parcedMealsArray = [ParcedMeal]()
         let fetchRequest = MealEntity.fetchRequest()
         do {
-            entityMealArray = try viewContext.fetch(fetchRequest)
-            for (index, _) in entityMealArray.enumerated() {
-                parcedMealArray.append(converseEntity(meal: entityMealArray[index]))
+            entityMealsArray = try viewContext.fetch(fetchRequest)
+            for (index, _) in entityMealsArray.enumerated() {
+                parcedMealsArray.append(converseEntity(meal: entityMealsArray[index]))
             }
         } catch {
             print("FetchData Error: \(error.localizedDescription)")
         }
         
-        return parcedMealArray
+        self.entityMealsArray = entityMealsArray
+        
+        return parcedMealsArray
     }
     
     func fetchDrinkData() -> [ParcedDrink] {
-        var entityDrinkArray = [DrinkEntity]()
-        var parcedDrinkArray = [ParcedDrink]()
+        var entityDrinksArray = [DrinkEntity]()
+        var parcedDrinksArray = [ParcedDrink]()
         let fetchRequest = DrinkEntity.fetchRequest()
         do {
-            entityDrinkArray = try viewContext.fetch(fetchRequest)
-            for (index, _) in entityDrinkArray.enumerated() {
-                parcedDrinkArray.append(converseEntity(drink: entityDrinkArray[index]))
+            entityDrinksArray = try viewContext.fetch(fetchRequest)
+            for (index, _) in entityDrinksArray.enumerated() {
+                parcedDrinksArray.append(converseEntity(drink: entityDrinksArray[index]))
             }
         } catch {
             print("FetchData Error: \(error.localizedDescription)")
         }
         
-        return parcedDrinkArray
+        self.entityDrinksArray = entityDrinksArray
+        
+        return parcedDrinksArray
     }
     
     func converseEntity(meal: MealEntity) -> ParcedMeal {

@@ -89,7 +89,7 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     func recipesAddCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         view?.removeWelcomeLabel()
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-        guard !savedRecipes.isEmpty else { return cell }
+        guard !savedMeals.isEmpty || !savedDrinks.isEmpty else { return cell }
         if #available(iOS 14.0, *) {
             var content = cell.defaultContentConfiguration()
             content.text = indexPath.section == 0 ? savedMeals[indexPath.row].strMeal : savedDrinks[indexPath.row].strDrink
@@ -102,14 +102,18 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     
     func recipesRemoveCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            //если удалять последнюю ячейку в первой секции, когда вторая ещё существует = сега
             if indexPath.section == 0 {
+                storage.removeMealContext(rowIndexPath: indexPath.row)
                 savedMeals.remove(at: indexPath.row)
+                savedMeals.isEmpty ? tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic) : tableView.deleteRows(at: [indexPath], with: .automatic)
             } else {
+                storage.removeDrinkContext(rowIndexPath: indexPath.row)
                 savedDrinks.remove(at: indexPath.row)
+                savedDrinks.isEmpty ? tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic) : tableView.deleteRows(at: [indexPath], with: .automatic)
             }
-            tableView.deleteRows(at: [indexPath], with: .fade)
         }
-        if savedRecipes.isEmpty {
+        if savedMeals.isEmpty && savedDrinks.isEmpty {
             view?.configureWelcomeLabel()
         }
     }
@@ -130,11 +134,11 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
         if let notification = notification.userInfo as? [String: ParcedDrink] {
             guard let drink = notification["drink"] else { return }
             savedDrinks.append(drink)
-//            storage.saveDrinkToCoreData(drink: drink)
+            storage.saveToCoreData(drink: drink)
         } else if let notification = notification.userInfo as? [String: ParcedMeal] {
             guard let meal = notification["meal"] else { return }
             savedMeals.append(meal)
-//            storage.saveMealToCoreData(meal: meal)
+            storage.saveToCoreData(meal: meal)
         }
     }
 }

@@ -6,6 +6,25 @@
          contextName = "MealRouter.buttonSavePressed(meal:):MealRouter.swift">
       </ContextState>
       <ContextState
+         contextName = "FavoritesPresenter.recipesRemoveCell(_:commit:forRowAt:):FavoritesPresenter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "savedMeals[indexPath.row]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FavoritesViewController.tableView(_:numberOfRowsInSection:):FavoritesViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "presenter.mealsArrayCount">
+            </PersistentString>
+            <PersistentString
+               value = "presenter.drinksArrayCount">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "FavoritesViewController.numberOfSections(in:):FavoritesViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -52,10 +71,10 @@
          contextName = "FavoritesViewController.viewDidAppear(_:):FavoritesViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "indexPathMeals.row">
+               value = "presenter.mealsArrayCount">
             </PersistentString>
             <PersistentString
-               value = "tableViewController.tableView.numberOfRows(inSection: 0) == indexPathMeals.row">
+               value = "indexPathMeals.row">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

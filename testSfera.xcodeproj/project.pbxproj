@@ -70,10 +70,10 @@
 		EB0CF60D29473DF400CC248F /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		EB0CF61029484EF000CC248F /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		EB64D8EF294B9BE500A33274 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
-		EB95074E294CEFF1007704DF /* MealEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MealEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		EB95074F294CEFF1007704DF /* MealEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MealEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		EB950750294CEFF1007704DF /* DrinkEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrinkEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		EB950751294CEFF1007704DF /* DrinkEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrinkEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		EB95074E294CEFF1007704DF /* MealEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MealEntity+CoreDataClass.swift"; path = "testSfera/Application/StorageManagerModels/MealEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		EB95074F294CEFF1007704DF /* MealEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MealEntity+CoreDataProperties.swift"; path = "testSfera/Application/StorageManagerModels/MealEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		EB950750294CEFF1007704DF /* DrinkEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DrinkEntity+CoreDataClass.swift"; path = "testSfera/Application/StorageManagerModels/DrinkEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		EB950751294CEFF1007704DF /* DrinkEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DrinkEntity+CoreDataProperties.swift"; path = "testSfera/Application/StorageManagerModels/DrinkEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		EBDB97BD2934FEB8000683C1 /* testSfera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testSfera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDB97C02934FEB8000683C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBDB97C42934FEB8000683C1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -121,17 +121,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EB0C28CF294B77370051BB34 /* StorageManagerModels */ = {
-			isa = PBXGroup;
-			children = (
-				EB95074E294CEFF1007704DF /* MealEntity+CoreDataClass.swift */,
-				EB95074F294CEFF1007704DF /* MealEntity+CoreDataProperties.swift */,
-				EB950750294CEFF1007704DF /* DrinkEntity+CoreDataClass.swift */,
-				EB950751294CEFF1007704DF /* DrinkEntity+CoreDataProperties.swift */,
-			);
-			path = StorageManagerModels;
-			sourceTree = "<group>";
-		};
 		EB0CF5FF2946E59000CC248F /* DetailCellModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +139,17 @@
 				EB0CF61029484EF000CC248F /* Tabs.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		EB3A291929508393008D1620 /* StorageManagerModels */ = {
+			isa = PBXGroup;
+			children = (
+				EB950750294CEFF1007704DF /* DrinkEntity+CoreDataClass.swift */,
+				EB950751294CEFF1007704DF /* DrinkEntity+CoreDataProperties.swift */,
+				EB95074E294CEFF1007704DF /* MealEntity+CoreDataClass.swift */,
+				EB95074F294CEFF1007704DF /* MealEntity+CoreDataProperties.swift */,
+			);
+			path = StorageManagerModels;
 			sourceTree = "<group>";
 		};
 		EB49E2BB294056E700DD54FB /* BaseClasses */ = {
@@ -192,9 +192,9 @@
 		EBDB97DE293516CF000683C1 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				EB3A291929508393008D1620 /* StorageManagerModels */,
 				EBDB97C02934FEB8000683C1 /* AppDelegate.swift */,
 				EB0CF60D29473DF400CC248F /* StorageManager.swift */,
-				EB0C28CF294B77370051BB34 /* StorageManagerModels */,
 			);
 			path = Application;
 			sourceTree = "<group>";
