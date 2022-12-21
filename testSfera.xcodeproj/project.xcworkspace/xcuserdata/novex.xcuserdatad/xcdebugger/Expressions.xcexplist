@@ -6,10 +6,40 @@
          contextName = "MealRouter.buttonSavePressed(meal:):MealRouter.swift">
       </ContextState>
       <ContextState
-         contextName = "FavoritesPresenter.recipesRemoveCell(_:commit:forRowAt:):FavoritesPresenter.swift">
+         contextName = "StorageManager.removeMealContext(rowIndexPath:):StorageManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "savedMeals[indexPath.row]">
+               value = "rowIndexPath">
+            </PersistentString>
+            <PersistentString
+               value = "savedEntityMealsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FavoritesViewController.getEntity(meal:):FavoritesViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "savedRecipes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FavoritesPresenter.routerOutput(notification:):FavoritesPresenter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "savedMeals">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FavoritesViewController.viewDidAppear(_:):FavoritesViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "presenter.mealsArrayCount">
+            </PersistentString>
+            <PersistentString
+               value = "indexPathMeals.row">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -18,9 +48,6 @@
          <PersistentStrings>
             <PersistentString
                value = "presenter.mealsArrayCount">
-            </PersistentString>
-            <PersistentString
-               value = "presenter.drinksArrayCount">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -36,7 +63,7 @@
          contextName = "MealPresenter.buttonSaveTapped():MealPresenter.swift">
       </ContextState>
       <ContextState
-         contextName = "FavoritesPresenter.routerOutput(notification:):FavoritesPresenter.swift">
+         contextName = "FavoritesPresenter.countSections():FavoritesPresenter.swift">
          <PersistentStrings>
             <PersistentString
                value = "savedMeals">
@@ -52,29 +79,32 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "FavoritesPresenter.countSections():FavoritesPresenter.swift">
+         contextName = "StorageManager.removeDrinkContext(rowIndexPath:):StorageManager.swift">
          <PersistentStrings>
+            <PersistentString
+               value = "savedEntityDrinksArray">
+            </PersistentString>
+            <PersistentString
+               value = "rowIndexPath">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FavoritesPresenter.viewOutput():FavoritesPresenter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "savedDrinks">
+            </PersistentString>
             <PersistentString
                value = "savedMeals">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "FavoritesViewController.getEntity(meal:):FavoritesViewController.swift">
+         contextName = "FavoritesPresenter.recipesRemoveCell(_:commit:forRowAt:):FavoritesPresenter.swift">
          <PersistentStrings>
             <PersistentString
-               value = "savedRecipes">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FavoritesViewController.viewDidAppear(_:):FavoritesViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "presenter.mealsArrayCount">
-            </PersistentString>
-            <PersistentString
-               value = "indexPathMeals.row">
+               value = "indexPath.row">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

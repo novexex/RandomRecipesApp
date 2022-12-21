@@ -15,9 +15,8 @@ protocol FavoritesPresenterProtocol: AnyObject {
     func recipesRemoveCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     func recipesAddCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     func viewOutput()
+    func getSectionName(section: Int) -> String
     
-    var recipesIsEmpty: Bool { get }
-    var recipesCount: Int { get }
     var cellIdentifier: String { get }
     
     var mealsArrayIsEmpty: Bool { get }
@@ -33,7 +32,6 @@ class FavoritesPresenter {
     weak var view: FavoritesViewProtocol?
     var router: FavoritesRouterProtocol
     var interactor: FavoritesInteractorProtocol
-    private var savedRecipes = [AnyObject]()
     private var savedMeals = [ParcedMeal]()
     private var savedDrinks = [ParcedDrink]()
     private let identifier = "cell"
@@ -47,6 +45,19 @@ class FavoritesPresenter {
 }
 
 extension FavoritesPresenter: FavoritesPresenterProtocol {
+    func getSectionName(section: Int) -> String {
+        let sectionName: String
+        switch section {
+        case 0:
+            sectionName = "Meals"
+        case 1:
+            sectionName = "Drinks"
+        default:
+            sectionName = "Default"
+        }
+        return sectionName
+    }
+    
     var mealsArrayCount: Int {
         savedMeals.count
     }
@@ -102,28 +113,30 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     
     func recipesRemoveCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            //если удалять последнюю ячейку в первой секции, когда вторая ещё существует = сега
+            tableView.beginUpdates()
+            //если удалять последнюю ячейку в первой секции, когда вторая ещё существует происходит краш
             if indexPath.section == 0 {
+                
                 storage.removeMealContext(rowIndexPath: indexPath.row)
                 savedMeals.remove(at: indexPath.row)
-                savedMeals.isEmpty ? tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic) : tableView.deleteRows(at: [indexPath], with: .automatic)
+                
+                if savedMeals.isEmpty {
+                    tableView.deleteSections([indexPath.section], with: .automatic)
+                } else {
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
+
+                
             } else {
                 storage.removeDrinkContext(rowIndexPath: indexPath.row)
                 savedDrinks.remove(at: indexPath.row)
                 savedDrinks.isEmpty ? tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic) : tableView.deleteRows(at: [indexPath], with: .automatic)
             }
+            tableView.endUpdates()
         }
         if savedMeals.isEmpty && savedDrinks.isEmpty {
             view?.configureWelcomeLabel()
         }
-    }
-    
-    var recipesCount: Int {
-        savedRecipes.count
-    }
-    
-    var recipesIsEmpty: Bool {
-        savedRecipes.isEmpty
     }
     
     func routerOutput(vc: DetailCellViewController) {

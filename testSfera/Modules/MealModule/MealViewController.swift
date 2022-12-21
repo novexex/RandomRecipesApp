@@ -126,6 +126,7 @@ extension MealViewController: MealViewProtocol {
     
     func startActivityIndicator() {
         DispatchQueue.main.async {
+            self.disableButtons()
             self.view.addSubview(self.activityIndicator)
             self.activityIndicator.pin(to: self.view)
             self.activityIndicator.startAnimating()
@@ -138,6 +139,7 @@ extension MealViewController: MealViewProtocol {
             self.activityIndicator.stopAnimating()
             self.activityIndicator.isHidden = true
             self.activityIndicator.removeFromSuperview()
+            self.enableButtons()
         }
     }
 }

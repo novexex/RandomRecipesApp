@@ -18,8 +18,8 @@ class StorageManager {
         return container
     }()
     private lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
-    private var entityMealsArray = [MealEntity]()
-    private var entityDrinksArray = [DrinkEntity]()
+    private var savedEntityMealsArray = [MealEntity]()
+    private var savedEntityDrinksArray = [DrinkEntity]()
     
     func saveContext() {
         if persistentContainer.viewContext.hasChanges {
@@ -33,12 +33,14 @@ class StorageManager {
     }
     
     func removeMealContext(rowIndexPath: Int) {
-        persistentContainer.viewContext.delete(entityMealsArray[rowIndexPath])
+        persistentContainer.viewContext.delete(savedEntityMealsArray[rowIndexPath])
+        savedEntityMealsArray.remove(at: rowIndexPath)
         saveContext()
     }
     
     func removeDrinkContext(rowIndexPath: Int) {
-        persistentContainer.viewContext.delete(entityDrinksArray[rowIndexPath])
+        persistentContainer.viewContext.delete(savedEntityDrinksArray[rowIndexPath])
+        savedEntityDrinksArray.remove(at: rowIndexPath)
         saveContext()
     }
         
@@ -67,6 +69,8 @@ class StorageManager {
         }
         
         entityDrink.measure = measure
+        
+        savedEntityDrinksArray.append(entityDrink)
         
         saveContext()
     }
@@ -97,6 +101,8 @@ class StorageManager {
         
         entityMeal.measure = measure
         
+        savedEntityMealsArray.append(entityMeal)
+        
         saveContext()
     }
     
@@ -110,10 +116,11 @@ class StorageManager {
                 parcedMealsArray.append(converseEntity(meal: entityMealsArray[index]))
             }
         } catch {
-            print("FetchData Error: \(error.localizedDescription)")
+            print("Fetch Meal Data Error: \(error.localizedDescription)")
         }
         
-        self.entityMealsArray = entityMealsArray
+        savedEntityMealsArray = entityMealsArray
+        
         
         return parcedMealsArray
     }
@@ -128,10 +135,10 @@ class StorageManager {
                 parcedDrinksArray.append(converseEntity(drink: entityDrinksArray[index]))
             }
         } catch {
-            print("FetchData Error: \(error.localizedDescription)")
+            print("Fetch Drink Data Error: \(error.localizedDescription)")
         }
         
-        self.entityDrinksArray = entityDrinksArray
+        savedEntityDrinksArray = entityDrinksArray
         
         return parcedDrinksArray
     }

@@ -14,6 +14,8 @@ enum NavBarPosition {
 
 class BaseViewController: UIViewController {
     
+    var buttons = [UIButton]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,7 +43,10 @@ extension BaseViewController {
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)
         button.setTitleColor(Resources.Colors.active, for: .normal)
+        button.setTitleColor(Resources.Colors.inActive, for: .disabled)
         button.titleLabel?.font = Resources.Fonts.helveticaRegular(with: 17)
+        
+        buttons.append(button)
         
         switch position {
         case .left:
@@ -50,6 +55,18 @@ extension BaseViewController {
         case .right:
             button.addTarget(self, action: #selector(navBarRightButtonHandler), for: .touchUpInside)
             navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
+        }
+    }
+    
+    func disableButtons() {
+        for i in buttons {
+            i.isEnabled = false
+        }
+    }
+    
+    func enableButtons() {
+        for i in buttons {
+            i.isEnabled = true
         }
     }
 }
