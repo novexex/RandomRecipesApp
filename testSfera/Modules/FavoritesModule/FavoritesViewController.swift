@@ -11,6 +11,7 @@ protocol FavoritesViewProtocol: AnyObject {
     func presenterOutput(vc: DetailCellViewController)
     func configureWelcomeLabel()
     func removeWelcomeLabel()
+    func toggle()
 }
 
 class FavoritesViewController: UIViewController {
@@ -18,6 +19,7 @@ class FavoritesViewController: UIViewController {
     private let tableViewController = UITableViewController()
     private let myVC = UITableViewController()
     private var welcomeLabel = UILabel()
+    private var deleteSection = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +60,10 @@ class FavoritesViewController: UIViewController {
 }
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, FavoritesViewProtocol {
+    func toggle() {
+        deleteSection = true
+    }
+    
     func configureWelcomeLabel() {
         welcomeLabel = {
             let label = UILabel()
@@ -78,7 +84,6 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //надо попробовать создать 3 секции и перед удалением нулевой перемещать её в третью и удалять
         guard let presenter else { return 0 }
         return section == 0 ? presenter.mealsArrayCount : presenter.drinksArrayCount
     }
@@ -90,7 +95,6 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let presenter else { return 0 }
         return presenter.countSections()
-//        3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

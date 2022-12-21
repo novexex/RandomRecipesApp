@@ -16,16 +16,14 @@ protocol FavoritesPresenterProtocol: AnyObject {
     func recipesAddCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     func viewOutput()
     func getSectionName(section: Int) -> String
+    func countSections() -> Int
     
+    //should change computed propertys to funcs
     var cellIdentifier: String { get }
-    
     var mealsArrayIsEmpty: Bool { get }
     var drinksArrayIsEmpty: Bool { get }
-    
     var mealsArrayCount: Int { get }
     var drinksArrayCount: Int { get }
-    
-    func countSections() -> Int
 }
 
 class FavoritesPresenter {
@@ -35,9 +33,10 @@ class FavoritesPresenter {
     private var savedMeals = [ParcedMeal]()
     private var savedDrinks = [ParcedDrink]()
     private let identifier = "cell"
+    private var viewDidLoaded = false
     
     let storage = StorageManager()
-
+    
     init(interactor: FavoritesInteractorProtocol, router: FavoritesRouterProtocol) {
         self.interactor = interactor
         self.router = router
@@ -85,6 +84,7 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     }
     
     func viewOutput() {
+        viewDidLoaded = true
         savedMeals += storage.fetchMealData()
         savedDrinks += storage.fetchDrinkData()
     }
@@ -113,26 +113,24 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     
     func recipesRemoveCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            tableView.beginUpdates()
-            //если удалять последнюю ячейку в первой секции, когда вторая ещё существует происходит краш
             if indexPath.section == 0 {
-                
+                if tableView.numberOfRows(inSection: 0) == 1 {
+                    tableView.deleteSections([0], with: .automatic)
+                }
                 storage.removeMealContext(rowIndexPath: indexPath.row)
                 savedMeals.remove(at: indexPath.row)
-                
                 if savedMeals.isEmpty {
+                    tableView.reloadData()
                     tableView.deleteSections([indexPath.section], with: .automatic)
                 } else {
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 }
-
-                
             } else {
                 storage.removeDrinkContext(rowIndexPath: indexPath.row)
                 savedDrinks.remove(at: indexPath.row)
+                
                 savedDrinks.isEmpty ? tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic) : tableView.deleteRows(at: [indexPath], with: .automatic)
             }
-            tableView.endUpdates()
         }
         if savedMeals.isEmpty && savedDrinks.isEmpty {
             view?.configureWelcomeLabel()
@@ -146,11 +144,15 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     func routerOutput(notification: Notification) {
         if let notification = notification.userInfo as? [String: ParcedDrink] {
             guard let drink = notification["drink"] else { return }
-            savedDrinks.append(drink)
+            if viewDidLoaded {
+                savedDrinks.append(drink)
+            }
             storage.saveToCoreData(drink: drink)
         } else if let notification = notification.userInfo as? [String: ParcedMeal] {
             guard let meal = notification["meal"] else { return }
-            savedMeals.append(meal)
+            if viewDidLoaded {
+                savedMeals.append(meal)
+            }
             storage.saveToCoreData(meal: meal)
         }
     }

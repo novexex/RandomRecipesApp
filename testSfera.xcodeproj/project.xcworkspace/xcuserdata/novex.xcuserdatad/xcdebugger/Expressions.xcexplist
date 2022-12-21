@@ -104,7 +104,13 @@
          contextName = "FavoritesPresenter.recipesRemoveCell(_:commit:forRowAt:):FavoritesPresenter.swift">
          <PersistentStrings>
             <PersistentString
+               value = "savedMeals.isEmpty">
+            </PersistentString>
+            <PersistentString
                value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "tableView.numberOfRows(inSection: indexPath.section)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
