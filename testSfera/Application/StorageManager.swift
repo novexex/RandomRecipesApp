@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import UIKit
 
 class StorageManager {
     private var persistentContainer: NSPersistentContainer = {
@@ -20,7 +21,14 @@ class StorageManager {
     private lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
     private var savedEntityMealsArray = [MealEntity]()
     private var savedEntityDrinksArray = [DrinkEntity]()
+    var fetchedMealsController: NSFetchedResultsController<MealEntity>?
+    var fetchedDrinksController: NSFetchedResultsController<DrinkEntity>?
+    let tableView: UITableView
     
+    init(tableView: UITableView) {
+        self.tableView = tableView
+    }
+
     func saveContext() {
         if persistentContainer.viewContext.hasChanges {
             do {
@@ -183,5 +191,91 @@ class StorageManager {
         }
         
         return parcedDrink
+    }
+}
+
+extension StorageManager: NSFetchedResultsControllerDelegate {
+    func isEqual(_ object: Any?) -> Bool {
+        false
+    }
+    
+    var hash: Int {
+        0
+    }
+    
+    var superclass: AnyClass? {
+        <#code#>
+    }
+    
+    func `self`() -> Self {
+        <#code#>
+    }
+    
+    func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
+        <#code#>
+    }
+    
+    func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
+        <#code#>
+    }
+    
+    func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
+        <#code#>
+    }
+    
+    func isProxy() -> Bool {
+        <#code#>
+    }
+    
+    func isKind(of aClass: AnyClass) -> Bool {
+        <#code#>
+    }
+    
+    func isMember(of aClass: AnyClass) -> Bool {
+        <#code#>
+    }
+    
+    func conforms(to aProtocol: Protocol) -> Bool {
+        <#code#>
+    }
+    
+    func responds(to aSelector: Selector!) -> Bool {
+        <#code#>
+    }
+    
+    var description: String {
+        <#code#>
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        guard let newIndexPath, let indexPath else { return }
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .update:
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        case .move:
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .delete:
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        default:
+            return
+        }
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func setupFetchedMealsController(for context: NSManagedObjectContext) {
+        let request = NSFetchRequest<MealEntity>(entityName: "MealEntity")
+        
+        fetchedMealsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedMealsController?.delegate = self
     }
 }

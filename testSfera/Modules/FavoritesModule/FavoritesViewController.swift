@@ -12,6 +12,7 @@ protocol FavoritesViewProtocol: AnyObject {
     func configureWelcomeLabel()
     func removeWelcomeLabel()
     func toggle()
+    func tableView() -> UITableView
 }
 
 class FavoritesViewController: UIViewController {
@@ -37,8 +38,8 @@ class FavoritesViewController: UIViewController {
     }
     
     func refreshMealsView() {
-        guard let presenter, !presenter.mealsArrayIsEmpty else { return }
-        let indexPath = IndexPath(row: presenter.mealsArrayCount - 1, section: 0)
+        guard let presenter, !presenter.mealsArrayIsEmpty() else { return }
+        let indexPath = IndexPath(row: presenter.mealsArrayCount() - 1, section: 0)
         
         tableViewController.tableView.reloadData()
         
@@ -48,8 +49,8 @@ class FavoritesViewController: UIViewController {
     }
     
     func refreshDrinksView() {
-        guard let presenter, !presenter.drinksArrayIsEmpty else { return }
-        let indexPath = IndexPath(row: presenter.drinksArrayCount - 1, section: 1)
+        guard let presenter, !presenter.drinksArrayIsEmpty() else { return }
+        let indexPath = IndexPath(row: presenter.drinksArrayCount() - 1, section: 1)
         
         tableViewController.tableView.reloadData()
         
@@ -60,6 +61,10 @@ class FavoritesViewController: UIViewController {
 }
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, FavoritesViewProtocol {
+    func tableView() -> UITableView {
+        tableViewController.tableView
+    }
+    
     func toggle() {
         deleteSection = true
     }
@@ -85,7 +90,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let presenter else { return 0 }
-        return section == 0 ? presenter.mealsArrayCount : presenter.drinksArrayCount
+        return presenter.numberOfRowsInSection(section: section)
     }
     
     func removeWelcomeLabel() {
@@ -114,7 +119,6 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     }
     
     func initialize() {
-        guard let presenter else { return }
         view.addSubview(tableViewController.tableView)
         
         tableViewController.tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -126,7 +130,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
             tableViewController.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
         ])
         
-        tableViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: presenter.cellIdentifier)
+        tableViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.Identifiers.cell)
         tableViewController.tableView.delegate = self
         tableViewController.tableView.dataSource = self
     }

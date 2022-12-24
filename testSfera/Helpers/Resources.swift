@@ -45,6 +45,20 @@ enum Resources {
             UIFont(name: "Helvetica", size: size) ?? UIFont()
         }
     }
+    
+    enum SectionName {
+        static let meals = "Meals"
+        static let drinks = "Drinks"
+    }
+    
+    enum Identifiers {
+        static let cell = "cell"
+    }
+    
+    enum Sections {
+        static let mealSection = 0
+        static let drinkSection = 1
+    }
 }
 
 enum DictKeys {
