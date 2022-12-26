@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "FavoritesPresenter.countRows(section:):FavoritesPresenter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "mealsArrayCount()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "MealRouter.buttonSavePressed(meal:):MealRouter.swift">
       </ContextState>
       <ContextState
@@ -71,14 +79,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "FavoritesViewController.tableView(_:cellForRowAt:):FavoritesViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "savedRecipes">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "StorageManager.removeDrinkContext(rowIndexPath:):StorageManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -90,6 +90,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "FavoritesViewController.tableView(_:cellForRowAt:):FavoritesViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "savedRecipes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "FavoritesPresenter.viewOutput():FavoritesPresenter.swift">
          <PersistentStrings>
             <PersistentString
@@ -97,20 +105,6 @@
             </PersistentString>
             <PersistentString
                value = "savedMeals">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FavoritesPresenter.recipesRemoveCell(_:commit:forRowAt:):FavoritesPresenter.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "savedMeals.isEmpty">
-            </PersistentString>
-            <PersistentString
-               value = "indexPath.row">
-            </PersistentString>
-            <PersistentString
-               value = "tableView.numberOfRows(inSection: indexPath.section)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

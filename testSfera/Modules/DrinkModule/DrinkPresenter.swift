@@ -34,15 +34,15 @@ extension DrinkPresenter: DrinkPresenterProtocol {
     }
     
     func interactorDidLoad(drink: Drink) {
-        let presentedDrink = ParcedDrink(strDrink: (drink.drinks[0][DictKeys.Drink.name] ?? "") ?? "",
-                                         strAlcoholic: (drink.drinks[0][DictKeys.Drink.alco] ?? "") ?? "",
-                                         image: (drink.drinks[0][DictKeys.Drink.image] ?? "") ?? "",
-                                         category: (drink.drinks[0][DictKeys.category] ?? "") ?? "",
-                                         instructions: (drink.drinks[0][DictKeys.instruct] ?? "") ?? "")
-        for i in DictKeys.ingr {
+        let presentedDrink = ParcedDrink(strDrink: (drink.drinks[0][Resources.DictKeys.Drink.name] ?? Resources.empty) ?? Resources.empty,
+                                         strAlcoholic: (drink.drinks[0][Resources.DictKeys.Drink.alco] ?? Resources.empty) ?? Resources.empty,
+                                         image: (drink.drinks[0][Resources.DictKeys.Drink.image] ?? Resources.empty) ?? Resources.empty,
+                                         category: (drink.drinks[0][Resources.DictKeys.category] ?? Resources.empty) ?? Resources.empty,
+                                         instructions: (drink.drinks[0][Resources.DictKeys.instruct] ?? Resources.empty) ?? Resources.empty)
+        for i in Resources.DictKeys.ingr {
             presentedDrink.ingredients.append(drink.drinks[0][i] ?? nil)
         }
-        for i in DictKeys.meas {
+        for i in Resources.DictKeys.meas {
             presentedDrink.measure.append(drink.drinks[0][i] ?? nil)
         }
         
@@ -50,11 +50,11 @@ extension DrinkPresenter: DrinkPresenterProtocol {
 
         let drinkDiscription = "Drink: \(presentedDrink.strDrink)\n\n"
         let categoryDiscription = "Category: \(presentedDrink.category), \(presentedDrink.strAlcoholic)\n\n"
-        let instructionDiscription = presentedDrink.instructions.isEmpty ? "" : "\n\nInstructions:\n\(presentedDrink.instructions)"
+        let instructionDiscription = presentedDrink.instructions.isEmpty ? Resources.empty : "\n\nInstructions:\n\(presentedDrink.instructions)"
         var ingredientsDiscription = "Ingredients:\n"
         
         for (index, _) in presentedDrink.ingredients.enumerated() {
-            ingredientsDiscription += "\(presentedDrink.ingredients[index] ?? "del"): \(presentedDrink.measure[index] ?? "del"),\n"
+            ingredientsDiscription += "\(presentedDrink.ingredients[index] ?? Resources.del): \(presentedDrink.measure[index] ?? Resources.del),\n"
         }
         
         ingredientsDiscription.formatting()

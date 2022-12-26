@@ -17,7 +17,7 @@ protocol FavoritesPresenterProtocol: AnyObject {
     func viewOutput()
     func getSectionName(section: Int) -> String
     func countSections() -> Int
-    func numberOfRowsInSection(section: Int) -> Int
+    func countRows(section: Int) -> Int
     func mealsArrayIsEmpty() -> Bool
     func drinksArrayIsEmpty() -> Bool
     func mealsArrayCount() -> Int
@@ -32,37 +32,38 @@ class FavoritesPresenter {
     private var savedDrinks = [ParcedDrink]()
     private var viewDidLoaded = false
     
-    lazy var storage = StorageManager(tableView: view?.tableView() ?? UITableView())
+    let storage = StorageManager()
     
     init(interactor: FavoritesInteractorProtocol, router: FavoritesRouterProtocol) {
         self.interactor = interactor
         self.router = router
     }
+    
+    func removeEntity(rowIndexPath: Int) {
+        storage.removeMealContext(rowIndexPath: rowIndexPath)
+        savedMeals.remove(at: rowIndexPath)
+    }
 }
 
 extension FavoritesPresenter: FavoritesPresenterProtocol {
-    func numberOfRowsInSection(section: Int) -> Int {
-        switch section {
-        case Resources.Sections.mealSection:
-            guard let mealsSections = storage.fetchedMealsController?.sections else { return 0 }
-            return mealsSections[section].numberOfObjects
-        case Resources.Sections.drinkSection:
-            guard let drinksSections = storage.fetchedDrinksController?.sections else { return 0 }
-            return drinksSections[section].numberOfObjects
-        default:
-            return 0
+    func countRows(section: Int) -> Int {
+        if section == Resources.Section.mealSection {
+            return mealsArrayCount()
+        } else if section == Resources.Section.drinkSection {
+            return drinksArrayCount()
         }
+        return 0
     }
     
     func getSectionName(section: Int) -> String {
         let sectionName: String
         switch section {
-        case Resources.Sections.mealSection:
-            sectionName = Resources.SectionName.meals
-        case Resources.Sections.drinkSection:
-            sectionName = Resources.SectionName.drinks
+        case Resources.Section.mealSection:
+            sectionName = Resources.SectionNames.meals
+        case Resources.Section.drinkSection:
+            sectionName = Resources.SectionNames.drinks
         default:
-            sectionName = ""
+            sectionName = Resources.empty
         }
         return sectionName
     }
@@ -84,12 +85,9 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     }
     
     func countSections() -> Int {
-        guard let mealsSections = storage.fetchedMealsController?.sections else { return 0 }
-        guard let drinksSections = storage.fetchedDrinksController?.sections else { return 0 }
-        
-        if !mealsSections.isEmpty && !drinksSections.isEmpty {
+         if !savedMeals.isEmpty && !savedDrinks.isEmpty {
             return 2
-        } else if !mealsSections.isEmpty || !drinksSections.isEmpty {
+        } else if !savedMeals.isEmpty || !savedDrinks.isEmpty {
             return 1
         } else {
             return 0
@@ -103,55 +101,42 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     }
     
     func detailView(didSelectRowAt indexPath: IndexPath) {
-        indexPath.section == 0 ? router.detailView(recipeEntity: savedMeals[indexPath.row]) : router.detailView(recipeEntity: savedDrinks[indexPath.row])
+        indexPath.section == Resources.Section.mealSection ? router.detailView(recipeEntity: savedMeals[indexPath.row]) : router.detailView(recipeEntity: savedDrinks[indexPath.row])
     }
-    
+
     func recipesAddCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         view?.removeWelcomeLabel()
-        let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.cell, for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: Resources.cellIdentifier, for: indexPath)
+        guard !savedMeals.isEmpty || !savedDrinks.isEmpty else { return cell }
         if #available(iOS 14.0, *) {
             var content = cell.defaultContentConfiguration()
-            if indexPath.section == Resources.Sections.mealSection {
-                guard let meal = storage.fetchedMealsController?.object(at: indexPath) else { return cell }
-                content.text = meal.strMeal ?? ""
-            } else if indexPath.section == Resources.Sections.drinkSection {
-                guard let drink = storage.fetchedDrinksController?.object(at: indexPath) else { return cell }
-                content.text = drink.strDrink ?? ""
-            }
+            content.text = indexPath.section == Resources.Section.mealSection ? savedMeals[indexPath.row].strMeal : savedDrinks[indexPath.row].strDrink
             cell.contentConfiguration = content
         } else {
-            if indexPath.section == Resources.Sections.mealSection {
-                guard let meal = storage.fetchedMealsController?.object(at: indexPath) else { return cell }
-                cell.textLabel?.text = meal.strMeal ?? ""
-            } else if indexPath.section == Resources.Sections.drinkSection {
-                guard let drink = storage.fetchedDrinksController?.object(at: indexPath) else { return cell }
-                cell.textLabel?.text = drink.strDrink ?? ""
-            }
+            cell.textLabel?.text = indexPath.section == Resources.Section.mealSection ? savedMeals[indexPath.row].strMeal : savedDrinks[indexPath.row].strDrink
         }
-        
         return cell
     }
     
     func recipesRemoveCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            if indexPath.section == 0 {
-                if savedMeals.count == 1 {
-                    storage.removeMealContext(rowIndexPath: indexPath.row)
-                    savedMeals.remove(at: indexPath.row)
-                    
-                    tableView.deleteRows(at: [indexPath], with: .automatic)
-                    
-                    tableView.deleteSections([indexPath.section], with: .automatic)
-                } else {
-                    tableView.deleteRows(at: [indexPath], with: .automatic)
-                }
-            } else {
-                storage.removeDrinkContext(rowIndexPath: indexPath.row)
-                savedDrinks.remove(at: indexPath.row)
+            if indexPath.section == Resources.Section.mealSection {
+//                if tableView.numberOfRows(inSection: 0) == 1 {
+//                    if tableView.numberOfSections == 2 {
+//                        removeEntity(rowIndexPath: indexPath.row)
+//                        tableView.reloadRows(at: [indexPath], with: .automatic)
+//                        tableView.deleteRows(at: [indexPath], with: .automatic)
+//                    }
+//                    tableView.deleteSections([indexPath.section], with: .automatic)
+//                } else {
+//                    tableView.deleteRows(at: [indexPath], with: .automatic)
+//                }
+                removeEntity(rowIndexPath: indexPath.row)
                 
-                savedDrinks.isEmpty ? tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic) : tableView.deleteRows(at: [indexPath], with: .automatic)
-                tableView.reloadData()
+                savedMeals.isEmpty ? tableView.deleteSections([indexPath.section], with: .automatic) : tableView.deleteRows(at: [indexPath], with: .automatic)
+            } else if indexPath.section == Resources.Section.drinkSection {
+                removeEntity(rowIndexPath: indexPath.row)
+                savedDrinks.isEmpty ? tableView.deleteSections([indexPath.section], with: .automatic) : tableView.deleteRows(at: [indexPath], with: .automatic)
             }
         }
         if savedMeals.isEmpty && savedDrinks.isEmpty {
@@ -165,13 +150,13 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     
     func routerOutput(notification: Notification) {
         if let notification = notification.userInfo as? [String: ParcedDrink] {
-            guard let drink = notification["drink"] else { return }
+            guard let drink = notification[Resources.DictKeys.drink] else { return }
             if viewDidLoaded {
                 savedDrinks.append(drink)
             }
             storage.saveToCoreData(drink: drink)
         } else if let notification = notification.userInfo as? [String: ParcedMeal] {
-            guard let meal = notification["meal"] else { return }
+            guard let meal = notification[Resources.DictKeys.meal] else { return }
             if viewDidLoaded {
                 savedMeals.append(meal)
             }

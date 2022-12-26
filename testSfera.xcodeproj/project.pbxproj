@@ -70,10 +70,10 @@
 		EB0CF60D29473DF400CC248F /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		EB0CF61029484EF000CC248F /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		EB64D8EF294B9BE500A33274 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
-		EB95074E294CEFF1007704DF /* MealEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MealEntity+CoreDataClass.swift"; path = "testSfera/Modules/MealModule/MealEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		EB95074F294CEFF1007704DF /* MealEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MealEntity+CoreDataProperties.swift"; path = "testSfera/Modules/MealModule/MealEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		EB950750294CEFF1007704DF /* DrinkEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DrinkEntity+CoreDataClass.swift"; path = "testSfera/Modules/DrinkModule/DrinkEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		EB950751294CEFF1007704DF /* DrinkEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DrinkEntity+CoreDataProperties.swift"; path = "testSfera/Modules/DrinkModule/DrinkEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		EB95074E294CEFF1007704DF /* MealEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MealEntity+CoreDataClass.swift"; path = "testSfera/Application/StorageManagerModels/MealEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		EB95074F294CEFF1007704DF /* MealEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MealEntity+CoreDataProperties.swift"; path = "testSfera/Application/StorageManagerModels/MealEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		EB950750294CEFF1007704DF /* DrinkEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DrinkEntity+CoreDataClass.swift"; path = "testSfera/Application/StorageManagerModels/DrinkEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		EB950751294CEFF1007704DF /* DrinkEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DrinkEntity+CoreDataProperties.swift"; path = "testSfera/Application/StorageManagerModels/DrinkEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		EBDB97BD2934FEB8000683C1 /* testSfera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testSfera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDB97C02934FEB8000683C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBDB97C42934FEB8000683C1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -136,9 +136,21 @@
 		EB0CF60F29484EE100CC248F /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				EBDB97F229377398000683C1 /* Resources.swift */,
 				EB0CF61029484EF000CC248F /* Tabs.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		EB3A291929508393008D1620 /* StorageManagerModels */ = {
+			isa = PBXGroup;
+			children = (
+				EB950750294CEFF1007704DF /* DrinkEntity+CoreDataClass.swift */,
+				EB950751294CEFF1007704DF /* DrinkEntity+CoreDataProperties.swift */,
+				EB95074E294CEFF1007704DF /* MealEntity+CoreDataClass.swift */,
+				EB95074F294CEFF1007704DF /* MealEntity+CoreDataProperties.swift */,
+			);
+			path = StorageManagerModels;
 			sourceTree = "<group>";
 		};
 		EB49E2BB294056E700DD54FB /* BaseClasses */ = {
@@ -181,6 +193,7 @@
 		EBDB97DE293516CF000683C1 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				EB3A291929508393008D1620 /* StorageManagerModels */,
 				EBDB97C02934FEB8000683C1 /* AppDelegate.swift */,
 				EB0CF60D29473DF400CC248F /* StorageManager.swift */,
 			);
@@ -201,7 +214,6 @@
 		EBDB97EE29377288000683C1 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				EBDB97F229377398000683C1 /* Resources.swift */,
 				EB0CF60F29484EE100CC248F /* Enums */,
 				EB49E2BB294056E700DD54FB /* BaseClasses */,
 				EBDB97EF293772D0000683C1 /* Extensions */,
@@ -238,8 +250,6 @@
 			children = (
 				EBDB984C29393778000683C1 /* MealBuilder.swift */,
 				EBDB97D8293501DB000683C1 /* MealEntity.swift */,
-				EB95074E294CEFF1007704DF /* MealEntity+CoreDataClass.swift */,
-				EB95074F294CEFF1007704DF /* MealEntity+CoreDataProperties.swift */,
 				EBDB985029393778000683C1 /* MealInteractor.swift */,
 				EBDB984D29393778000683C1 /* MealPresenter.swift */,
 				EBDB984E29393778000683C1 /* MealRouter.swift */,
@@ -253,8 +263,6 @@
 			children = (
 				EBDB985729393833000683C1 /* DrinkBuilder.swift */,
 				EBDB97DA293501ED000683C1 /* DrinkEntity.swift */,
-				EB950750294CEFF1007704DF /* DrinkEntity+CoreDataClass.swift */,
-				EB950751294CEFF1007704DF /* DrinkEntity+CoreDataProperties.swift */,
 				EBDB985B29393833000683C1 /* DrinkInteractor.swift */,
 				EBDB985829393833000683C1 /* DrinkPresenter.swift */,
 				EBDB985929393833000683C1 /* DrinkRouter.swift */,

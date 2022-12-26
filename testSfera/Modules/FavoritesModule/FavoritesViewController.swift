@@ -12,7 +12,6 @@ protocol FavoritesViewProtocol: AnyObject {
     func configureWelcomeLabel()
     func removeWelcomeLabel()
     func toggle()
-    func tableView() -> UITableView
 }
 
 class FavoritesViewController: UIViewController {
@@ -61,10 +60,6 @@ class FavoritesViewController: UIViewController {
 }
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, FavoritesViewProtocol {
-    func tableView() -> UITableView {
-        tableViewController.tableView
-    }
-    
     func toggle() {
         deleteSection = true
     }
@@ -72,7 +67,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     func configureWelcomeLabel() {
         welcomeLabel = {
             let label = UILabel()
-            label.text = "You haven't saved any recipes yet\n Come back when you do"
+            label.text = Resources.Titles.welcomeLabel
             label.numberOfLines = 0
             label.textAlignment = .center
             label.sizeToFit()
@@ -90,7 +85,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let presenter else { return 0 }
-        return presenter.numberOfRowsInSection(section: section)
+        return presenter.countRows(section: section)
     }
     
     func removeWelcomeLabel() {
@@ -130,7 +125,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
             tableViewController.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
         ])
         
-        tableViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.Identifiers.cell)
+        tableViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.cellIdentifier)
         tableViewController.tableView.delegate = self
         tableViewController.tableView.dataSource = self
     }

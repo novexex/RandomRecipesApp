@@ -42,7 +42,7 @@ class DetailCellPresenter {
         let instructionDiscription = "\n\nInstructions:\n\(drink.instructions)"
         var ingredientsDiscription = ""
         
-        for (index, _) in drink.ingredients.enumerated() {
+        for (index, _) in drink.ingredients.enumerated() { //fatal error
             ingredientsDiscription += "\(drink.ingredients[index] ?? "del"): \(drink.measure[index] ?? "del"),\n"
         }
 

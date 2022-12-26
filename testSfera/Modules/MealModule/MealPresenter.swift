@@ -34,15 +34,15 @@ extension MealPresenter: MealPresenterProtocol {
     }
     
     func interactorDidLoad(meal: Meal) {
-        let presentedMeal = ParcedMeal(strMeal: (meal.meals[0][DictKeys.Meal.name] ?? "") ?? "",
-                                       strArea: (meal.meals[0][DictKeys.Meal.area] ?? "") ?? "",
-                                       image: (meal.meals[0][DictKeys.Meal.image] ?? "") ?? "",
-                                       category: (meal.meals[0][DictKeys.category] ?? "") ?? "",
-                                       instructions: (meal.meals[0][DictKeys.instruct] ?? "") ?? "")
-        for i in DictKeys.ingr {
+        let presentedMeal = ParcedMeal(strMeal: (meal.meals[0][Resources.DictKeys.Meal.name] ?? Resources.empty) ?? Resources.empty,
+                                       strArea: (meal.meals[0][Resources.DictKeys.Meal.area] ?? Resources.empty) ?? Resources.empty,
+                                       image: (meal.meals[0][Resources.DictKeys.Meal.image] ?? Resources.empty) ?? Resources.empty,
+                                       category: (meal.meals[0][Resources.DictKeys.category] ?? Resources.empty) ?? Resources.empty,
+                                       instructions: (meal.meals[0][Resources.DictKeys.instruct] ?? Resources.empty) ?? Resources.empty)
+        for i in Resources.DictKeys.ingr {
             presentedMeal.ingredients.append(meal.meals[0][i] ?? nil)
         }
-        for i in DictKeys.meas {
+        for i in Resources.DictKeys.meas {
             presentedMeal.measure.append(meal.meals[0][i] ?? nil)
         }
         lastLoadedMeal = presentedMeal
@@ -53,7 +53,7 @@ extension MealPresenter: MealPresenterProtocol {
         var ingredientsDiscription = "Ingredients:\n"
         
         for (index, _) in presentedMeal.ingredients.enumerated() {
-            ingredientsDiscription += "\(presentedMeal.ingredients[index] ?? "del"): \(presentedMeal.measure[index] ?? "del"),\n"
+            ingredientsDiscription += "\(presentedMeal.ingredients[index] ?? Resources.del): \(presentedMeal.measure[index] ?? Resources.del),\n"
         }
         
         ingredientsDiscription.formatting()
