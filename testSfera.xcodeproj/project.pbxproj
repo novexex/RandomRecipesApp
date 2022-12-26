@@ -136,6 +136,7 @@
 		EB0CF60F29484EE100CC248F /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				EBDB97F229377398000683C1 /* Resources.swift */,
 				EB0CF61029484EF000CC248F /* Tabs.swift */,
 			);
 			path = Enums;
@@ -201,7 +202,6 @@
 		EBDB97EE29377288000683C1 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				EBDB97F229377398000683C1 /* Resources.swift */,
 				EB0CF60F29484EE100CC248F /* Enums */,
 				EB49E2BB294056E700DD54FB /* BaseClasses */,
 				EBDB97EF293772D0000683C1 /* Extensions */,

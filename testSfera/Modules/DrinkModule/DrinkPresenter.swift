@@ -34,15 +34,15 @@ extension DrinkPresenter: DrinkPresenterProtocol {
     }
     
     func interactorDidLoad(drink: Drink) {
-        let presentedDrink = ParcedDrink(strDrink: (drink.drinks[0][DictKeys.Drink.name] ?? "") ?? "",
-                                         strAlcoholic: (drink.drinks[0][DictKeys.Drink.alco] ?? "") ?? "",
-                                         image: (drink.drinks[0][DictKeys.Drink.image] ?? "") ?? "",
-                                         category: (drink.drinks[0][DictKeys.category] ?? "") ?? "",
-                                         instructions: (drink.drinks[0][DictKeys.instruct] ?? "") ?? "")
-        for i in DictKeys.ingr {
+        let presentedDrink = ParcedDrink(strDrink: (drink.drinks[0][Resources.DictKeys.Drink.name] ?? "") ?? "",
+                                         strAlcoholic: (drink.drinks[0][Resources.DictKeys.Drink.alco] ?? "") ?? "",
+                                         image: (drink.drinks[0][Resources.DictKeys.Drink.image] ?? "") ?? "",
+                                         category: (drink.drinks[0][Resources.DictKeys.category] ?? "") ?? "",
+                                         instructions: (drink.drinks[0][Resources.DictKeys.instruct] ?? "") ?? "")
+        for i in Resources.DictKeys.ingr {
             presentedDrink.ingredients.append(drink.drinks[0][i] ?? nil)
         }
-        for i in DictKeys.meas {
+        for i in Resources.DictKeys.meas {
             presentedDrink.measure.append(drink.drinks[0][i] ?? nil)
         }
         

@@ -12,16 +12,12 @@ protocol FavoritesPresenterProtocol: AnyObject {
     func detailView(didSelectRowAt indexPath: IndexPath)
     func routerOutput(notification: Notification)
     func routerOutput(vc: DetailCellViewController)
-    func recipesRemoveCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+    func recipesActionCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     func recipesAddCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    func viewOutput()
     func getSectionName(section: Int) -> String
     func countSections() -> Int
-    func numberOfRowsInSection(section: Int) -> Int
-    func mealsArrayIsEmpty() -> Bool
-    func drinksArrayIsEmpty() -> Bool
-    func mealsArrayCount() -> Int
-    func drinksArrayCount() -> Int
+    func countRows(in section: Int) -> Int
+    func viewDidAppear()
 }
 
 class FavoritesPresenter {
@@ -35,7 +31,6 @@ class FavoritesPresenter {
     var interactor: FavoritesInteractorProtocol
     private var savedMeals = [ParcedMeal]()
     private var savedDrinks = [ParcedDrink]()
-//    private var viewDidLoaded = false
     
     var storage: StorageManager?
     
@@ -46,7 +41,13 @@ class FavoritesPresenter {
 }
 
 extension FavoritesPresenter: FavoritesPresenterProtocol {
-    func numberOfRowsInSection(section: Int) -> Int {
+    func viewDidAppear() {
+        try? storage?.fetchedMealsController?.performFetch()
+        try? storage?.fetchedDrinksController?.performFetch()
+        view?.tableView().reloadData()
+    }
+    
+    func countRows(in section: Int) -> Int {
         switch section {
         case Resources.Sections.mealSection:
             guard let mealsSections = storage?.fetchedMealsController?.sections else { return 0 }
@@ -71,100 +72,58 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
         }
         return sectionName
     }
-    
-    func mealsArrayCount() -> Int {
-        savedMeals.count
-    }
-    
-    func drinksArrayCount() -> Int {
-        savedDrinks.count
-    }
-    
-    func mealsArrayIsEmpty() -> Bool {
-        savedMeals.isEmpty
-    }
-    
-    func drinksArrayIsEmpty() -> Bool {
-        savedDrinks.isEmpty
-    }
-    
+        
     func countSections() -> Int {
         var sections = 0
-        if let mealsSections = storage?.fetchedMealsController?.sections {
+        if let mealsSections = storage?.fetchedMealsController?.fetchedObjects {
             if !mealsSections.isEmpty {
                 sections += 1
             }
         }
-        if let drinksSections = storage?.fetchedDrinksController?.sections {
-            if !drinksSections.isEmpty {
+        if let drinksSections = storage?.fetchedDrinksController?.fetchedObjects {
+            if drinksSections.isEmpty {
                 sections += 1
             }
         }
         return sections
     }
-    
-    func viewOutput() {
-        guard let storage else { return }
-        storage.setupFetchedDrinksController(for: storage.viewContext)
-        storage.setupFetchedMealsController(for: storage.viewContext)
-//        viewDidLoaded = true
-//        savedMeals += storage.fetchMealData()
-//        savedDrinks += storage.fetchDrinkData()
-    }
-    
+        
     func detailView(didSelectRowAt indexPath: IndexPath) {
-//        indexPath.section == 0 ? router.detailView(recipeEntity: savedMeals[indexPath.row]) : router.detailView(recipeEntity: savedDrinks[indexPath.row])
+        guard let storage, let drinksController = storage.fetchedDrinksController, let mealsController = storage.fetchedMealsController else { return }
+        indexPath.section == Resources.Sections.mealSection ? router.detailView(recipeEntity: storage.converseEntity(meal: mealsController.object(at: indexPath))) : router.detailView(recipeEntity: storage.converseEntity(drink: drinksController.object(at: indexPath)))
     }
     
     func recipesAddCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         view?.removeWelcomeLabel()
-        let cell = tableView.dequeueReusableCell(withIdentifier: Resources.Identifiers.cell, for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: Resources.cellIdentifier, for: indexPath)
         if #available(iOS 14.0, *) {
             var content = cell.defaultContentConfiguration()
             if indexPath.section == Resources.Sections.mealSection {
                 guard let meal = storage?.fetchedMealsController?.object(at: indexPath) else { return cell }
-                content.text = meal.strMeal ?? ""
+                content.text = meal.strMeal ?? Resources.empty
             } else if indexPath.section == Resources.Sections.drinkSection {
                 guard let drink = storage?.fetchedDrinksController?.object(at: indexPath) else { return cell }
-                content.text = drink.strDrink ?? ""
+                content.text = drink.strDrink ?? Resources.empty
             }
             cell.contentConfiguration = content
         } else {
             if indexPath.section == Resources.Sections.mealSection {
                 guard let meal = storage?.fetchedMealsController?.object(at: indexPath) else { return cell }
-                cell.textLabel?.text = meal.strMeal ?? ""
+                cell.textLabel?.text = meal.strMeal ?? Resources.empty
             } else if indexPath.section == Resources.Sections.drinkSection {
                 guard let drink = storage?.fetchedDrinksController?.object(at: indexPath) else { return cell }
-                cell.textLabel?.text = drink.strDrink ?? ""
+                cell.textLabel?.text = drink.strDrink ?? Resources.empty
             }
         }
-        
         return cell
     }
     
-    func recipesRemoveCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func recipesActionCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            if indexPath.section == 0 {
-                if savedMeals.count == 1 {
-//                    storage?.removeMealContext(rowIndexPath: indexPath.row)
-                    savedMeals.remove(at: indexPath.row)
-                    
-                    tableView.deleteRows(at: [indexPath], with: .automatic)
-                    
-                    tableView.deleteSections([indexPath.section], with: .automatic)
-                } else {
-                    tableView.deleteRows(at: [indexPath], with: .automatic)
-                }
-            } else {
-//                storage?.removeDrinkContext(rowIndexPath: indexPath.row)
-                savedDrinks.remove(at: indexPath.row)
-                
-                savedDrinks.isEmpty ? tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic) : tableView.deleteRows(at: [indexPath], with: .automatic)
-                tableView.reloadData()
-            }
+            storage?.removeObject(at: indexPath)
         }
-        if savedMeals.isEmpty && savedDrinks.isEmpty {
+        guard let storage, let drinksFetchedObjs = storage.fetchedDrinksController?.fetchedObjects, let mealsFetchedObjs = storage.fetchedMealsController?.fetchedObjects else { return }
+        if drinksFetchedObjs.isEmpty && mealsFetchedObjs.isEmpty {
             view?.configureWelcomeLabel()
         }
     }
@@ -175,16 +134,10 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     
     func routerOutput(notification: Notification) {
         if let notification = notification.userInfo as? [String: ParcedDrink] {
-            guard let drink = notification["drink"] else { return }
-//            if viewDidLoaded {
-//                savedDrinks.append(drink)
-//            }
+            guard let drink = notification[Resources.DictKeys.drink] else { return }
             storage?.saveToCoreData(drink: drink)
         } else if let notification = notification.userInfo as? [String: ParcedMeal] {
-            guard let meal = notification["meal"] else { return }
-//            if viewDidLoaded {
-//                savedMeals.append(meal)
-//            }
+            guard let meal = notification[Resources.DictKeys.meal] else { return }
             storage?.saveToCoreData(meal: meal)
         }
     }

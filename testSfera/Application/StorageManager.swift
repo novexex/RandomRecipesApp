@@ -19,8 +19,6 @@ class StorageManager {
         return container
     }()
     var viewContext: NSManagedObjectContext
-//    private var savedEntityMealsArray = [MealEntity]()
-//    private var savedEntityDrinksArray = [DrinkEntity]()
     var fetchedMealsController: NSFetchedResultsController<MealEntity>?
     var fetchedDrinksController: NSFetchedResultsController<DrinkEntity>?
     let tableView: UITableView
@@ -28,6 +26,9 @@ class StorageManager {
     init(tableView: UITableView) {
         self.tableView = tableView
         viewContext = persistentContainer.viewContext
+        setupFetchedDrinksController(for: viewContext)
+        setupFetchedMealsController(for: viewContext)
+        fetchData()
     }
 
     func fetchData() {
@@ -46,18 +47,6 @@ class StorageManager {
             }
         }
     }
-    
-//    func removeMealContext(rowIndexPath: Int) {
-//        persistentContainer.viewContext.delete(savedEntityMealsArray[rowIndexPath])
-//        savedEntityMealsArray.remove(at: rowIndexPath)
-//        saveContext()
-//    }
-//
-//    func removeDrinkContext(rowIndexPath: Int) {
-//        persistentContainer.viewContext.delete(savedEntityDrinksArray[rowIndexPath])
-//        savedEntityDrinksArray.remove(at: rowIndexPath)
-//        saveContext()
-//    }
         
     func saveToCoreData(drink: ParcedDrink) {
         let entityDrink = DrinkEntity(context: viewContext)
@@ -66,14 +55,13 @@ class StorageManager {
         entityDrink.instructions = drink.instructions
         entityDrink.image = drink.image
         entityDrink.category = drink.category
-        
+
         var ingredients: [String]? = []
         for index in drink.ingredients {
             if let index {
                 ingredients?.append(index)
             }
         }
-        
         entityDrink.ingredients = ingredients
 
         var measure: [String]? = []
@@ -82,14 +70,11 @@ class StorageManager {
                 measure?.append(index)
             }
         }
-        
         entityDrink.measure = measure
-        
-//        savedEntityDrinksArray.append(entityDrink)
-        
+
         saveContext()
     }
-    
+
     func saveToCoreData(meal: ParcedMeal) {
         let entityMeal = MealEntity(context: viewContext)
         entityMeal.strMeal = meal.strMeal
@@ -104,7 +89,6 @@ class StorageManager {
                 ingredients?.append(index)
             }
         }
-        
         entityMeal.ingredients = ingredients
 
         var measure: [String]? = []
@@ -113,56 +97,17 @@ class StorageManager {
                 measure?.append(index)
             }
         }
-        
         entityMeal.measure = measure
-        
-//        savedEntityMealsArray.append(entityMeal)
-        
+
         saveContext()
     }
     
-//    func fetchMealData() -> [ParcedMeal] {
-//        var entityMealsArray = [MealEntity]()
-//        var parcedMealsArray = [ParcedMeal]()
-//        let fetchRequest = MealEntity.fetchRequest()
-//        do {
-//            entityMealsArray = try viewContext.fetch(fetchRequest)
-//            for (index, _) in entityMealsArray.enumerated() {
-//                parcedMealsArray.append(converseEntity(meal: entityMealsArray[index]))
-//            }
-//        } catch {
-//            print("Fetch Meal Data Error: \(error.localizedDescription)")
-//        }
-//
-//        savedEntityMealsArray = entityMealsArray
-//
-//        return parcedMealsArray
-//    }
-    
-//    func fetchDrinkData() -> [ParcedDrink] {
-//        var entityDrinksArray = [DrinkEntity]()
-//        var parcedDrinksArray = [ParcedDrink]()
-//        let fetchRequest = DrinkEntity.fetchRequest()
-//        do {
-//            entityDrinksArray = try viewContext.fetch(fetchRequest)
-//            for (index, _) in entityDrinksArray.enumerated() {
-//                parcedDrinksArray.append(converseEntity(drink: entityDrinksArray[index]))
-//            }
-//        } catch {
-//            print("Fetch Drink Data Error: \(error.localizedDescription)")
-//        }
-//
-//        savedEntityDrinksArray = entityDrinksArray
-//
-//        return parcedDrinksArray
-//    }
-    
     func converseEntity(meal: MealEntity) -> ParcedMeal {
-        let parcedMeal = ParcedMeal(strMeal: meal.strMeal ?? "",
-                              strArea: meal.strArea ?? "",
-                              image: meal.image ?? "",
-                              category: meal.category ?? "",
-                              instructions: meal.instructions ?? "")
+        let parcedMeal = ParcedMeal(strMeal: meal.strMeal ?? Resources.empty,
+                              strArea: meal.strArea ?? Resources.empty,
+                              image: meal.image ?? Resources.empty,
+                              category: meal.category ?? Resources.empty,
+                              instructions: meal.instructions ?? Resources.empty)
         if let ingr = meal.ingredients {
             for index in ingr {
                 parcedMeal.ingredients.append(index)
@@ -179,11 +124,11 @@ class StorageManager {
     }
     
     func converseEntity(drink: DrinkEntity) -> ParcedDrink {
-        let parcedDrink = ParcedDrink(strDrink: drink.strDrink ?? "",
-                                      strAlcoholic: drink.strAlcoholic ?? "",
-                                      image: drink.image ?? "",
-                                      category: drink.category ?? "",
-                                      instructions: drink.instructions ?? "")
+        let parcedDrink = ParcedDrink(strDrink: drink.strDrink ?? Resources.empty,
+                                      strAlcoholic: drink.strAlcoholic ?? Resources.empty,
+                                      image: drink.image ?? Resources.empty,
+                                      category: drink.category ?? Resources.empty,
+                                      instructions: drink.instructions ?? Resources.empty)
         if let ingr = drink.ingredients {
             for index in ingr {
                 parcedDrink.ingredients.append(index)
@@ -198,19 +143,30 @@ class StorageManager {
         
         return parcedDrink
     }
-}
 
-extension StorageManager: NSFetchedResultsControllerDelegate {
+    func removeObject(at indexPath: IndexPath) {
+        if indexPath.section == Resources.Sections.mealSection {
+            guard let fetchedMealsController else { return }
+            let managedObject: NSManagedObject = fetchedMealsController.object(at: indexPath) as NSManagedObject
+            viewContext.delete(managedObject)
+            saveContext()
+            fetchData()
+        } else if indexPath.section == Resources.Sections.drinkSection {
+            guard let fetchedDrinksController else { return }
+            let managedObject: NSManagedObject = fetchedDrinksController.object(at: indexPath) as NSManagedObject
+            viewContext.delete(managedObject)
+            saveContext()
+            fetchData()
+        }
+    }
+    
+    // MARK: controller func didnt call
+    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        guard let newIndexPath, let indexPath else { return }
+        guard let indexPath else { return }
         switch type {
-        case .insert:
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
         case .update:
             tableView.reloadRows(at: [indexPath], with: .automatic)
-        case .move:
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
         case .delete:
             tableView.deleteRows(at: [indexPath], with: .automatic)
         default:
@@ -230,8 +186,7 @@ extension StorageManager: NSFetchedResultsControllerDelegate {
         let sort = NSSortDescriptor(key: "strMeal", ascending: true)
         let request = NSFetchRequest<MealEntity>(entityName: "MealEntity")
         request.sortDescriptors = [sort]
-        print(request)
-        fetchedMealsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: Resources.SectionName.meals, cacheName: nil)
+        fetchedMealsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         fetchedMealsController?.delegate = self
     }
     
@@ -239,12 +194,14 @@ extension StorageManager: NSFetchedResultsControllerDelegate {
         let sort = NSSortDescriptor(key: "strDrink", ascending: true)
         let request = NSFetchRequest<DrinkEntity>(entityName: "DrinkEntity")
         request.sortDescriptors = [sort]
-        fetchedDrinksController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: Resources.SectionName.drinks, cacheName: nil)
+        fetchedDrinksController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         fetchedDrinksController?.delegate = self
     }
 }
 
-extension StorageManager {
+// MARK: Trash funcs
+
+extension StorageManager: NSFetchedResultsControllerDelegate {
     func isEqual(_ object: Any?) -> Bool {
         false
     }

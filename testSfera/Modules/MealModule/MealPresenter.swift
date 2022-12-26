@@ -34,15 +34,15 @@ extension MealPresenter: MealPresenterProtocol {
     }
     
     func interactorDidLoad(meal: Meal) {
-        let presentedMeal = ParcedMeal(strMeal: (meal.meals[0][DictKeys.Meal.name] ?? "") ?? "",
-                                       strArea: (meal.meals[0][DictKeys.Meal.area] ?? "") ?? "",
-                                       image: (meal.meals[0][DictKeys.Meal.image] ?? "") ?? "",
-                                       category: (meal.meals[0][DictKeys.category] ?? "") ?? "",
-                                       instructions: (meal.meals[0][DictKeys.instruct] ?? "") ?? "")
-        for i in DictKeys.ingr {
+        let presentedMeal = ParcedMeal(strMeal: (meal.meals[0][Resources.DictKeys.Meal.name] ?? "") ?? "",
+                                       strArea: (meal.meals[0][Resources.DictKeys.Meal.area] ?? "") ?? "",
+                                       image: (meal.meals[0][Resources.DictKeys.Meal.image] ?? "") ?? "",
+                                       category: (meal.meals[0][Resources.DictKeys.category] ?? "") ?? "",
+                                       instructions: (meal.meals[0][Resources.DictKeys.instruct] ?? "") ?? "")
+        for i in Resources.DictKeys.ingr {
             presentedMeal.ingredients.append(meal.meals[0][i] ?? nil)
         }
-        for i in DictKeys.meas {
+        for i in Resources.DictKeys.meas {
             presentedMeal.measure.append(meal.meals[0][i] ?? nil)
         }
         lastLoadedMeal = presentedMeal
