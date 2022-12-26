@@ -12,6 +12,7 @@ enum Resources {
     static let cellIdentifier = "cell"
     static let empty = ""
     static let del = "del"
+    static let persistentContainerName = "CoreData"
     
     enum Colors {
         static let active = UIColor(hexString: "#437BFE")
@@ -62,6 +63,11 @@ enum Resources {
     enum Sections {
         static let mealSection = 0
         static let drinkSection = 1
+    }
+    
+    enum EntityNames {
+        static let meal = "MealEntity"
+        static let drink = "DrinkEntity"
     }
     
     enum DictKeys {

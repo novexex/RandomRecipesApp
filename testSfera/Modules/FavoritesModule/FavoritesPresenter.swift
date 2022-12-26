@@ -29,10 +29,10 @@ class FavoritesPresenter {
     }
     var router: FavoritesRouterProtocol
     var interactor: FavoritesInteractorProtocol
+    var storage: StorageManager?
     private var savedMeals = [ParcedMeal]()
     private var savedDrinks = [ParcedDrink]()
     
-    var storage: StorageManager?
     
     init(interactor: FavoritesInteractorProtocol, router: FavoritesRouterProtocol) {
         self.interactor = interactor

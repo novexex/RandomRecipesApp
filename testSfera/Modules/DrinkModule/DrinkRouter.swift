@@ -19,6 +19,6 @@ class DrinkRouter {
 
 extension DrinkRouter: DrinkRouterProtocol {
     func post(drink: ParcedDrink) {
-        notificationCenter.post(name: .sendEntityNotification, object: self, userInfo: ["drink":drink])
+        notificationCenter.post(name: .sendEntityNotification, object: self, userInfo: [Resources.DictKeys.drink:drink])
     }
 }

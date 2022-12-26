@@ -13,7 +13,7 @@ import CoreData
 extension MealEntity {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<MealEntity> {
-        return NSFetchRequest<MealEntity>(entityName: "MealEntity")
+        return NSFetchRequest<MealEntity>(entityName: Resources.EntityNames.meal)
     }
 
     @NSManaged public var category: String?

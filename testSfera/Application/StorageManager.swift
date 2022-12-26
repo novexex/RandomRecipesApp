@@ -10,7 +10,7 @@ import UIKit
 
 class StorageManager {
     private var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "CoreData")
+        let container = NSPersistentContainer(name: Resources.persistentContainerName)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -160,7 +160,7 @@ class StorageManager {
         }
     }
     
-    // MARK: controller func didnt call
+    // MARK: controller funcs didnt call
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         guard let indexPath else { return }
@@ -183,16 +183,16 @@ class StorageManager {
     }
     
     func setupFetchedMealsController(for context: NSManagedObjectContext) {
-        let sort = NSSortDescriptor(key: "strMeal", ascending: true)
-        let request = NSFetchRequest<MealEntity>(entityName: "MealEntity")
+        let sort = NSSortDescriptor(key: Resources.DictKeys.Meal.name, ascending: true)
+        let request = NSFetchRequest<MealEntity>(entityName: Resources.EntityNames.meal)
         request.sortDescriptors = [sort]
         fetchedMealsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         fetchedMealsController?.delegate = self
     }
     
     func setupFetchedDrinksController(for context: NSManagedObjectContext) {
-        let sort = NSSortDescriptor(key: "strDrink", ascending: true)
-        let request = NSFetchRequest<DrinkEntity>(entityName: "DrinkEntity")
+        let sort = NSSortDescriptor(key: Resources.DictKeys.Drink.name, ascending: true)
+        let request = NSFetchRequest<DrinkEntity>(entityName: Resources.EntityNames.drink)
         request.sortDescriptors = [sort]
         fetchedDrinksController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         fetchedDrinksController?.delegate = self
