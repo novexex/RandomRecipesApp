@@ -11,7 +11,6 @@ protocol FavoritesViewProtocol: AnyObject {
     func presenterOutput(vc: DetailCellViewController)
     func configureWelcomeLabel()
     func removeWelcomeLabel()
-    func toggle()
     func tableView() -> UITableView
 }
 
@@ -20,7 +19,6 @@ class FavoritesViewController: UIViewController {
     private let tableViewController = UITableViewController()
     private let myVC = UITableViewController()
     private var welcomeLabel = UILabel()
-    private var deleteSection = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +31,8 @@ class FavoritesViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        refreshMealsView()
-        refreshDrinksView()
+//        refreshMealsView()
+//        refreshDrinksView()
     }
     
     func refreshMealsView() {
@@ -63,10 +61,6 @@ class FavoritesViewController: UIViewController {
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, FavoritesViewProtocol {
     func tableView() -> UITableView {
         tableViewController.tableView
-    }
-    
-    func toggle() {
-        deleteSection = true
     }
     
     func configureWelcomeLabel() {
@@ -106,14 +100,14 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
         presenter?.recipesAddCell(tableView, cellForRowAt: indexPath) ?? UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        presenter?.recipesRemoveCell(tableView, commit: editingStyle, forRowAt: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.detailView(didSelectRowAt: indexPath)
-    }
-    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        presenter?.recipesRemoveCell(tableView, commit: editingStyle, forRowAt: indexPath)
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        presenter?.detailView(didSelectRowAt: indexPath)
+//    }
+//
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         presenter?.getSectionName(section: section)
     }

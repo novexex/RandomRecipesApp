@@ -25,14 +25,19 @@ protocol FavoritesPresenterProtocol: AnyObject {
 }
 
 class FavoritesPresenter {
-    weak var view: FavoritesViewProtocol?
+    weak var view: FavoritesViewProtocol? {
+        didSet {
+            guard let view else { return }
+            storage = StorageManager(tableView: view.tableView())
+        }
+    }
     var router: FavoritesRouterProtocol
     var interactor: FavoritesInteractorProtocol
     private var savedMeals = [ParcedMeal]()
     private var savedDrinks = [ParcedDrink]()
-    private var viewDidLoaded = false
+//    private var viewDidLoaded = false
     
-    lazy var storage = StorageManager(tableView: view?.tableView() ?? UITableView())
+    var storage: StorageManager?
     
     init(interactor: FavoritesInteractorProtocol, router: FavoritesRouterProtocol) {
         self.interactor = interactor
@@ -44,10 +49,10 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     func numberOfRowsInSection(section: Int) -> Int {
         switch section {
         case Resources.Sections.mealSection:
-            guard let mealsSections = storage.fetchedMealsController?.sections else { return 0 }
+            guard let mealsSections = storage?.fetchedMealsController?.sections else { return 0 }
             return mealsSections[section].numberOfObjects
         case Resources.Sections.drinkSection:
-            guard let drinksSections = storage.fetchedDrinksController?.sections else { return 0 }
+            guard let drinksSections = storage?.fetchedDrinksController?.sections else { return 0 }
             return drinksSections[section].numberOfObjects
         default:
             return 0
@@ -62,7 +67,7 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
         case Resources.Sections.drinkSection:
             sectionName = Resources.SectionName.drinks
         default:
-            sectionName = ""
+            sectionName = Resources.SectionName.empty
         }
         return sectionName
     }
@@ -84,26 +89,31 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     }
     
     func countSections() -> Int {
-        guard let mealsSections = storage.fetchedMealsController?.sections else { return 0 }
-        guard let drinksSections = storage.fetchedDrinksController?.sections else { return 0 }
-        
-        if !mealsSections.isEmpty && !drinksSections.isEmpty {
-            return 2
-        } else if !mealsSections.isEmpty || !drinksSections.isEmpty {
-            return 1
-        } else {
-            return 0
+        var sections = 0
+        if let mealsSections = storage?.fetchedMealsController?.sections {
+            if !mealsSections.isEmpty {
+                sections += 1
+            }
         }
+        if let drinksSections = storage?.fetchedDrinksController?.sections {
+            if !drinksSections.isEmpty {
+                sections += 1
+            }
+        }
+        return sections
     }
     
     func viewOutput() {
-        viewDidLoaded = true
-        savedMeals += storage.fetchMealData()
-        savedDrinks += storage.fetchDrinkData()
+        guard let storage else { return }
+        storage.setupFetchedDrinksController(for: storage.viewContext)
+        storage.setupFetchedMealsController(for: storage.viewContext)
+//        viewDidLoaded = true
+//        savedMeals += storage.fetchMealData()
+//        savedDrinks += storage.fetchDrinkData()
     }
     
     func detailView(didSelectRowAt indexPath: IndexPath) {
-        indexPath.section == 0 ? router.detailView(recipeEntity: savedMeals[indexPath.row]) : router.detailView(recipeEntity: savedDrinks[indexPath.row])
+//        indexPath.section == 0 ? router.detailView(recipeEntity: savedMeals[indexPath.row]) : router.detailView(recipeEntity: savedDrinks[indexPath.row])
     }
     
     func recipesAddCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -113,19 +123,19 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
         if #available(iOS 14.0, *) {
             var content = cell.defaultContentConfiguration()
             if indexPath.section == Resources.Sections.mealSection {
-                guard let meal = storage.fetchedMealsController?.object(at: indexPath) else { return cell }
+                guard let meal = storage?.fetchedMealsController?.object(at: indexPath) else { return cell }
                 content.text = meal.strMeal ?? ""
             } else if indexPath.section == Resources.Sections.drinkSection {
-                guard let drink = storage.fetchedDrinksController?.object(at: indexPath) else { return cell }
+                guard let drink = storage?.fetchedDrinksController?.object(at: indexPath) else { return cell }
                 content.text = drink.strDrink ?? ""
             }
             cell.contentConfiguration = content
         } else {
             if indexPath.section == Resources.Sections.mealSection {
-                guard let meal = storage.fetchedMealsController?.object(at: indexPath) else { return cell }
+                guard let meal = storage?.fetchedMealsController?.object(at: indexPath) else { return cell }
                 cell.textLabel?.text = meal.strMeal ?? ""
             } else if indexPath.section == Resources.Sections.drinkSection {
-                guard let drink = storage.fetchedDrinksController?.object(at: indexPath) else { return cell }
+                guard let drink = storage?.fetchedDrinksController?.object(at: indexPath) else { return cell }
                 cell.textLabel?.text = drink.strDrink ?? ""
             }
         }
@@ -137,7 +147,7 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
         if editingStyle == .delete {
             if indexPath.section == 0 {
                 if savedMeals.count == 1 {
-                    storage.removeMealContext(rowIndexPath: indexPath.row)
+//                    storage?.removeMealContext(rowIndexPath: indexPath.row)
                     savedMeals.remove(at: indexPath.row)
                     
                     tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -147,7 +157,7 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 }
             } else {
-                storage.removeDrinkContext(rowIndexPath: indexPath.row)
+//                storage?.removeDrinkContext(rowIndexPath: indexPath.row)
                 savedDrinks.remove(at: indexPath.row)
                 
                 savedDrinks.isEmpty ? tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic) : tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -166,16 +176,16 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     func routerOutput(notification: Notification) {
         if let notification = notification.userInfo as? [String: ParcedDrink] {
             guard let drink = notification["drink"] else { return }
-            if viewDidLoaded {
-                savedDrinks.append(drink)
-            }
-            storage.saveToCoreData(drink: drink)
+//            if viewDidLoaded {
+//                savedDrinks.append(drink)
+//            }
+            storage?.saveToCoreData(drink: drink)
         } else if let notification = notification.userInfo as? [String: ParcedMeal] {
             guard let meal = notification["meal"] else { return }
-            if viewDidLoaded {
-                savedMeals.append(meal)
-            }
-            storage.saveToCoreData(meal: meal)
+//            if viewDidLoaded {
+//                savedMeals.append(meal)
+//            }
+            storage?.saveToCoreData(meal: meal)
         }
     }
 }

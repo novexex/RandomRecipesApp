@@ -49,6 +49,7 @@ enum Resources {
     enum SectionName {
         static let meals = "Meals"
         static let drinks = "Drinks"
+        static let empty = ""
     }
     
     enum Identifiers {
