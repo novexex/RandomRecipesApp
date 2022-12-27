@@ -63,6 +63,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "FavoritesPresenter.countRows(in:):FavoritesPresenter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "drinksSections[section].numberOfObjects">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "FavoritesViewController.tableView(_:numberOfRowsInSection:):FavoritesViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -85,10 +93,7 @@
          contextName = "FavoritesPresenter.countSections():FavoritesPresenter.swift">
          <PersistentStrings>
             <PersistentString
-               value = "storage?.fetchedDrinksController?.sections">
-            </PersistentString>
-            <PersistentString
-               value = "storage?.fetchedMealsController?.sections">
+               value = "storage?.fetchedDrinksController?.fetchedObjects?.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

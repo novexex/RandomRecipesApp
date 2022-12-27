@@ -163,12 +163,14 @@ class StorageManager {
     // MARK: controller funcs didnt call
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        guard let indexPath else { return }
+        guard let indexPath, let newIndexPath else { return }
         switch type {
         case .update:
             tableView.reloadRows(at: [indexPath], with: .automatic)
         case .delete:
             tableView.deleteRows(at: [indexPath], with: .automatic)
+        case .insert:
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
         default:
             return
         }

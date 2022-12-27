@@ -69,11 +69,12 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let presenter else { return 0 }
+//        print(presenter.countSections())
         return presenter.countSections()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        presenter?.recipesAddCell(tableView, cellForRowAt: indexPath) ?? UITableViewCell()
+        return presenter?.recipesAddCell(tableView, cellForRowAt: indexPath) ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

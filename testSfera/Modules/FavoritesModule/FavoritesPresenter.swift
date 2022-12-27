@@ -30,9 +30,6 @@ class FavoritesPresenter {
     var router: FavoritesRouterProtocol
     var interactor: FavoritesInteractorProtocol
     var storage: StorageManager?
-    private var savedMeals = [ParcedMeal]()
-    private var savedDrinks = [ParcedDrink]()
-    
     
     init(interactor: FavoritesInteractorProtocol, router: FavoritesRouterProtocol) {
         self.interactor = interactor
@@ -42,35 +39,45 @@ class FavoritesPresenter {
 
 extension FavoritesPresenter: FavoritesPresenterProtocol {
     func viewDidAppear() {
-        try? storage?.fetchedMealsController?.performFetch()
-        try? storage?.fetchedDrinksController?.performFetch()
-        view?.tableView().reloadData()
+        storage?.fetchData()
     }
     
     func countRows(in section: Int) -> Int {
-        switch section {
-        case Resources.Sections.mealSection:
-            guard let mealsSections = storage?.fetchedMealsController?.sections else { return 0 }
-            return mealsSections[section].numberOfObjects
-        case Resources.Sections.drinkSection:
-            guard let drinksSections = storage?.fetchedDrinksController?.sections else { return 0 }
-            return drinksSections[section].numberOfObjects
-        default:
-            return 0
+        if section == Resources.Sections.mealSection {
+            guard let meals = storage?.fetchedMealsController?.fetchedObjects else { return 0 }
+            return meals.count
+        } else {
+            guard let drinks = storage?.fetchedDrinksController?.fetchedObjects else { return 0 }
+            return drinks.count
         }
+//        switch section {
+//        case Resources.Sections.mealSection:
+//            guard let meals = storage?.fetchedMealsController?.fetchedObjects else { return 0 }
+//            return meals.count
+//        case Resources.Sections.drinkSection:
+//            guard let drinks = storage?.fetchedDrinksController?.fetchedObjects else { return 0 }
+//            return drinks.count
+//        default:
+//            return 0
+//        }
     }
     
     func getSectionName(section: Int) -> String {
-        let sectionName: String
-        switch section {
-        case Resources.Sections.mealSection:
-            sectionName = Resources.SectionName.meals
-        case Resources.Sections.drinkSection:
-            sectionName = Resources.SectionName.drinks
-        default:
-            sectionName = Resources.SectionName.empty
+        if section == Resources.Sections.mealSection {
+            return Resources.SectionName.meals
+        } else {
+            return Resources.SectionName.drinks
         }
-        return sectionName
+//        let sectionName: String
+//        switch section {
+//        case Resources.Sections.mealSection:
+//            sectionName = Resources.SectionName.meals
+//        case Resources.Sections.drinkSection:
+//            sectionName = Resources.SectionName.drinks
+//        default:
+//            sectionName = Resources.SectionName.empty
+//        }
+//        return sectionName
     }
         
     func countSections() -> Int {
@@ -81,7 +88,7 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
             }
         }
         if let drinksSections = storage?.fetchedDrinksController?.fetchedObjects {
-            if drinksSections.isEmpty {
+            if !drinksSections.isEmpty {
                 sections += 1
             }
         }
@@ -94,6 +101,7 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     }
     
     func recipesAddCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        print(indexPath.count)
         view?.removeWelcomeLabel()
         let cell = tableView.dequeueReusableCell(withIdentifier: Resources.cellIdentifier, for: indexPath)
         if #available(iOS 14.0, *) {
