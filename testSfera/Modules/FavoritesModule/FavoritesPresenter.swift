@@ -101,7 +101,7 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     }
     
     func recipesAddCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        print(indexPath.count)
+        print(indexPath.count)
         view?.removeWelcomeLabel()
         let cell = tableView.dequeueReusableCell(withIdentifier: Resources.cellIdentifier, for: indexPath)
         if #available(iOS 14.0, *) {

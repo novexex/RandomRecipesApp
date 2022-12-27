@@ -188,7 +188,8 @@ class StorageManager {
         let sort = NSSortDescriptor(key: Resources.DictKeys.Meal.name, ascending: true)
         let request = NSFetchRequest<MealEntity>(entityName: Resources.EntityNames.meal)
         request.sortDescriptors = [sort]
-        fetchedMealsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        let sectionName = fetchedMealsController?.sectionNameKeyPath
+        fetchedMealsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: sectionName, cacheName: nil)
         fetchedMealsController?.delegate = self
     }
     
@@ -196,7 +197,8 @@ class StorageManager {
         let sort = NSSortDescriptor(key: Resources.DictKeys.Drink.name, ascending: true)
         let request = NSFetchRequest<DrinkEntity>(entityName: Resources.EntityNames.drink)
         request.sortDescriptors = [sort]
-        fetchedDrinksController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        let sectionName = fetchedDrinksController?.sectionNameKeyPath
+        fetchedDrinksController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: sectionName, cacheName: nil)
         fetchedDrinksController?.delegate = self
     }
 }

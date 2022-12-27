@@ -823,8 +823,8 @@
             filePath = "testSfera/Application/StorageManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "setupFetchedDrinksController(for:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -839,8 +839,8 @@
             filePath = "testSfera/Application/StorageManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
             landmarkName = "setupFetchedDrinksController(for:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -929,7 +929,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "6464935B-4F6E-4E18-8A8C-EE6A973A32EC"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testSfera/Application/StorageManager.swift"
