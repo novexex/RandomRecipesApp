@@ -25,10 +25,10 @@ class DetailCellPresenter {
         let mealDiscription = "Meal: \(meal.strMeal)\n\n"
         let categoryDiscription = "Category: \(meal.category), \(meal.strArea)\n\n"
         let instructionDiscription = "\n\nInstructions:\n\(meal.instructions)"
-        var ingredientsDiscription = ""
+        var ingredientsDiscription = Resources.empty
         
-        for (index, _) in meal.ingredients.enumerated() {
-            ingredientsDiscription += "\(meal.ingredients[index] ?? "del"): \(meal.measure[index] ?? "del"),\n"
+        for (index1, index2) in zip(meal.ingredients.indices, meal.measure.indices) {
+            ingredientsDiscription += "\(meal.ingredients[index1] ?? Resources.del): \(meal.measure[index2] ?? Resources.del),\n"
         }
         
         ingredientsDiscription.formatting()
@@ -40,10 +40,10 @@ class DetailCellPresenter {
         let drinkDiscription = "Drink: \(drink.strDrink)\n\n"
         let categoryDiscription = "Category: \(drink.category), \(drink.strAlcoholic)\n\n"
         let instructionDiscription = "\n\nInstructions:\n\(drink.instructions)"
-        var ingredientsDiscription = ""
+        var ingredientsDiscription = Resources.empty
         
-        for (index, _) in drink.ingredients.enumerated() {
-            ingredientsDiscription += "\(drink.ingredients[index] ?? "del"): \(drink.measure[index] ?? "del"),\n"
+        for (index1, index2) in zip(drink.ingredients.indices, drink.measure.indices) {
+            ingredientsDiscription += "\(drink.ingredients[index1] ?? Resources.del): \(drink.measure[index2] ?? Resources.del),\n"
         }
 
         ingredientsDiscription.formatting()

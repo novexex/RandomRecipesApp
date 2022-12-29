@@ -14,7 +14,7 @@ protocol FavoritesViewProtocol: AnyObject {
     func tableView() -> UITableView
 }
 
-class FavoritesViewController: UIViewController {
+class FavoritesViewController: BaseViewController {
     var presenter: FavoritesPresenterProtocol?
     private let tableViewController = UITableViewController()
     private let myVC = UITableViewController()
@@ -27,11 +27,17 @@ class FavoritesViewController: UIViewController {
         configureWelcomeLabel()
         title = Resources.Titles.NavBar.favorites
         navigationController?.tabBarItem.title = Resources.Titles.TabBar.favorites
+//        addNavBarButton(at: .right, with: "Clear")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         presenter?.viewDidAppear()
     }
+    
+//    override func navBarRightButtonHandler() {
+//        disableSaveButton()
+//    }
+    
 }
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, FavoritesViewProtocol {
@@ -82,7 +88,8 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.detailView(didSelectRowAt: indexPath)
+//        presenter?.detailView(didSelectRowAt: indexPath)
+//        presenter?.removeStorage(indexPath: indexPath)
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -101,8 +108,8 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
             tableViewController.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
         ])
         
-        tableViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.cellIdentifier)
-        tableViewController.tableView.delegate = self
+        tableViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.CellIdentifiers.meal)
+//        tableViewController.tableView.delegate = self
         tableViewController.tableView.dataSource = self
     }
 }

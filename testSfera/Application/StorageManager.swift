@@ -21,7 +21,7 @@ class StorageManager {
     var viewContext: NSManagedObjectContext
     var fetchedMealsController: NSFetchedResultsController<MealEntity>?
     var fetchedDrinksController: NSFetchedResultsController<DrinkEntity>?
-    let tableView: UITableView
+    private let tableView: UITableView
     
     init(tableView: UITableView) {
         self.tableView = tableView
@@ -35,6 +35,25 @@ class StorageManager {
         try? fetchedDrinksController?.performFetch()
         try? fetchedMealsController?.performFetch()
         tableView.reloadData()
+    }
+    
+    func remove(indexPath: IndexPath, isMeal: Bool) {
+//        let managedObjectContext: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext;
+        let managedObject: NSManagedObject
+        if isMeal {
+            guard let fetchedMealsController else { return }
+            managedObject = fetchedMealsController.object(at: IndexPath(row: 0, section: indexPath.row)) as NSManagedObject
+        } else {
+            guard let fetchedDrinksController else { return }
+            managedObject = fetchedDrinksController.object(at: IndexPath(row: 0, section: indexPath.row)) as NSManagedObject
+        }
+        viewContext.delete(managedObject);
+        do {
+            try viewContext.save();
+        } catch {
+            // Error occured while deleting objects
+        }
+        fetchData()
     }
     
     func saveContext() {
@@ -188,8 +207,7 @@ class StorageManager {
         let sort = NSSortDescriptor(key: Resources.DictKeys.Meal.name, ascending: true)
         let request = NSFetchRequest<MealEntity>(entityName: Resources.EntityNames.meal)
         request.sortDescriptors = [sort]
-        let sectionName = fetchedMealsController?.sectionNameKeyPath
-        fetchedMealsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: sectionName, cacheName: nil)
+        fetchedMealsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: Resources.DictKeys.Meal.name, cacheName: nil)
         fetchedMealsController?.delegate = self
     }
     
@@ -197,8 +215,7 @@ class StorageManager {
         let sort = NSSortDescriptor(key: Resources.DictKeys.Drink.name, ascending: true)
         let request = NSFetchRequest<DrinkEntity>(entityName: Resources.EntityNames.drink)
         request.sortDescriptors = [sort]
-        let sectionName = fetchedDrinksController?.sectionNameKeyPath
-        fetchedDrinksController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: sectionName, cacheName: nil)
+        fetchedDrinksController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: Resources.DictKeys.Drink.name, cacheName: nil)
         fetchedDrinksController?.delegate = self
     }
 }

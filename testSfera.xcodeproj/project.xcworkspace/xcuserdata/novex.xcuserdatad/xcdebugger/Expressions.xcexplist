@@ -47,6 +47,9 @@
          contextName = "FavoritesPresenter.routerOutput(notification:):FavoritesPresenter.swift">
          <PersistentStrings>
             <PersistentString
+               value = "storage?.fetchedMealsController?.indexPath(forObject: meal)">
+            </PersistentString>
+            <PersistentString
                value = "savedMeals">
             </PersistentString>
          </PersistentStrings>
@@ -88,6 +91,36 @@
       </ContextState>
       <ContextState
          contextName = "MealPresenter.buttonSaveTapped():MealPresenter.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FavoritesPresenter.recipesAddCell(_:cellForRowAt:):FavoritesPresenter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.section">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "StorageManager.saveToCoreData(meal:):StorageManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "fetchedMealsController?.indexPath(forObject: entityMeal)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FavoritesPresenter.recipesActionCell(_:commit:forRowAt:):FavoritesPresenter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.section">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "FavoritesPresenter.countSections():FavoritesPresenter.swift">

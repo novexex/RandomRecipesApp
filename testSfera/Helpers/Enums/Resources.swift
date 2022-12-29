@@ -9,10 +9,14 @@ import UIKit
 
 enum Resources {
     
-    static let cellIdentifier = "cell"
     static let empty = ""
     static let del = "del"
     static let persistentContainerName = "CoreData"
+    
+    enum CellIdentifiers {
+        static let meal = "mealCell"
+        static let drink = "drinkCell"
+    }
     
     enum Colors {
         static let active = UIColor(hexString: "#437BFE")
@@ -57,7 +61,6 @@ enum Resources {
     enum SectionName {
         static let meals = "Meals"
         static let drinks = "Drinks"
-        static let empty = ""
     }
     
     enum Sections {

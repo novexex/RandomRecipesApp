@@ -53,8 +53,8 @@ extension DrinkPresenter: DrinkPresenterProtocol {
         let instructionDiscription = presentedDrink.instructions.isEmpty ? Resources.empty : "\n\nInstructions:\n\(presentedDrink.instructions)"
         var ingredientsDiscription = "Ingredients:\n"
         
-        for (index, _) in presentedDrink.ingredients.enumerated() {
-            ingredientsDiscription += "\(presentedDrink.ingredients[index] ?? Resources.del): \(presentedDrink.measure[index] ?? Resources.del),\n"
+        for (index1, index2) in zip(presentedDrink.ingredients.indices, presentedDrink.measure.indices) {
+            ingredientsDiscription += "\(presentedDrink.ingredients[index1] ?? Resources.del): \(presentedDrink.measure[index2] ?? Resources.del),\n"
         }
         
         ingredientsDiscription.formatting()

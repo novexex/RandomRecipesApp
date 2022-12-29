@@ -18,6 +18,7 @@ protocol FavoritesPresenterProtocol: AnyObject {
     func countSections() -> Int
     func countRows(in section: Int) -> Int
     func viewDidAppear()
+    func removeStorage(indexPath: IndexPath)
 }
 
 class FavoritesPresenter {
@@ -38,46 +39,46 @@ class FavoritesPresenter {
 }
 
 extension FavoritesPresenter: FavoritesPresenterProtocol {
+    func removeStorage(indexPath: IndexPath) {
+        storage?.removeObject(at: indexPath)
+    }
+    
     func viewDidAppear() {
         storage?.fetchData()
     }
     
     func countRows(in section: Int) -> Int {
-        if section == Resources.Sections.mealSection {
-            guard let meals = storage?.fetchedMealsController?.fetchedObjects else { return 0 }
-            return meals.count
+        guard let storage, let drinksController = storage.fetchedDrinksController, let drinksObjects = drinksController.fetchedObjects, let mealsController = storage.fetchedMealsController, let mealsObjects = mealsController.fetchedObjects else { return 0 }
+        if drinksObjects.isEmpty || mealsObjects.isEmpty {
+            if drinksObjects.isEmpty {
+                return mealsObjects.count
+            } else if mealsObjects.isEmpty {
+                return drinksObjects.count
+            }
+            return 0
         } else {
-            guard let drinks = storage?.fetchedDrinksController?.fetchedObjects else { return 0 }
-            return drinks.count
+            switch section {
+            case Resources.Sections.mealSection:
+                return mealsObjects.count
+            case Resources.Sections.drinkSection:
+                return drinksObjects.count
+            default:
+                return 0
+            }
         }
-//        switch section {
-//        case Resources.Sections.mealSection:
-//            guard let meals = storage?.fetchedMealsController?.fetchedObjects else { return 0 }
-//            return meals.count
-//        case Resources.Sections.drinkSection:
-//            guard let drinks = storage?.fetchedDrinksController?.fetchedObjects else { return 0 }
-//            return drinks.count
-//        default:
-//            return 0
-//        }
     }
     
     func getSectionName(section: Int) -> String {
-        if section == Resources.Sections.mealSection {
-            return Resources.SectionName.meals
-        } else {
-            return Resources.SectionName.drinks
+        let sectionName: String
+        switch section {
+        case Resources.Sections.mealSection:
+            sectionName = Resources.SectionName.meals
+        case Resources.Sections.drinkSection:
+            sectionName = Resources.SectionName.drinks
+        default:
+            sectionName = Resources.empty
         }
-//        let sectionName: String
-//        switch section {
-//        case Resources.Sections.mealSection:
-//            sectionName = Resources.SectionName.meals
-//        case Resources.Sections.drinkSection:
-//            sectionName = Resources.SectionName.drinks
-//        default:
-//            sectionName = Resources.SectionName.empty
-//        }
-//        return sectionName
+        return sectionName
     }
         
     func countSections() -> Int {
@@ -97,38 +98,73 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
         
     func detailView(didSelectRowAt indexPath: IndexPath) {
         guard let storage, let drinksController = storage.fetchedDrinksController, let mealsController = storage.fetchedMealsController else { return }
-        indexPath.section == Resources.Sections.mealSection ? router.detailView(recipeEntity: storage.converseEntity(meal: mealsController.object(at: indexPath))) : router.detailView(recipeEntity: storage.converseEntity(drink: drinksController.object(at: indexPath)))
+        indexPath.section == Resources.Sections.mealSection ? router.detailView(recipeEntity: storage.converseEntity(meal: mealsController.object(at: IndexPath(row: 0, section: indexPath.row)))) : router.detailView(recipeEntity: storage.converseEntity(drink: drinksController.object(at: IndexPath(row: 0, section: indexPath.row))))
     }
     
     func recipesAddCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(indexPath.count)
+//        guard let storage, let drinksController = storage.fetchedDrinksController, let drinksObjects = drinksController.fetchedObjects, let mealsController = storage.fetchedMealsController, let mealsObjects = mealsController.fetchedObjects else { return UITableViewCell() }
+//        if drinksObjects.isEmpty || mealsObjects.isEmpty {
+//            if drinksObjects.isEmpty {
+//
+//            } else if mealsObjects.isEmpty {
+//
+//            }
+//        }
         view?.removeWelcomeLabel()
-        let cell = tableView.dequeueReusableCell(withIdentifier: Resources.cellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Resources.CellIdentifiers.meal, for: indexPath)
+        // MARK: проблема в indexPath, костыли работают, но сложно сделать костыль для добавления ячеек
+//                guard let storage, let drinksController = storage.fetchedDrinksController, let drinksObjects = drinksController.fetchedObjects, let mealsController = storage.fetchedMealsController, let mealsObjects = mealsController.fetchedObjects else { return cell }
         if #available(iOS 14.0, *) {
             var content = cell.defaultContentConfiguration()
+//            if mealsObjects.isEmpty {
+//                guard let drink = storage.fetchedDrinksController?.object(at: IndexPath(row: 0, section: indexPath.row)) else { return cell }
+//                content.text = drink.strDrink ?? Resources.empty
+//            }
             if indexPath.section == Resources.Sections.mealSection {
-                guard let meal = storage?.fetchedMealsController?.object(at: indexPath) else { return cell }
+                guard let meal = storage?.fetchedMealsController?.object(at: IndexPath(row: 0, section: indexPath.row)) else { return cell }
                 content.text = meal.strMeal ?? Resources.empty
             } else if indexPath.section == Resources.Sections.drinkSection {
-                guard let drink = storage?.fetchedDrinksController?.object(at: indexPath) else { return cell }
+                guard let drink = storage?.fetchedDrinksController?.object(at: IndexPath(row: 0, section: indexPath.row)) else { return cell }
                 content.text = drink.strDrink ?? Resources.empty
             }
             cell.contentConfiguration = content
         } else {
             if indexPath.section == Resources.Sections.mealSection {
-                guard let meal = storage?.fetchedMealsController?.object(at: indexPath) else { return cell }
+                guard let meal = storage?.fetchedMealsController?.object(at: IndexPath(row: 0, section: indexPath.row)) else { return cell }
                 cell.textLabel?.text = meal.strMeal ?? Resources.empty
             } else if indexPath.section == Resources.Sections.drinkSection {
-                guard let drink = storage?.fetchedDrinksController?.object(at: indexPath) else { return cell }
+                guard let drink = storage?.fetchedDrinksController?.object(at: IndexPath(row: 0, section: indexPath.row)) else { return cell }
                 cell.textLabel?.text = drink.strDrink ?? Resources.empty
             }
         }
+//        storage?.fetchData()
         return cell
     }
     
     func recipesActionCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+//            guard let storage, let qwe = storage.fetchedMealsController, let asd = qwe.fetchedObjects else { return }
+//            for i in asd {
+//                print("meals indexPath row: \(String(describing: qwe.indexPath(forObject: i)?.row))")
+//                print("meals indexPath section: \(String(describing: qwe.indexPath(forObject: i)?.section))")
+//            }
+//
+//            print("---------------------------")
+//
+//            guard let qwe = storage.fetchedDrinksController, let asd = qwe.fetchedObjects else { return }
+//            for i in asd {
+//                print("drinks indexPath row: \(String(describing: qwe.indexPath(forObject: i)?.row))")
+//                print("drinks indexPath section: \(String(describing: qwe.indexPath(forObject: i)?.section))")
+//            }
+//            if indexPath.section == 0 {
+//                storage?.remove(indexPath: indexPath, isMeal: true)
+//            } else {
+//                storage?.remove(indexPath: indexPath, isMeal: false)
+//            }
+//            storage?.remove(indexPath: indexPath, isMeal: <#T##Bool#>)
             storage?.removeObject(at: indexPath)
+//            storage.
+
         }
         guard let storage, let drinksFetchedObjs = storage.fetchedDrinksController?.fetchedObjects, let mealsFetchedObjs = storage.fetchedMealsController?.fetchedObjects else { return }
         if drinksFetchedObjs.isEmpty && mealsFetchedObjs.isEmpty {
@@ -141,6 +177,7 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     }
     
     func routerOutput(notification: Notification) {
+        
         if let notification = notification.userInfo as? [String: ParcedDrink] {
             guard let drink = notification[Resources.DictKeys.drink] else { return }
             storage?.saveToCoreData(drink: drink)

@@ -7,11 +7,11 @@
 
 extension String {
     mutating func formatting() {
-        self = self.replacingOccurrences(of: "del: del,", with: "")
-        self = self.replacingOccurrences(of: "del: ,", with: "")
-        self = self.replacingOccurrences(of: ": del", with: "")
-        self = self.replacingOccurrences(of: ":  ,", with: "")
-        self = self.replacingOccurrences(of: ": ,", with: "")
+        self = self.replacingOccurrences(of: "del: del,", with: Resources.empty)
+        self = self.replacingOccurrences(of: "del: ,", with: Resources.empty)
+        self = self.replacingOccurrences(of: ": del", with: Resources.empty)
+        self = self.replacingOccurrences(of: ":  ,", with: Resources.empty)
+        self = self.replacingOccurrences(of: ": ,", with: Resources.empty)
         self = self.replacingOccurrences(of: " ,", with: ",")
         while self.last == "\n" || self.last == "," {
             self.removeLast()

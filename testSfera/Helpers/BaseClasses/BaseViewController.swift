@@ -64,6 +64,14 @@ extension BaseViewController {
         }
     }
     
+    func disableSaveButton() {
+        buttons[1].isEnabled = false
+    }
+    
+    func enableSaveButton() {
+        buttons[1].isEnabled = true
+    }
+    
     func enableButtons() {
         for i in buttons {
             i.isEnabled = true
