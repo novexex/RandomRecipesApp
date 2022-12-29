@@ -181,34 +181,11 @@ class StorageManager {
     
     // MARK: controller funcs didnt call
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        guard let indexPath, let newIndexPath else { return }
-        switch type {
-        case .update:
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-        case .delete:
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        case .insert:
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-        default:
-            return
-        }
-    }
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-    }
-    
     func setupFetchedMealsController(for context: NSManagedObjectContext) {
         let sort = NSSortDescriptor(key: Resources.DictKeys.Meal.name, ascending: true)
         let request = NSFetchRequest<MealEntity>(entityName: Resources.EntityNames.meal)
         request.sortDescriptors = [sort]
         fetchedMealsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: Resources.DictKeys.Meal.name, cacheName: nil)
-        fetchedMealsController?.delegate = self
     }
     
     func setupFetchedDrinksController(for context: NSManagedObjectContext) {
@@ -216,65 +193,64 @@ class StorageManager {
         let request = NSFetchRequest<DrinkEntity>(entityName: Resources.EntityNames.drink)
         request.sortDescriptors = [sort]
         fetchedDrinksController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: Resources.DictKeys.Drink.name, cacheName: nil)
-        fetchedDrinksController?.delegate = self
     }
 }
 
 // MARK: Trash funcs
-
-extension StorageManager: NSFetchedResultsControllerDelegate {
-    func isEqual(_ object: Any?) -> Bool {
-        false
-    }
-    
-    var hash: Int {
-        0
-    }
-    
-    var superclass: AnyClass? {
-        let anyClass: AnyClass? = {
-            BaseEntity.self
-        }()
-        return anyClass
-    }
-    
-    func `self`() -> Self {
-        self
-    }
-    
-    func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
-        perform(aSelector)
-    }
-    
-    func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
-        perform(aSelector, with: object)
-    }
-    
-    func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
-        perform(aSelector, with: object1, with: object2)
-    }
-    
-    func isProxy() -> Bool {
-        false
-    }
-    
-    func isKind(of aClass: AnyClass) -> Bool {
-        false
-    }
-    
-    func isMember(of aClass: AnyClass) -> Bool {
-        false
-    }
-    
-    func conforms(to aProtocol: Protocol) -> Bool {
-        false
-    }
-    
-    func responds(to aSelector: Selector!) -> Bool {
-        false
-    }
-    
-    var description: String {
-        "description"
-    }
-}
+//
+//extension StorageManager: NSFetchedResultsControllerDelegate {
+//    func isEqual(_ object: Any?) -> Bool {
+//        false
+//    }
+//
+//    var hash: Int {
+//        0
+//    }
+//
+//    var superclass: AnyClass? {
+//        let anyClass: AnyClass? = {
+//            BaseEntity.self
+//        }()
+//        return anyClass
+//    }
+//
+//    func `self`() -> Self {
+//        self
+//    }
+//
+//    func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
+//        perform(aSelector)
+//    }
+//
+//    func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
+//        perform(aSelector, with: object)
+//    }
+//
+//    func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
+//        perform(aSelector, with: object1, with: object2)
+//    }
+//
+//    func isProxy() -> Bool {
+//        false
+//    }
+//
+//    func isKind(of aClass: AnyClass) -> Bool {
+//        false
+//    }
+//
+//    func isMember(of aClass: AnyClass) -> Bool {
+//        false
+//    }
+//
+//    func conforms(to aProtocol: Protocol) -> Bool {
+//        false
+//    }
+//
+//    func responds(to aSelector: Selector!) -> Bool {
+//        false
+//    }
+//
+//    var description: String {
+//        "description"
+//    }
+//}

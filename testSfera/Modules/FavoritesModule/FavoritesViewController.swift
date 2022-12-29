@@ -12,6 +12,7 @@ protocol FavoritesViewProtocol: AnyObject {
     func configureWelcomeLabel()
     func removeWelcomeLabel()
     func tableView() -> UITableView
+    func hideTableView()
 }
 
 class FavoritesViewController: BaseViewController {
@@ -27,20 +28,22 @@ class FavoritesViewController: BaseViewController {
         configureWelcomeLabel()
         title = Resources.Titles.NavBar.favorites
         navigationController?.tabBarItem.title = Resources.Titles.TabBar.favorites
-//        addNavBarButton(at: .right, with: "Clear")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         presenter?.viewDidAppear()
     }
     
-//    override func navBarRightButtonHandler() {
-//        disableSaveButton()
-//    }
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        presenter?.viewDidDisappear()
+    }
 }
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, FavoritesViewProtocol {
+    func hideTableView() {
+        tableViewController.tableView.isHidden = true
+    }
+    
     func tableView() -> UITableView {
         tableViewController.tableView
     }
@@ -75,7 +78,6 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let presenter else { return 0 }
-//        print(presenter.countSections())
         return presenter.countSections()
     }
     
@@ -88,8 +90,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        presenter?.detailView(didSelectRowAt: indexPath)
-//        presenter?.removeStorage(indexPath: indexPath)
+        presenter?.detailView(didSelectRowAt: indexPath)
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -109,7 +110,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
         ])
         
         tableViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.CellIdentifiers.meal)
-//        tableViewController.tableView.delegate = self
+        tableViewController.tableView.delegate = self
         tableViewController.tableView.dataSource = self
     }
 }

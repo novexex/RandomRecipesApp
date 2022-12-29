@@ -96,10 +96,19 @@
          contextName = "FavoritesPresenter.recipesAddCell(_:cellForRowAt:):FavoritesPresenter.swift">
          <PersistentStrings>
             <PersistentString
-               value = "indexPath.row">
+               value = "drinkSection">
+            </PersistentString>
+            <PersistentString
+               value = "inverse">
+            </PersistentString>
+            <PersistentString
+               value = "mealSection">
             </PersistentString>
             <PersistentString
                value = "indexPath.section">
+            </PersistentString>
+            <PersistentString
+               value = "firstTime">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -115,10 +124,13 @@
          contextName = "FavoritesPresenter.recipesActionCell(_:commit:forRowAt:):FavoritesPresenter.swift">
          <PersistentStrings>
             <PersistentString
-               value = "indexPath.row">
+               value = "drinkSection">
             </PersistentString>
             <PersistentString
                value = "indexPath.section">
+            </PersistentString>
+            <PersistentString
+               value = "mealSection">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

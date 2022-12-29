@@ -27,8 +27,8 @@ enum Resources {
     }
     
     enum Titles {
-        
-        static let welcomeLabel = "You haven't saved any recipes yet\n Come back when you do"
+        static let crashLabel = "Sorry, this scenario breaks the application,\n so for now dummy"
+        static var welcomeLabel = "You haven't saved any recipes yet\n Come back when you do"
         
         enum TabBar {
             static let meal = "Random Meal"
