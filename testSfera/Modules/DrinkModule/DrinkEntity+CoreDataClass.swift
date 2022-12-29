@@ -10,6 +10,4 @@ import Foundation
 import CoreData
 
 @objc(DrinkEntity)
-public class DrinkEntity: NSManagedObject {
-
-}
+public class DrinkEntity: NSManagedObject {}

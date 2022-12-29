@@ -65,5 +65,4 @@ extension DetailCellPresenter: DetailCellPresenterProtocol {
             view?.viewInput(description: description, image: imageView)
         }
     }
-    
 }

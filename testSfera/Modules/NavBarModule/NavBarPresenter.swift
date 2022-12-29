@@ -5,8 +5,7 @@
 //  Created by Artour Ilyasov on 01.12.2022
 //
 
-protocol NavBarPresenterProtocol: AnyObject {
-}
+protocol NavBarPresenterProtocol: AnyObject {}
 
 class NavBarPresenter {
     weak var view: NavBarViewProtocol?
@@ -19,5 +18,4 @@ class NavBarPresenter {
     }
 }
 
-extension NavBarPresenter: NavBarPresenterProtocol {
-}
+extension NavBarPresenter: NavBarPresenterProtocol {}

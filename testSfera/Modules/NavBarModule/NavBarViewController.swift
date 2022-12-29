@@ -53,5 +53,4 @@ private extension NavBarViewController {
     
 }
 
-extension NavBarViewController: NavBarViewProtocol {
-}
+extension NavBarViewController: NavBarViewProtocol {}

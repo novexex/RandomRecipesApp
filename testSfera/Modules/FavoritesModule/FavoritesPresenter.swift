@@ -168,8 +168,8 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
                 storage?.remove(indexPath: indexPath, isMeal: false)
             }
         }
-        guard let storage, let drinksFetchedObjs = storage.fetchedDrinksController?.fetchedObjects, let mealsFetchedObjs = storage.fetchedMealsController?.fetchedObjects else { return }
-        if drinksFetchedObjs.isEmpty && mealsFetchedObjs.isEmpty {
+        guard let storage, let drinksFetchedObjects = storage.fetchedDrinksController?.fetchedObjects, let mealsFetchedObjects = storage.fetchedMealsController?.fetchedObjects else { return }
+        if drinksFetchedObjects.isEmpty && mealsFetchedObjects.isEmpty {
             view?.configureWelcomeLabel()
         }
     }

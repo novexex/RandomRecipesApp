@@ -26,6 +26,4 @@ extension MealEntity {
 
 }
 
-extension MealEntity : Identifiable {
-
-}
+extension MealEntity : Identifiable {}

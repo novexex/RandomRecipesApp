@@ -26,6 +26,4 @@ extension DrinkEntity {
 
 }
 
-extension DrinkEntity : Identifiable {
-
-}
+extension DrinkEntity : Identifiable {}

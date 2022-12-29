@@ -9,7 +9,6 @@ import Foundation
 
 protocol DrinkRouterProtocol {
     func post(drink: ParcedDrink)
-    
 }
 
 class DrinkRouter {
