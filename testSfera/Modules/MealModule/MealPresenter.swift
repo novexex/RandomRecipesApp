@@ -52,8 +52,8 @@ extension MealPresenter: MealPresenterProtocol {
         let instructionDiscription = "\n\nInstructions:\n\(presentedMeal.instructions)"
         var ingredientsDiscription = "Ingredients:\n"
         
-        for (index, _) in presentedMeal.ingredients.enumerated() {
-            ingredientsDiscription += "\(presentedMeal.ingredients[index] ?? Resources.del): \(presentedMeal.measure[index] ?? Resources.del),\n"
+        for (index1, index2) in zip(presentedMeal.ingredients.indices, presentedMeal.measure.indices) {
+            ingredientsDiscription += "\(presentedMeal.ingredients[index1] ?? Resources.del): \(presentedMeal.measure[index2] ?? Resources.del),\n"
         }
         
         ingredientsDiscription.formatting()

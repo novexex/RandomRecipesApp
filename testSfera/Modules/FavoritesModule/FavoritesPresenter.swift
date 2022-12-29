@@ -12,134 +12,164 @@ protocol FavoritesPresenterProtocol: AnyObject {
     func detailView(didSelectRowAt indexPath: IndexPath)
     func routerOutput(notification: Notification)
     func routerOutput(vc: DetailCellViewController)
-    func recipesRemoveCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+    func recipesActionCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     func recipesAddCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    func viewOutput()
     func getSectionName(section: Int) -> String
     func countSections() -> Int
-    func countRows(section: Int) -> Int
-    func mealsArrayIsEmpty() -> Bool
-    func drinksArrayIsEmpty() -> Bool
-    func mealsArrayCount() -> Int
-    func drinksArrayCount() -> Int
+    func countRows(in section: Int) -> Int
+    func viewDidAppear()
+    func viewDidDisappear()
 }
 
 class FavoritesPresenter {
-    weak var view: FavoritesViewProtocol?
+    weak var view: FavoritesViewProtocol? {
+        didSet {
+            guard let view else { return }
+            storage = StorageManager(tableView: view.tableView())
+        }
+    }
     var router: FavoritesRouterProtocol
     var interactor: FavoritesInteractorProtocol
-    private var savedMeals = [ParcedMeal]()
-    private var savedDrinks = [ParcedDrink]()
-    private var viewDidLoaded = false
+    var storage: StorageManager?
+    var mealSection = 0
+    var drinkSection = 1
+    var firstTime = true
+    var crash = false
     
-    let storage = StorageManager()
     
     init(interactor: FavoritesInteractorProtocol, router: FavoritesRouterProtocol) {
         self.interactor = interactor
         self.router = router
     }
-    
-    func removeEntity(rowIndexPath: Int) {
-        storage.removeMealContext(rowIndexPath: rowIndexPath)
-        savedMeals.remove(at: rowIndexPath)
-    }
 }
 
 extension FavoritesPresenter: FavoritesPresenterProtocol {
-    func countRows(section: Int) -> Int {
-        if section == Resources.Section.mealSection {
-            return mealsArrayCount()
-        } else if section == Resources.Section.drinkSection {
-            return drinksArrayCount()
+    func viewDidDisappear() {
+        guard let storage, let drinksObjects = storage.fetchedDrinksController?.fetchedObjects, let mealsObjects = storage.fetchedMealsController?.fetchedObjects else { return }
+        
+        if !drinksObjects.isEmpty && mealsObjects.isEmpty {
+            Resources.Titles.welcomeLabel = Resources.Titles.crashLabel
+            crash = true
+            view?.hideTableView()
+            view?.configureWelcomeLabel()
         }
-        return 0
+    }
+    
+    func viewDidAppear() {
+        guard let storage, let drinksObjects = storage.fetchedDrinksController?.fetchedObjects, let mealsObjects = storage.fetchedMealsController?.fetchedObjects else { return }
+        storage.fetchData()
+        firstTime = true
+        if drinksObjects.isEmpty && mealsObjects.isEmpty {
+            mealSection = 0
+            drinkSection = 1
+        }
+    }
+    
+    func countRows(in section: Int) -> Int {
+        guard let storage, let drinksController = storage.fetchedDrinksController, let drinksObjects = drinksController.fetchedObjects, let mealsController = storage.fetchedMealsController, let mealsObjects = mealsController.fetchedObjects else { return 0 }
+        if drinksObjects.isEmpty || mealsObjects.isEmpty {
+            if drinksObjects.isEmpty {
+                return mealsObjects.count
+            } else if mealsObjects.isEmpty {
+                return drinksObjects.count
+            }
+            return 0
+        } else {
+            switch section {
+            case Resources.Sections.mealSection:
+                return mealsObjects.count
+            case Resources.Sections.drinkSection:
+                return drinksObjects.count
+            default:
+                return 0
+            }
+        }
     }
     
     func getSectionName(section: Int) -> String {
         let sectionName: String
         switch section {
-        case Resources.Section.mealSection:
-            sectionName = Resources.SectionNames.meals
-        case Resources.Section.drinkSection:
-            sectionName = Resources.SectionNames.drinks
+        case mealSection:
+            sectionName = Resources.SectionName.meals
+        case drinkSection:
+            sectionName = Resources.SectionName.drinks
         default:
             sectionName = Resources.empty
         }
         return sectionName
     }
     
-    func mealsArrayCount() -> Int {
-        savedMeals.count
-    }
-    
-    func drinksArrayCount() -> Int {
-        savedDrinks.count
-    }
-    
-    func mealsArrayIsEmpty() -> Bool {
-        savedMeals.isEmpty
-    }
-    
-    func drinksArrayIsEmpty() -> Bool {
-        savedDrinks.isEmpty
-    }
-    
     func countSections() -> Int {
-         if !savedMeals.isEmpty && !savedDrinks.isEmpty {
-            return 2
-        } else if !savedMeals.isEmpty || !savedDrinks.isEmpty {
-            return 1
-        } else {
-            return 0
+        var sections = 0
+        if let mealsSections = storage?.fetchedMealsController?.fetchedObjects {
+            if !mealsSections.isEmpty {
+                sections += 1
+            }
         }
-    }
-    
-    func viewOutput() {
-        viewDidLoaded = true
-        savedMeals += storage.fetchMealData()
-        savedDrinks += storage.fetchDrinkData()
+        if let drinksSections = storage?.fetchedDrinksController?.fetchedObjects {
+            if !drinksSections.isEmpty {
+                sections += 1
+            }
+        }
+        return sections
     }
     
     func detailView(didSelectRowAt indexPath: IndexPath) {
-        indexPath.section == Resources.Section.mealSection ? router.detailView(recipeEntity: savedMeals[indexPath.row]) : router.detailView(recipeEntity: savedDrinks[indexPath.row])
+        guard let storage, let drinksController = storage.fetchedDrinksController, let mealsController = storage.fetchedMealsController else { return }
+        
+        if indexPath.section == mealSection {
+            router.detailView(recipeEntity: storage.converseEntity(meal: mealsController.object(at: IndexPath(row: 0, section: indexPath.row))))
+        } else if indexPath.section == drinkSection {
+            router.detailView(recipeEntity: storage.converseEntity(drink: drinksController.object(at: IndexPath(row: 0, section: indexPath.row))))
+        }
     }
-
+    
     func recipesAddCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if crash { return UITableViewCell() }
         view?.removeWelcomeLabel()
-        let cell = tableView.dequeueReusableCell(withIdentifier: Resources.cellIdentifier, for: indexPath)
-        guard !savedMeals.isEmpty || !savedDrinks.isEmpty else { return cell }
+        let cell = tableView.dequeueReusableCell(withIdentifier: Resources.CellIdentifiers.meal, for: indexPath)
+        
+        guard let storage, let mealsObjects = storage.fetchedMealsController?.fetchedObjects else { return cell }
+        
+        if mealsObjects.isEmpty && firstTime {
+            let temp = mealSection
+            mealSection = drinkSection
+            drinkSection = temp
+            firstTime = false
+        }
+        
         if #available(iOS 14.0, *) {
             var content = cell.defaultContentConfiguration()
-            content.text = indexPath.section == Resources.Section.mealSection ? savedMeals[indexPath.row].strMeal : savedDrinks[indexPath.row].strDrink
+            if indexPath.section == mealSection {
+                guard let meal = storage.fetchedMealsController?.object(at: IndexPath(row: 0, section: indexPath.row)) else { return cell }
+                content.text = meal.strMeal ?? Resources.empty
+            } else if indexPath.section == drinkSection {
+                guard let drink = storage.fetchedDrinksController?.object(at: IndexPath(row: 0, section: indexPath.row)) else { return cell }
+                content.text = drink.strDrink ?? Resources.empty
+            }
             cell.contentConfiguration = content
         } else {
-            cell.textLabel?.text = indexPath.section == Resources.Section.mealSection ? savedMeals[indexPath.row].strMeal : savedDrinks[indexPath.row].strDrink
+            if indexPath.section == mealSection {
+                guard let meal = storage.fetchedMealsController?.object(at: IndexPath(row: 0, section: indexPath.row)) else { return cell }
+                cell.textLabel?.text = meal.strMeal ?? Resources.empty
+            } else if indexPath.section == drinkSection {
+                guard let drink = storage.fetchedDrinksController?.object(at: IndexPath(row: 0, section: indexPath.row)) else { return cell }
+                cell.textLabel?.text = drink.strDrink ?? Resources.empty
+            }
         }
         return cell
     }
     
-    func recipesRemoveCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func recipesActionCell(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            if indexPath.section == Resources.Section.mealSection {
-//                if tableView.numberOfRows(inSection: 0) == 1 {
-//                    if tableView.numberOfSections == 2 {
-//                        removeEntity(rowIndexPath: indexPath.row)
-//                        tableView.reloadRows(at: [indexPath], with: .automatic)
-//                        tableView.deleteRows(at: [indexPath], with: .automatic)
-//                    }
-//                    tableView.deleteSections([indexPath.section], with: .automatic)
-//                } else {
-//                    tableView.deleteRows(at: [indexPath], with: .automatic)
-//                }
-                removeEntity(rowIndexPath: indexPath.row)
-                
-                savedMeals.isEmpty ? tableView.deleteSections([indexPath.section], with: .automatic) : tableView.deleteRows(at: [indexPath], with: .automatic)
-            } else if indexPath.section == Resources.Section.drinkSection {
-                removeEntity(rowIndexPath: indexPath.row)
-                savedDrinks.isEmpty ? tableView.deleteSections([indexPath.section], with: .automatic) : tableView.deleteRows(at: [indexPath], with: .automatic)
+            if indexPath.section == 0 && mealSection == 0 {
+                storage?.remove(indexPath: indexPath, isMeal: true)
+            } else {
+                storage?.remove(indexPath: indexPath, isMeal: false)
             }
         }
-        if savedMeals.isEmpty && savedDrinks.isEmpty {
+        guard let storage, let drinksFetchedObjs = storage.fetchedDrinksController?.fetchedObjects, let mealsFetchedObjs = storage.fetchedMealsController?.fetchedObjects else { return }
+        if drinksFetchedObjs.isEmpty && mealsFetchedObjs.isEmpty {
             view?.configureWelcomeLabel()
         }
     }
@@ -149,18 +179,13 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     }
     
     func routerOutput(notification: Notification) {
+        
         if let notification = notification.userInfo as? [String: ParcedDrink] {
             guard let drink = notification[Resources.DictKeys.drink] else { return }
-            if viewDidLoaded {
-                savedDrinks.append(drink)
-            }
-            storage.saveToCoreData(drink: drink)
+            storage?.saveToCoreData(drink: drink)
         } else if let notification = notification.userInfo as? [String: ParcedMeal] {
             guard let meal = notification[Resources.DictKeys.meal] else { return }
-            if viewDidLoaded {
-                savedMeals.append(meal)
-            }
-            storage.saveToCoreData(meal: meal)
+            storage?.saveToCoreData(meal: meal)
         }
     }
 }

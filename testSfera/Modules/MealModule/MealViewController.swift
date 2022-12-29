@@ -38,10 +38,12 @@ class MealViewController: BaseViewController {
     
     override func navBarLeftButtonHandler() {
         presenter?.buttonNextPressed()
+        enableSaveButton()
     }
     
     override func navBarRightButtonHandler() {
         presenter?.buttonSavePressed()
+        disableSaveButton()
     }
     
     override func setupViews() {

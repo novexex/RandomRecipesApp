@@ -18,6 +18,6 @@ class MealRouter {
 
 extension MealRouter: MealRouterProtocol {
     func post(meal: ParcedMeal) {
-        notificationCenter.post(name: .sendEntityNotification, object: self, userInfo: ["meal":meal])
+        notificationCenter.post(name: .sendEntityNotification, object: self, userInfo: [Resources.DictKeys.meal:meal])
     }
 }

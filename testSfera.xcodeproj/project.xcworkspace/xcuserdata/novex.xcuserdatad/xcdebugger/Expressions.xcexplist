@@ -3,14 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "FavoritesPresenter.countRows(section:):FavoritesPresenter.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "mealsArrayCount()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "MealRouter.buttonSavePressed(meal:):MealRouter.swift">
       </ContextState>
       <ContextState
@@ -21,6 +13,25 @@
             </PersistentString>
             <PersistentString
                value = "savedEntityMealsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "StorageManager.fetchData():StorageManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "fetchedDrinksController?.fetchedObjects?.count">
+            </PersistentString>
+            <PersistentString
+               value = "fetchedMealsController?.fetchedObjects?.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "StorageManager.removeObject(at:):StorageManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "fetchedMealsController?.fetchedObjects?.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -36,6 +47,9 @@
          contextName = "FavoritesPresenter.routerOutput(notification:):FavoritesPresenter.swift">
          <PersistentStrings>
             <PersistentString
+               value = "storage?.fetchedMealsController?.indexPath(forObject: meal)">
+            </PersistentString>
+            <PersistentString
                value = "savedMeals">
             </PersistentString>
          </PersistentStrings>
@@ -48,6 +62,14 @@
             </PersistentString>
             <PersistentString
                value = "indexPathMeals.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FavoritesPresenter.countRows(in:):FavoritesPresenter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "drinksSections[section].numberOfObjects">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -71,10 +93,52 @@
          contextName = "MealPresenter.buttonSaveTapped():MealPresenter.swift">
       </ContextState>
       <ContextState
+         contextName = "FavoritesPresenter.recipesAddCell(_:cellForRowAt:):FavoritesPresenter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "drinkSection">
+            </PersistentString>
+            <PersistentString
+               value = "inverse">
+            </PersistentString>
+            <PersistentString
+               value = "mealSection">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.section">
+            </PersistentString>
+            <PersistentString
+               value = "firstTime">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "StorageManager.saveToCoreData(meal:):StorageManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "fetchedMealsController?.indexPath(forObject: entityMeal)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FavoritesPresenter.recipesActionCell(_:commit:forRowAt:):FavoritesPresenter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "drinkSection">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.section">
+            </PersistentString>
+            <PersistentString
+               value = "mealSection">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "FavoritesPresenter.countSections():FavoritesPresenter.swift">
          <PersistentStrings>
             <PersistentString
-               value = "savedMeals">
+               value = "storage?.fetchedDrinksController?.fetchedObjects?.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -105,6 +169,20 @@
             </PersistentString>
             <PersistentString
                value = "savedMeals">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FavoritesPresenter.recipesRemoveCell(_:commit:forRowAt:):FavoritesPresenter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "savedMeals.isEmpty">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "tableView.numberOfRows(inSection: indexPath.section)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

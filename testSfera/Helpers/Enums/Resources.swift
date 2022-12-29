@@ -9,9 +9,14 @@ import UIKit
 
 enum Resources {
     
-    static let cellIdentifier = "cell"
     static let empty = ""
     static let del = "del"
+    static let persistentContainerName = "CoreData"
+    
+    enum CellIdentifiers {
+        static let meal = "mealCell"
+        static let drink = "drinkCell"
+    }
     
     enum Colors {
         static let active = UIColor(hexString: "#437BFE")
@@ -22,7 +27,8 @@ enum Resources {
     }
     
     enum Titles {
-        static let welcomeLabel = "You haven't saved any recipes yet\n Come back when you do"
+        static let crashLabel = "Sorry, this scenario breaks the application,\n so for now dummy"
+        static var welcomeLabel = "You haven't saved any recipes yet\n Come back when you do"
         
         enum TabBar {
             static let meal = "Random Meal"
@@ -52,18 +58,22 @@ enum Resources {
         }
     }
     
-    enum SectionNames {
+    enum SectionName {
         static let meals = "Meals"
         static let drinks = "Drinks"
     }
     
-    enum Section {
+    enum Sections {
         static let mealSection = 0
         static let drinkSection = 1
     }
     
+    enum EntityNames {
+        static let meal = "MealEntity"
+        static let drink = "DrinkEntity"
+    }
+    
     enum DictKeys {
-        
         static let meal = "meal"
         static let drink = "drink"
         
@@ -167,3 +177,4 @@ enum Resources {
         static let meas20 = "strMeasure20"
     }
 }
+

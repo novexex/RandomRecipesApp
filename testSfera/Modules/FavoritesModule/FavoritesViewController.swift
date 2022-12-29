@@ -11,57 +11,41 @@ protocol FavoritesViewProtocol: AnyObject {
     func presenterOutput(vc: DetailCellViewController)
     func configureWelcomeLabel()
     func removeWelcomeLabel()
-    func toggle()
+    func tableView() -> UITableView
+    func hideTableView()
 }
 
-class FavoritesViewController: UIViewController {
+class FavoritesViewController: BaseViewController {
     var presenter: FavoritesPresenterProtocol?
     private let tableViewController = UITableViewController()
     private let myVC = UITableViewController()
     private var welcomeLabel = UILabel()
-    private var deleteSection = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initialize()
-        presenter?.viewOutput()
         configureWelcomeLabel()
         title = Resources.Titles.NavBar.favorites
         navigationController?.tabBarItem.title = Resources.Titles.TabBar.favorites
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        refreshMealsView()
-        refreshDrinksView()
+        presenter?.viewDidAppear()
     }
     
-    func refreshMealsView() {
-        guard let presenter, !presenter.mealsArrayIsEmpty() else { return }
-        let indexPath = IndexPath(row: presenter.mealsArrayCount() - 1, section: 0)
-        
-        tableViewController.tableView.reloadData()
-        
-        guard tableViewController.tableView.numberOfRows(inSection: 0) == indexPath.row else { return }
-        tableViewController.tableView.insertRows(at: [indexPath], with: .automatic)
-        tableViewController.tableView.reloadRows(at: [indexPath], with: .automatic)
-    }
-    
-    func refreshDrinksView() {
-        guard let presenter, !presenter.drinksArrayIsEmpty() else { return }
-        let indexPath = IndexPath(row: presenter.drinksArrayCount() - 1, section: 1)
-        
-        tableViewController.tableView.reloadData()
-        
-        guard tableViewController.tableView.numberOfRows(inSection: 1) == indexPath.row else { return }
-        tableViewController.tableView.insertRows(at: [indexPath], with: .automatic)
-        tableViewController.tableView.reloadRows(at: [indexPath], with: .automatic)
+    override func viewDidDisappear(_ animated: Bool) {
+        presenter?.viewDidDisappear()
     }
 }
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, FavoritesViewProtocol {
-    func toggle() {
-        deleteSection = true
+    func hideTableView() {
+        tableViewController.tableView.isHidden = true
+    }
+    
+    func tableView() -> UITableView {
+        tableViewController.tableView
     }
     
     func configureWelcomeLabel() {
@@ -85,7 +69,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let presenter else { return 0 }
-        return presenter.countRows(section: section)
+        return presenter.countRows(in: section)
     }
     
     func removeWelcomeLabel() {
@@ -98,17 +82,17 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        presenter?.recipesAddCell(tableView, cellForRowAt: indexPath) ?? UITableViewCell()
+        return presenter?.recipesAddCell(tableView, cellForRowAt: indexPath) ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        presenter?.recipesRemoveCell(tableView, commit: editingStyle, forRowAt: indexPath)
+        presenter?.recipesActionCell(tableView, commit: editingStyle, forRowAt: indexPath)
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.detailView(didSelectRowAt: indexPath)
     }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         presenter?.getSectionName(section: section)
     }
@@ -125,7 +109,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
             tableViewController.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
         ])
         
-        tableViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.cellIdentifier)
+        tableViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.CellIdentifiers.meal)
         tableViewController.tableView.delegate = self
         tableViewController.tableView.dataSource = self
     }
