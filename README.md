@@ -1,4 +1,4 @@
-### RandomRecipesApp
+### testSfera
 
 Stack: VIPER, CoreData, Meal API, Drink API, UIKit, Kingfisher, SMP
 
