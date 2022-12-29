@@ -19,7 +19,6 @@ protocol FavoritesPresenterProtocol: AnyObject {
     func countRows(in section: Int) -> Int
     func viewDidAppear()
     func viewDidDisappear()
-    func removeStorage(indexPath: IndexPath)
 }
 
 class FavoritesPresenter {
@@ -54,10 +53,6 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
             view?.hideTableView()
             view?.configureWelcomeLabel()
         }
-    }
-    
-    func removeStorage(indexPath: IndexPath) {
-        storage?.removeObject(at: indexPath)
     }
     
     func viewDidAppear() {

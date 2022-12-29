@@ -38,7 +38,6 @@ class StorageManager {
     }
     
     func remove(indexPath: IndexPath, isMeal: Bool) {
-//        let managedObjectContext: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext;
         let managedObject: NSManagedObject
         if isMeal {
             guard let fetchedMealsController else { return }
@@ -179,8 +178,6 @@ class StorageManager {
         }
     }
     
-    // MARK: controller funcs didnt call
-    
     func setupFetchedMealsController(for context: NSManagedObjectContext) {
         let sort = NSSortDescriptor(key: Resources.DictKeys.Meal.name, ascending: true)
         let request = NSFetchRequest<MealEntity>(entityName: Resources.EntityNames.meal)
@@ -195,62 +192,3 @@ class StorageManager {
         fetchedDrinksController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: Resources.DictKeys.Drink.name, cacheName: nil)
     }
 }
-
-// MARK: Trash funcs
-//
-//extension StorageManager: NSFetchedResultsControllerDelegate {
-//    func isEqual(_ object: Any?) -> Bool {
-//        false
-//    }
-//
-//    var hash: Int {
-//        0
-//    }
-//
-//    var superclass: AnyClass? {
-//        let anyClass: AnyClass? = {
-//            BaseEntity.self
-//        }()
-//        return anyClass
-//    }
-//
-//    func `self`() -> Self {
-//        self
-//    }
-//
-//    func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
-//        perform(aSelector)
-//    }
-//
-//    func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
-//        perform(aSelector, with: object)
-//    }
-//
-//    func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
-//        perform(aSelector, with: object1, with: object2)
-//    }
-//
-//    func isProxy() -> Bool {
-//        false
-//    }
-//
-//    func isKind(of aClass: AnyClass) -> Bool {
-//        false
-//    }
-//
-//    func isMember(of aClass: AnyClass) -> Bool {
-//        false
-//    }
-//
-//    func conforms(to aProtocol: Protocol) -> Bool {
-//        false
-//    }
-//
-//    func responds(to aSelector: Selector!) -> Bool {
-//        false
-//    }
-//
-//    var description: String {
-//        "description"
-//    }
-//}

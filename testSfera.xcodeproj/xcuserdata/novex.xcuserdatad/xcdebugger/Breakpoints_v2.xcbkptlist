@@ -298,8 +298,8 @@
             filePath = "testSfera/Application/StorageManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "saveToCoreData(meal:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -314,8 +314,8 @@
             filePath = "testSfera/Application/StorageManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "saveToCoreData(meal:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -426,25 +426,9 @@
             filePath = "testSfera/Application/StorageManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "converseEntity(meal:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "28D284E0-AAE8-4B39-9D32-905ADDF5E705"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "testSfera/Application/StorageManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "remove(indexPath:isMeal:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -474,8 +458,8 @@
             filePath = "testSfera/Modules/FavoritesModule/FavoritesPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "countSections()"
             landmarkType = "7">
          </BreakpointContent>
@@ -506,8 +490,8 @@
             filePath = "testSfera/Modules/FavoritesModule/FavoritesPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "FavoritesPresenter"
             landmarkType = "21">
          </BreakpointContent>
@@ -522,8 +506,8 @@
             filePath = "testSfera/Modules/FavoritesModule/FavoritesPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "recipesAddCell(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -538,8 +522,8 @@
             filePath = "testSfera/Modules/FavoritesModule/FavoritesPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "recipesActionCell(_:commit:forRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
