@@ -48,7 +48,7 @@ enum Resources {
     
     enum Images {
         static let meal = UIImage(systemName: "fork.knife")
-        static let drink = UIImage(systemName: "wineglass")
+        static let drink = UIImage(systemName: "cup.and.saucer")
         static let favorites = UIImage(systemName: "bookmark")
     }
     

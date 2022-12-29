@@ -106,7 +106,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
             tableViewController.tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             tableViewController.tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
             tableViewController.tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableViewController.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
+            tableViewController.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
         ])
         
         tableViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: Resources.CellIdentifiers.meal)

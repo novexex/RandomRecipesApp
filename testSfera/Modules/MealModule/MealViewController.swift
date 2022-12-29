@@ -79,7 +79,7 @@ class MealViewController: BaseViewController {
             
             NSLayoutConstraint.activate([
                 self.imageView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
-                self.imageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: -150),
+                self.imageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: -165),
                 self.imageView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 3/4)
             ])
             
