@@ -9,8 +9,11 @@ import CoreData
 import UIKit
 
 class StorageManager {
-    private var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: Resources.persistentContainerName)
+    private let persistentContainer: NSPersistentContainer = {
+        guard let modelURL = Bundle.module.url(forResource: "CoreData", withExtension: "momd"),
+              let model = NSManagedObjectModel(contentsOf: modelURL) else { return NSPersistentContainer() }
+        
+        let container = NSPersistentContainer(name: "CoreData", managedObjectModel: model)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -18,6 +21,7 @@ class StorageManager {
         })
         return container
     }()
+
     var viewContext: NSManagedObjectContext
     var fetchedMealsController: NSFetchedResultsController<MealEntity>?
     var fetchedDrinksController: NSFetchedResultsController<DrinkEntity>?

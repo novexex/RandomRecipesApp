@@ -5,8 +5,8 @@
 //  Created by Artour Ilyasov on 01.12.2022
 //
 
-class DrinkBuilder {
-    static func build(favoritesVC: FavoritesViewController) -> DrinkViewController {
+public class DrinkBuilder {
+    public func build(favoritesVC: FavoritesViewController) -> DrinkViewController {
         let interactor = DrinkInteractor()
         let router = DrinkRouter()
         let presenter = DrinkPresenter(interactor: interactor, router: router)
@@ -18,4 +18,6 @@ class DrinkBuilder {
         
         return viewController
     }
+    
+    public init() {}
 }

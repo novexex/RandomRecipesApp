@@ -5,8 +5,8 @@
 //  Created by Artour Ilyasov on 01.12.2022
 //
 
-class FavoritesBuilder {
-    static func build() -> FavoritesViewController {
+public class FavoritesBuilder {
+    public func build() -> FavoritesViewController {
         let interactor = FavoritesInteractor()
         let router = FavoritesRouter()
         let presenter = FavoritesPresenter(interactor: interactor, router: router)
@@ -18,4 +18,6 @@ class FavoritesBuilder {
         
         return viewController
     }
+    
+    public init() {}
 }

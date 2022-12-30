@@ -1,22 +1,21 @@
 //
-//  DrinkViewController.swift
+//  MealViewController.swift
 //  testSfera
 //
 //  Created by Artour Ilyasov on 01.12.2022
 //
 
 import UIKit
-import Kingfisher
 
-protocol DrinkViewProtocol: AnyObject {
+protocol MealViewProtocol: AnyObject {
     func viewInput(description: String, image: UIImageView)
     func refreshView()
     func startActivityIndicator()
     func stopActivityIndicator()
 }
 
-class DrinkViewController: BaseViewController {
-    var presenter: DrinkPresenterProtocol? {
+public class MealViewController: BaseViewController {
+    var presenter: MealPresenterProtocol? {
         didSet {
             presenter?.viewDidLoaded()
         }
@@ -27,11 +26,11 @@ class DrinkViewController: BaseViewController {
     private var imageView = UIImageView()
     private var subtitleLabel = UILabel()
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = Resources.Titles.NavBar.drink
-        navigationController?.tabBarItem.title = Resources.Titles.TabBar.drink
+        title = Resources.Titles.NavBar.meal
+        navigationController?.tabBarItem.title = Resources.Titles.TabBar.meal
         addNavBarButton(at: .left, with: Resources.Titles.NavBar.Actions.left)
         addNavBarButton(at: .right, with: Resources.Titles.NavBar.Actions.right)
         setupViews()
@@ -96,9 +95,9 @@ class DrinkViewController: BaseViewController {
     }
 }
 
-extension DrinkViewController: DrinkViewProtocol {
+extension MealViewController: MealViewProtocol {
     func viewInput(description: String, image: UIImageView) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
             self.subtitleLabel = {
                 let subtitleLabel = UILabel()
                 subtitleLabel.text = description

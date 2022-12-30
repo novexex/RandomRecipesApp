@@ -9,7 +9,7 @@ import UIKit
 
 protocol NavBarViewProtocol: AnyObject {}
 
-class NavBarViewController: UINavigationController {
+public class NavBarViewController: UINavigationController {
     var presenter: NavBarPresenterProtocol?
     
     convenience init(rootViewController: UIViewController, tab: Tabs) {
@@ -17,7 +17,7 @@ class NavBarViewController: UINavigationController {
         configureNavigation(tab: tab)
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         configure()
     }

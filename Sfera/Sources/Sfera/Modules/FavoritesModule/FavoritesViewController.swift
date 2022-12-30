@@ -15,13 +15,13 @@ protocol FavoritesViewProtocol: AnyObject {
     func hideTableView()
 }
 
-class FavoritesViewController: BaseViewController {
+public class FavoritesViewController: BaseViewController {
     var presenter: FavoritesPresenterProtocol?
     private let tableViewController = UITableViewController()
     private let myVC = UITableViewController()
     private var welcomeLabel = UILabel()
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         initialize()
@@ -30,11 +30,11 @@ class FavoritesViewController: BaseViewController {
         navigationController?.tabBarItem.title = Resources.Titles.TabBar.favorites
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    public override func viewDidAppear(_ animated: Bool) {
         presenter?.viewDidAppear()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    public override func viewDidDisappear(_ animated: Bool) {
         presenter?.viewDidDisappear()
     }
 }
@@ -67,7 +67,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
         self.present(vc, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let presenter else { return 0 }
         return presenter.countRows(in: section)
     }
@@ -76,24 +76,24 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource, F
         welcomeLabel.removeFromSuperview()
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         guard let presenter else { return 0 }
         return presenter.countSections()
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return presenter?.recipesAddCell(tableView, cellForRowAt: indexPath) ?? UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         presenter?.recipesActionCell(tableView, commit: editingStyle, forRowAt: indexPath)
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.detailView(didSelectRowAt: indexPath)
     }
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         presenter?.getSectionName(section: section)
     }
     

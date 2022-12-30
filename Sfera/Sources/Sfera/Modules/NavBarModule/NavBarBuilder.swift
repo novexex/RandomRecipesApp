@@ -5,8 +5,8 @@
 //  Created by Artour Ilyasov on 01.12.2022
 //
 
-class NavBarBuilder {
-    static func build(mealVC: MealViewController,
+public class NavBarBuilder {
+    public func build(mealVC: MealViewController,
                       drinkVC: DrinkViewController,
                       favoritesVC: FavoritesViewController) -> [NavBarViewController] {
         let interactor = NavBarInteractor()
@@ -24,4 +24,6 @@ class NavBarBuilder {
         
         return [mealNavigation, drinkNavigation, favoritesNavigation]
     }
+    
+    public init() {}
 }

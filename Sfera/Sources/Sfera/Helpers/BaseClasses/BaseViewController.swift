@@ -12,11 +12,11 @@ enum NavBarPosition {
     case right
 }
 
-class BaseViewController: UIViewController {
+public class BaseViewController: UIViewController {
     
     var buttons = [UIButton]()
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         configureAppearance()

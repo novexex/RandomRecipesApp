@@ -7,104 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EB0C28C629487B6F0051BB34 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EB0C28C529487B6F0051BB34 /* Kingfisher */; };
-		EB0C28CB2949C2900051BB34 /* NSNotification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0C28CA2949C2900051BB34 /* NSNotification.Name.swift */; };
-		EB0CF5FA2942EE3800CC248F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF5F92942EE3800CC248F /* String.swift */; };
-		EB0CF5FC2943387F00CC248F /* BaseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF5FB2943387F00CC248F /* BaseEntity.swift */; };
-		EB0CF5FE2944242700CC248F /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF5FD2944242700CC248F /* UIImageView.swift */; };
-		EB0CF6052946E5A700CC248F /* DetailCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF6002946E5A700CC248F /* DetailCellBuilder.swift */; };
-		EB0CF6062946E5A700CC248F /* DetailCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF6012946E5A700CC248F /* DetailCellPresenter.swift */; };
-		EB0CF6072946E5A700CC248F /* DetailCellRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF6022946E5A700CC248F /* DetailCellRouter.swift */; };
-		EB0CF6082946E5A700CC248F /* DetailCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF6032946E5A700CC248F /* DetailCellViewController.swift */; };
-		EB0CF6092946E5A700CC248F /* DetailCellInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF6042946E5A700CC248F /* DetailCellInteractor.swift */; };
-		EB0CF60E29473DF400CC248F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF60D29473DF400CC248F /* StorageManager.swift */; };
-		EB0CF61129484EF000CC248F /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0CF61029484EF000CC248F /* Tabs.swift */; };
-		EB64D8F0294B9BE500A33274 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB64D8EE294B9BE500A33274 /* CoreData.xcdatamodeld */; };
-		EB950752294CEFF1007704DF /* MealEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB95074E294CEFF1007704DF /* MealEntity+CoreDataClass.swift */; };
-		EB950753294CEFF1007704DF /* MealEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB95074F294CEFF1007704DF /* MealEntity+CoreDataProperties.swift */; };
-		EB950754294CEFF1007704DF /* DrinkEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB950750294CEFF1007704DF /* DrinkEntity+CoreDataClass.swift */; };
-		EB950755294CEFF1007704DF /* DrinkEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB950751294CEFF1007704DF /* DrinkEntity+CoreDataProperties.swift */; };
+		EB6412FC295E94050045CF64 /* Sfera in Frameworks */ = {isa = PBXBuildFile; productRef = EB6412FB295E94050045CF64 /* Sfera */; };
 		EBDB97C12934FEB8000683C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C02934FEB8000683C1 /* AppDelegate.swift */; };
-		EBDB97C52934FEB8000683C1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97C42934FEB8000683C1 /* BaseViewController.swift */; };
-		EBDB97CA2934FEB9000683C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBDB97C92934FEB9000683C1 /* Assets.xcassets */; };
-		EBDB97D9293501DB000683C1 /* MealEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97D8293501DB000683C1 /* MealEntity.swift */; };
-		EBDB97DB293501ED000683C1 /* DrinkEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97DA293501ED000683C1 /* DrinkEntity.swift */; };
-		EBDB97F129377364000683C1 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97F029377364000683C1 /* UIColor.swift */; };
-		EBDB97F329377398000683C1 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB97F229377398000683C1 /* Resources.swift */; };
-		EBDB981D293789AC000683C1 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB981C293789AC000683C1 /* UIView.swift */; };
-		EBDB984629393691000683C1 /* NavBarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984129393691000683C1 /* NavBarBuilder.swift */; };
-		EBDB984729393691000683C1 /* NavBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984229393691000683C1 /* NavBarPresenter.swift */; };
-		EBDB984829393691000683C1 /* NavBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984329393691000683C1 /* NavBarRouter.swift */; };
-		EBDB984929393691000683C1 /* NavBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984429393691000683C1 /* NavBarViewController.swift */; };
-		EBDB984A29393691000683C1 /* NavBarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984529393691000683C1 /* NavBarInteractor.swift */; };
-		EBDB985129393778000683C1 /* MealBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984C29393778000683C1 /* MealBuilder.swift */; };
-		EBDB985229393778000683C1 /* MealPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984D29393778000683C1 /* MealPresenter.swift */; };
-		EBDB985329393778000683C1 /* MealRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984E29393778000683C1 /* MealRouter.swift */; };
-		EBDB985429393778000683C1 /* MealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB984F29393778000683C1 /* MealViewController.swift */; };
-		EBDB985529393778000683C1 /* MealInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB985029393778000683C1 /* MealInteractor.swift */; };
-		EBDB985C29393833000683C1 /* DrinkBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB985729393833000683C1 /* DrinkBuilder.swift */; };
-		EBDB985D29393833000683C1 /* DrinkPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB985829393833000683C1 /* DrinkPresenter.swift */; };
-		EBDB985E29393833000683C1 /* DrinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB985929393833000683C1 /* DrinkRouter.swift */; };
-		EBDB985F29393833000683C1 /* DrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB985A29393833000683C1 /* DrinkViewController.swift */; };
-		EBDB986029393833000683C1 /* DrinkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB985B29393833000683C1 /* DrinkInteractor.swift */; };
-		EBDB9867293938C0000683C1 /* FavoritesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB9862293938C0000683C1 /* FavoritesBuilder.swift */; };
-		EBDB9868293938C0000683C1 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB9863293938C0000683C1 /* FavoritesPresenter.swift */; };
-		EBDB9869293938C0000683C1 /* FavoritesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB9864293938C0000683C1 /* FavoritesRouter.swift */; };
-		EBDB986A293938C0000683C1 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB9865293938C0000683C1 /* FavoritesViewController.swift */; };
-		EBDB986B293938C0000683C1 /* FavoritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB9866293938C0000683C1 /* FavoritesInteractor.swift */; };
-		EBDB986F29393C1D000683C1 /* RandomMealService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB986E29393C1D000683C1 /* RandomMealService.swift */; };
-		EBDB987129393C27000683C1 /* RandomDrinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDB987029393C27000683C1 /* RandomDrinkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EB0C28CA2949C2900051BB34 /* NSNotification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotification.Name.swift; sourceTree = "<group>"; };
-		EB0CF5F92942EE3800CC248F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		EB0CF5FB2943387F00CC248F /* BaseEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEntity.swift; sourceTree = "<group>"; };
-		EB0CF5FD2944242700CC248F /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
-		EB0CF6002946E5A700CC248F /* DetailCellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellBuilder.swift; sourceTree = "<group>"; };
-		EB0CF6012946E5A700CC248F /* DetailCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellPresenter.swift; sourceTree = "<group>"; };
-		EB0CF6022946E5A700CC248F /* DetailCellRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellRouter.swift; sourceTree = "<group>"; };
-		EB0CF6032946E5A700CC248F /* DetailCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellViewController.swift; sourceTree = "<group>"; };
-		EB0CF6042946E5A700CC248F /* DetailCellInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellInteractor.swift; sourceTree = "<group>"; };
-		EB0CF60D29473DF400CC248F /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		EB0CF61029484EF000CC248F /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
-		EB64D8EF294B9BE500A33274 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
-		EB95074E294CEFF1007704DF /* MealEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MealEntity+CoreDataClass.swift"; path = "testSfera/Modules/MealModule/MealEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		EB95074F294CEFF1007704DF /* MealEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MealEntity+CoreDataProperties.swift"; path = "testSfera/Modules/MealModule/MealEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		EB950750294CEFF1007704DF /* DrinkEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DrinkEntity+CoreDataClass.swift"; path = "testSfera/Modules/DrinkModule/DrinkEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		EB950751294CEFF1007704DF /* DrinkEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DrinkEntity+CoreDataProperties.swift"; path = "testSfera/Modules/DrinkModule/DrinkEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		EB6412F7295E91B10045CF64 /* Sfera */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Sfera; sourceTree = "<group>"; };
+		EBC7D507295E946A00F618FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EBC7D508295E946A00F618FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBDB97BD2934FEB8000683C1 /* testSfera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testSfera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBDB97C02934FEB8000683C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EBDB97C42934FEB8000683C1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		EBDB97C92934FEB9000683C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EBDB97CE2934FEB9000683C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBDB97D8293501DB000683C1 /* MealEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealEntity.swift; sourceTree = "<group>"; };
-		EBDB97DA293501ED000683C1 /* DrinkEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkEntity.swift; sourceTree = "<group>"; };
-		EBDB97F029377364000683C1 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		EBDB97F229377398000683C1 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
-		EBDB981C293789AC000683C1 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		EBDB984129393691000683C1 /* NavBarBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarBuilder.swift; sourceTree = "<group>"; };
-		EBDB984229393691000683C1 /* NavBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarPresenter.swift; sourceTree = "<group>"; };
-		EBDB984329393691000683C1 /* NavBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarRouter.swift; sourceTree = "<group>"; };
-		EBDB984429393691000683C1 /* NavBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarViewController.swift; sourceTree = "<group>"; };
-		EBDB984529393691000683C1 /* NavBarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarInteractor.swift; sourceTree = "<group>"; };
-		EBDB984C29393778000683C1 /* MealBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealBuilder.swift; sourceTree = "<group>"; };
-		EBDB984D29393778000683C1 /* MealPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPresenter.swift; sourceTree = "<group>"; };
-		EBDB984E29393778000683C1 /* MealRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRouter.swift; sourceTree = "<group>"; };
-		EBDB984F29393778000683C1 /* MealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealViewController.swift; sourceTree = "<group>"; };
-		EBDB985029393778000683C1 /* MealInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealInteractor.swift; sourceTree = "<group>"; };
-		EBDB985729393833000683C1 /* DrinkBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkBuilder.swift; sourceTree = "<group>"; };
-		EBDB985829393833000683C1 /* DrinkPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkPresenter.swift; sourceTree = "<group>"; };
-		EBDB985929393833000683C1 /* DrinkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkRouter.swift; sourceTree = "<group>"; };
-		EBDB985A29393833000683C1 /* DrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkViewController.swift; sourceTree = "<group>"; };
-		EBDB985B29393833000683C1 /* DrinkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkInteractor.swift; sourceTree = "<group>"; };
-		EBDB9862293938C0000683C1 /* FavoritesBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesBuilder.swift; sourceTree = "<group>"; };
-		EBDB9863293938C0000683C1 /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
-		EBDB9864293938C0000683C1 /* FavoritesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRouter.swift; sourceTree = "<group>"; };
-		EBDB9865293938C0000683C1 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
-		EBDB9866293938C0000683C1 /* FavoritesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesInteractor.swift; sourceTree = "<group>"; };
-		EBDB986E29393C1D000683C1 /* RandomMealService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMealService.swift; sourceTree = "<group>"; };
-		EBDB987029393C27000683C1 /* RandomDrinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDrinkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,48 +24,44 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB0C28C629487B6F0051BB34 /* Kingfisher in Frameworks */,
+				EB6412FC295E94050045CF64 /* Sfera in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EB0CF5FF2946E59000CC248F /* DetailCellModule */ = {
+		EB6412F8295E93320045CF64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EB0CF6002946E5A700CC248F /* DetailCellBuilder.swift */,
-				EB0CF6042946E5A700CC248F /* DetailCellInteractor.swift */,
-				EB0CF6012946E5A700CC248F /* DetailCellPresenter.swift */,
-				EB0CF6022946E5A700CC248F /* DetailCellRouter.swift */,
-				EB0CF6032946E5A700CC248F /* DetailCellViewController.swift */,
 			);
-			path = DetailCellModule;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EB0CF60F29484EE100CC248F /* Enums */ = {
+		EBC7D505295E944D00F618FC /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				EBDB97F229377398000683C1 /* Resources.swift */,
-				EB0CF61029484EF000CC248F /* Tabs.swift */,
+				EBDB97C02934FEB8000683C1 /* AppDelegate.swift */,
 			);
-			path = Enums;
+			path = Application;
 			sourceTree = "<group>";
 		};
-		EB49E2BB294056E700DD54FB /* BaseClasses */ = {
+		EBC7D506295E945700F618FC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				EBDB97C42934FEB8000683C1 /* BaseViewController.swift */,
-				EB0CF5FB2943387F00CC248F /* BaseEntity.swift */,
+				EBC7D507295E946A00F618FC /* Assets.xcassets */,
+				EBC7D508295E946A00F618FC /* Info.plist */,
 			);
-			path = BaseClasses;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		EBDB97B42934FEB7000683C1 = {
 			isa = PBXGroup;
 			children = (
+				EB6412F7295E91B10045CF64 /* Sfera */,
 				EBDB97BF2934FEB8000683C1 /* testSfera */,
 				EBDB97BE2934FEB8000683C1 /* Products */,
+				EB6412F8295E93320045CF64 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -168,129 +76,10 @@
 		EBDB97BF2934FEB8000683C1 /* testSfera */ = {
 			isa = PBXGroup;
 			children = (
-				EBDB986D29393C0C000683C1 /* API */,
-				EBDB97DE293516CF000683C1 /* Application */,
-				EBDB97EE29377288000683C1 /* Helpers */,
-				EBDB986C29393920000683C1 /* Modules */,
-				EBDB97DF2935170B000683C1 /* Resources */,
+				EBC7D506295E945700F618FC /* Resources */,
+				EBC7D505295E944D00F618FC /* Application */,
 			);
 			path = testSfera;
-			sourceTree = "<group>";
-		};
-		EBDB97DE293516CF000683C1 /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				EBDB97C02934FEB8000683C1 /* AppDelegate.swift */,
-				EB0CF60D29473DF400CC248F /* StorageManager.swift */,
-			);
-			path = Application;
-			sourceTree = "<group>";
-		};
-		EBDB97DF2935170B000683C1 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				EBDB97C92934FEB9000683C1 /* Assets.xcassets */,
-				EBDB97CE2934FEB9000683C1 /* Info.plist */,
-				EB64D8EE294B9BE500A33274 /* CoreData.xcdatamodeld */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		EBDB97EE29377288000683C1 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				EB0CF60F29484EE100CC248F /* Enums */,
-				EB49E2BB294056E700DD54FB /* BaseClasses */,
-				EBDB97EF293772D0000683C1 /* Extensions */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		EBDB97EF293772D0000683C1 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				EBDB97F029377364000683C1 /* UIColor.swift */,
-				EBDB981C293789AC000683C1 /* UIView.swift */,
-				EB0CF5F92942EE3800CC248F /* String.swift */,
-				EB0CF5FD2944242700CC248F /* UIImageView.swift */,
-				EB0C28CA2949C2900051BB34 /* NSNotification.Name.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		EBDB984029393678000683C1 /* NavBarModule */ = {
-			isa = PBXGroup;
-			children = (
-				EBDB984129393691000683C1 /* NavBarBuilder.swift */,
-				EBDB984529393691000683C1 /* NavBarInteractor.swift */,
-				EBDB984229393691000683C1 /* NavBarPresenter.swift */,
-				EBDB984329393691000683C1 /* NavBarRouter.swift */,
-				EBDB984429393691000683C1 /* NavBarViewController.swift */,
-			);
-			path = NavBarModule;
-			sourceTree = "<group>";
-		};
-		EBDB984B2939376B000683C1 /* MealModule */ = {
-			isa = PBXGroup;
-			children = (
-				EBDB984C29393778000683C1 /* MealBuilder.swift */,
-				EBDB97D8293501DB000683C1 /* MealEntity.swift */,
-				EB95074E294CEFF1007704DF /* MealEntity+CoreDataClass.swift */,
-				EB95074F294CEFF1007704DF /* MealEntity+CoreDataProperties.swift */,
-				EBDB985029393778000683C1 /* MealInteractor.swift */,
-				EBDB984D29393778000683C1 /* MealPresenter.swift */,
-				EBDB984E29393778000683C1 /* MealRouter.swift */,
-				EBDB984F29393778000683C1 /* MealViewController.swift */,
-			);
-			path = MealModule;
-			sourceTree = "<group>";
-		};
-		EBDB985629393828000683C1 /* DrinkModule */ = {
-			isa = PBXGroup;
-			children = (
-				EBDB985729393833000683C1 /* DrinkBuilder.swift */,
-				EBDB97DA293501ED000683C1 /* DrinkEntity.swift */,
-				EB950750294CEFF1007704DF /* DrinkEntity+CoreDataClass.swift */,
-				EB950751294CEFF1007704DF /* DrinkEntity+CoreDataProperties.swift */,
-				EBDB985B29393833000683C1 /* DrinkInteractor.swift */,
-				EBDB985829393833000683C1 /* DrinkPresenter.swift */,
-				EBDB985929393833000683C1 /* DrinkRouter.swift */,
-				EBDB985A29393833000683C1 /* DrinkViewController.swift */,
-			);
-			path = DrinkModule;
-			sourceTree = "<group>";
-		};
-		EBDB986129393899000683C1 /* FavoritesModule */ = {
-			isa = PBXGroup;
-			children = (
-				EBDB9862293938C0000683C1 /* FavoritesBuilder.swift */,
-				EBDB9866293938C0000683C1 /* FavoritesInteractor.swift */,
-				EBDB9863293938C0000683C1 /* FavoritesPresenter.swift */,
-				EBDB9864293938C0000683C1 /* FavoritesRouter.swift */,
-				EBDB9865293938C0000683C1 /* FavoritesViewController.swift */,
-			);
-			path = FavoritesModule;
-			sourceTree = "<group>";
-		};
-		EBDB986C29393920000683C1 /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				EB0CF5FF2946E59000CC248F /* DetailCellModule */,
-				EBDB986129393899000683C1 /* FavoritesModule */,
-				EBDB985629393828000683C1 /* DrinkModule */,
-				EBDB984B2939376B000683C1 /* MealModule */,
-				EBDB984029393678000683C1 /* NavBarModule */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		EBDB986D29393C0C000683C1 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				EBDB987029393C27000683C1 /* RandomDrinkService.swift */,
-				EBDB986E29393C1D000683C1 /* RandomMealService.swift */,
-			);
-			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,7 +99,7 @@
 			);
 			name = testSfera;
 			packageProductDependencies = (
-				EB0C28C529487B6F0051BB34 /* Kingfisher */,
+				EB6412FB295E94050045CF64 /* Sfera */,
 			);
 			productName = testSfera;
 			productReference = EBDB97BD2934FEB8000683C1 /* testSfera.app */;
@@ -357,7 +146,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBDB97CA2934FEB9000683C1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,51 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBDB981D293789AC000683C1 /* UIView.swift in Sources */,
-				EBDB985129393778000683C1 /* MealBuilder.swift in Sources */,
-				EBDB9867293938C0000683C1 /* FavoritesBuilder.swift in Sources */,
-				EBDB97F129377364000683C1 /* UIColor.swift in Sources */,
-				EB950755294CEFF1007704DF /* DrinkEntity+CoreDataProperties.swift in Sources */,
-				EB0CF6082946E5A700CC248F /* DetailCellViewController.swift in Sources */,
-				EB0CF6092946E5A700CC248F /* DetailCellInteractor.swift in Sources */,
-				EB0CF6052946E5A700CC248F /* DetailCellBuilder.swift in Sources */,
-				EBDB984829393691000683C1 /* NavBarRouter.swift in Sources */,
-				EBDB97C52934FEB8000683C1 /* BaseViewController.swift in Sources */,
-				EBDB984A29393691000683C1 /* NavBarInteractor.swift in Sources */,
-				EB0CF6062946E5A700CC248F /* DetailCellPresenter.swift in Sources */,
-				EBDB986029393833000683C1 /* DrinkInteractor.swift in Sources */,
-				EBDB985E29393833000683C1 /* DrinkRouter.swift in Sources */,
-				EBDB986A293938C0000683C1 /* FavoritesViewController.swift in Sources */,
 				EBDB97C12934FEB8000683C1 /* AppDelegate.swift in Sources */,
-				EBDB97DB293501ED000683C1 /* DrinkEntity.swift in Sources */,
-				EBDB985229393778000683C1 /* MealPresenter.swift in Sources */,
-				EBDB985D29393833000683C1 /* DrinkPresenter.swift in Sources */,
-				EBDB9869293938C0000683C1 /* FavoritesRouter.swift in Sources */,
-				EB950752294CEFF1007704DF /* MealEntity+CoreDataClass.swift in Sources */,
-				EBDB987129393C27000683C1 /* RandomDrinkService.swift in Sources */,
-				EBDB984729393691000683C1 /* NavBarPresenter.swift in Sources */,
-				EB64D8F0294B9BE500A33274 /* CoreData.xcdatamodeld in Sources */,
-				EB0CF5FC2943387F00CC248F /* BaseEntity.swift in Sources */,
-				EB0CF61129484EF000CC248F /* Tabs.swift in Sources */,
-				EB0C28CB2949C2900051BB34 /* NSNotification.Name.swift in Sources */,
-				EBDB985329393778000683C1 /* MealRouter.swift in Sources */,
-				EB0CF5FA2942EE3800CC248F /* String.swift in Sources */,
-				EB950753294CEFF1007704DF /* MealEntity+CoreDataProperties.swift in Sources */,
-				EBDB985529393778000683C1 /* MealInteractor.swift in Sources */,
-				EBDB986B293938C0000683C1 /* FavoritesInteractor.swift in Sources */,
-				EB950754294CEFF1007704DF /* DrinkEntity+CoreDataClass.swift in Sources */,
-				EBDB984629393691000683C1 /* NavBarBuilder.swift in Sources */,
-				EBDB9868293938C0000683C1 /* FavoritesPresenter.swift in Sources */,
-				EB0CF5FE2944242700CC248F /* UIImageView.swift in Sources */,
-				EBDB985429393778000683C1 /* MealViewController.swift in Sources */,
-				EBDB97D9293501DB000683C1 /* MealEntity.swift in Sources */,
-				EB0CF60E29473DF400CC248F /* StorageManager.swift in Sources */,
-				EBDB985F29393833000683C1 /* DrinkViewController.swift in Sources */,
-				EBDB986F29393C1D000683C1 /* RandomMealService.swift in Sources */,
-				EBDB984929393691000683C1 /* NavBarViewController.swift in Sources */,
-				EB0CF6072946E5A700CC248F /* DetailCellRouter.swift in Sources */,
-				EBDB97F329377398000683C1 /* Resources.swift in Sources */,
-				EBDB985C29393833000683C1 /* DrinkBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,25 +374,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		EB0C28C529487B6F0051BB34 /* Kingfisher */ = {
+		EB6412FB295E94050045CF64 /* Sfera */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = EB0C28C429487B6F0051BB34 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
+			productName = Sfera;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		EB64D8EE294B9BE500A33274 /* CoreData.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				EB64D8EF294B9BE500A33274 /* CoreData.xcdatamodel */,
-			);
-			currentVersion = EB64D8EF294B9BE500A33274 /* CoreData.xcdatamodel */;
-			path = CoreData.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = EBDB97B52934FEB7000683C1 /* Project object */;
 }

@@ -6,16 +6,21 @@
 //
 
 import UIKit
+import Sfera
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let favoritesVC = FavoritesBuilder.build()
-        let mealVC = MealBuilder.build(favoritesVC: favoritesVC)
-        let drinkVC = DrinkBuilder.build(favoritesVC: favoritesVC)
-        let navArray = NavBarBuilder.build(mealVC: mealVC, drinkVC: drinkVC, favoritesVC: favoritesVC)
+        let favoritesBuilder = FavoritesBuilder()
+        let favoritesVC = favoritesBuilder.build()
+        let mealBuilder = MealBuilder()
+        let mealVC = mealBuilder.build(favoritesVC: favoritesVC)
+        let drinkBuilder = DrinkBuilder()
+        let drinkVC = drinkBuilder.build(favoritesVC: favoritesVC)
+        let navBuilder = NavBarBuilder()
+        let navArray = navBuilder.build(mealVC: mealVC, drinkVC: drinkVC, favoritesVC: favoritesVC)
         let tabBarController = UITabBarController()
         tabBarController.setViewControllers(navArray, animated: false)
         tabBarController.tabBar.backgroundColor = .white
